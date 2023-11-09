@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,12 +23,31 @@ public class GameLoop : MonoBehaviour
     {
         if (playerTurn == 1)
         {
-            if (Input.GetKey(KeyCode.RightArrow))  //Il faut ajouter la duree du frame dans lequation !!!!
+            if (blueTeamUnits[selectedSoldier].GetAimingMode() == false)
             {
-                Vector3 currentPosition = blueTeamUnits[selectedSoldier].transform.position;
-                Vector3 newPosition = currentPosition + new Vector3(0.01f, 0.0f, 0.0f);
-                
-                blueTeamUnits[selectedSoldier].transform.position = newPosition;
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    blueTeamUnits[selectedSoldier].MoveRight();
+                }
+                else if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    blueTeamUnits[selectedSoldier].MoveLeft();
+                }
+                else if (Input.GetKey(KeyCode.Space)) 
+                {
+                    blueTeamUnits[selectedSoldier].Aim();
+                }
+            }
+            else if (blueTeamUnits[selectedSoldier].GetAimingMode() == true)
+            {
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    blueTeamUnits[selectedSoldier].AimHigher();
+                }
+                else if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    blueTeamUnits[selectedSoldier].AimLower();
+                }
             }
         }
         else if (playerTurn == 2)
