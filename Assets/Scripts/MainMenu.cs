@@ -11,6 +11,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void Options()
+    {
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene("Options");
+    }
+
     public void Quit()
     {
         Application.Quit();
