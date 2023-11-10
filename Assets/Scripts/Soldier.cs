@@ -12,6 +12,9 @@ public class Soldier : MonoBehaviour
     private bool AimingMode = false;
     private bool ActionUsed = false;
     private float moveSpeed = 2.0f;
+    private float health;
+
+    public GameObject ballPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -20,12 +23,16 @@ public class Soldier : MonoBehaviour
         SetTeamMaterial();
         gameLoop = FindObjectOfType<GameLoop>();
         gameLoop.RegisterSoldier(this, team);
+        health = 100.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     
     void SetTeamMaterial()
@@ -72,6 +79,17 @@ public class Soldier : MonoBehaviour
         Debug.Log("Player aim goes down");
     }
 
+    public void Shoot()
+    {
+        GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        
+        // set initial velocity
+        float angle = Vector3.Angle(transform.eulerAngles, transform.forward);
+        Vector3 initialVelocity = new Vector3(20 * Mathf.Cos(angle), 30 * Mathf.Sin(angle), 0);
+        rb.velocity = initialVelocity;
+    }
+
     public void Aim()
     {
         AimingMode = true;
@@ -101,5 +119,15 @@ public class Soldier : MonoBehaviour
     public void SetAimingMode(bool mode)
     {
         AimingMode = mode;
+    }
+
+    public float getHealth()
+    {
+        return health;
+    }
+
+    public void removeHealth(float damage)
+    {
+        health -= damage;
     }
 }

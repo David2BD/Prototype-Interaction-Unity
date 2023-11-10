@@ -7,7 +7,8 @@ using UnityEngine;
 public class GameLoop : MonoBehaviour
 {
     public int playerTurn;
-    public int selectedSoldier;
+    public int selectedSoldierBlue;
+    public int selectedSoldierRed;
     public List<Soldier> blueTeamUnits = new List<Soldier>();
     public List<Soldier> redTeamUnits = new List<Soldier>();
     
@@ -15,7 +16,10 @@ public class GameLoop : MonoBehaviour
     void Start()
     {
         playerTurn = 1;
-        selectedSoldier = 0;
+        selectedSoldierBlue = 0;
+        
+        RegisterSoldier(new Soldier(), 1);
+        RegisterSoldier(new Soldier(), 2);
     }
 
     // Update is called once per frame
@@ -23,36 +27,11 @@ public class GameLoop : MonoBehaviour
     {
         if (playerTurn == 1)
         {
-            if (blueTeamUnits[selectedSoldier].GetAimingMode() == false)
-            {
-                if (Input.GetKey(KeyCode.RightArrow))
-                {
-                    blueTeamUnits[selectedSoldier].MoveRight();
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    blueTeamUnits[selectedSoldier].MoveLeft();
-                }
-                else if (Input.GetKey(KeyCode.Space)) 
-                {
-                    blueTeamUnits[selectedSoldier].Aim();
-                }
-            }
-            else if (blueTeamUnits[selectedSoldier].GetAimingMode() == true)
-            {
-                if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    blueTeamUnits[selectedSoldier].AimHigher();
-                }
-                else if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    blueTeamUnits[selectedSoldier].AimLower();
-                }
-            }
+            playTurn(1, blueTeamUnits, selectedSoldierBlue);
         }
         else if (playerTurn == 2)
         {
-            
+            playTurn(2, redTeamUnits, selectedSoldierRed);
         }
     }
 
@@ -68,14 +47,68 @@ public class GameLoop : MonoBehaviour
         }
     }
     
-    public int GetplayerTurn()
+    public int GetPlayerTurn()
     {
         return playerTurn;
     }
     
-    public void SetplayerTurn(int player)
+    public void SetPlayerTurn(int player)
     {
         playerTurn = player;
     }
-    
+
+    private void nextTurn(int player)
+    {
+        playerTurn = (playerTurn + 1) % 2;
+
+        if (playerTurn == 1)
+        {
+            // add variable later based on team size
+            selectedSoldierBlue = (selectedSoldierBlue + 1) % 1;
+        }
+        else
+        {
+            selectedSoldierRed = (selectedSoldierRed + 1) % 1;
+        }
+        
+    }
+
+    public void playTurn(int player, List<Soldier> soldiers, int selectedSoldier)
+    {
+        if (soldiers[selectedSoldier].GetAimingMode() == false)
+        {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                soldiers[selectedSoldier].MoveRight();
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                soldiers[selectedSoldier].MoveLeft();
+            }
+            else if (Input.GetKey(KeyCode.Space)) 
+            {
+                soldiers[selectedSoldier].Aim();
+            }
+        }
+        else if (soldiers[selectedSoldier].GetAimingMode() == true)
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                soldiers[selectedSoldier].AimHigher();
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                soldiers[selectedSoldier].AimLower();
+            }
+                
+            
+            if (Input.GetKey(KeyCode.Space))
+            {
+                // set varying force later
+                soldiers[selectedSoldier].Shoot();
+                soldiers[selectedSoldier].SetAimingMode(false);
+                nextTurn(player);
+            }
+        }
+    }
 }
