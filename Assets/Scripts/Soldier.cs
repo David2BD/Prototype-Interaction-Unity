@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using System;
 using UnityEngine;
-using UnityEditor;
-using TreeEditor;
+
 
 public class Soldier : MonoBehaviour
 {
@@ -14,12 +12,13 @@ public class Soldier : MonoBehaviour
     private bool AimingMode = false;
     private bool ActionUsed = false;
     private float moveSpeed = 2.0f;
-    private float health;
+    public int health;
+    public HPBar barScript;
     
     //For aiming
-    private Vector3 AimingAngle;
+    public Vector3 AimingAngle;
     private LineRenderer lineRenderer;
-    public float rotationSpeed = 5f;
+    private float rotationSpeed = 5f;
 
     public GameObject ballPrefab;
     
@@ -27,11 +26,12 @@ public class Soldier : MonoBehaviour
     void Start()
     {
         AimingAngle = new Vector3(0.5f, 0.5f, 0);
+        AimingAngle.Normalize();
         soldierRenderer = GetComponent<Renderer>();
         SetTeamMaterial();
         gameLoop = FindObjectOfType<GameLoop>();
         gameLoop.RegisterSoldier(this, team);
-        health = 100.0f;
+        health = 100;
         lineRenderer = GetComponent<LineRenderer>();
     }
 
@@ -87,22 +87,30 @@ public class Soldier : MonoBehaviour
 
     public void AimHigher()
     {
-        /*
-        float rotationAmount = rotationSpeed * Time.deltaTime;
-
-        AimingAngle = Quaternion.AngleAxis(rotationAmount, Vector3.right) * AimingAngle;
-        AimingAngle.Normalize();
-        */
-        float rotationAmount = rotationSpeed * Time.deltaTime;
-        AimingAngle.Set(AimingAngle.x, AimingAngle.y + rotationAmount, AimingAngle.z);
-        AimingAngle.Normalize();
+        if( AimingAngle.x > 0.25f)
+        {
+            float rotationAmount = rotationSpeed * Time.deltaTime;
+            AimingAngle.Set(AimingAngle.x, AimingAngle.y + rotationAmount, AimingAngle.z);
+            AimingAngle.Normalize();
+        }
+        else
+        {
+            AimingAngle.Set(0.251f, AimingAngle.y, AimingAngle.z);
+        }
     }
     
     public void AimLower()
     {
-        float rotationAmount = rotationSpeed * Time.deltaTime;
-        AimingAngle.Set(AimingAngle.x, AimingAngle.y - rotationAmount, AimingAngle.z);
-        AimingAngle.Normalize();
+        if( AimingAngle.x > 0.25f)
+        {
+            float rotationAmount = rotationSpeed * Time.deltaTime;
+            AimingAngle.Set(AimingAngle.x, AimingAngle.y - rotationAmount, AimingAngle.z);
+            AimingAngle.Normalize();
+        }
+        else
+        {
+            AimingAngle.Set(0.251f, AimingAngle.y, AimingAngle.z);
+        }
     }
 
     public void Shoot()
@@ -154,8 +162,10 @@ public class Soldier : MonoBehaviour
         return health;
     }
 
-    public void removeHealth(float damage)
+    public void removeHealth(int damage)
     {
+        
         health -= damage;
+        barScript.Change(-damage);
     }
 }

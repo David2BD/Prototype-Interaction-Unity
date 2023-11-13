@@ -38,7 +38,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Soldier"))
         {
-            soldier.GetComponent<Soldier>().removeHealth(rb.velocity.x);
+            soldier.GetComponent<Soldier>().removeHealth(20);
         }
     }
 
