@@ -85,7 +85,7 @@ public class GameLoop : MonoBehaviour
             {
                 soldiers[selectedSoldier].MoveLeft();
             }
-            else if (Input.GetKey(KeyCode.Space)) 
+            else if (Input.GetKey(KeyCode.Z)) 
             {
                 soldiers[selectedSoldier].Aim();
             }

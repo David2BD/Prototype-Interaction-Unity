@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEditor;
+using TreeEditor;
 
 public class Soldier : MonoBehaviour
 {
@@ -13,17 +15,24 @@ public class Soldier : MonoBehaviour
     private bool ActionUsed = false;
     private float moveSpeed = 2.0f;
     private float health;
+    
+    //For aiming
+    private Vector3 AimingAngle;
+    private LineRenderer lineRenderer;
+    public float rotationSpeed = 5f;
 
     public GameObject ballPrefab;
     
     // Start is called before the first frame update
     void Start()
     {
+        AimingAngle = new Vector3(0.5f, 0.5f, 0);
         soldierRenderer = GetComponent<Renderer>();
         SetTeamMaterial();
         gameLoop = FindObjectOfType<GameLoop>();
         gameLoop.RegisterSoldier(this, team);
         health = 100.0f;
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -33,6 +42,13 @@ public class Soldier : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        //lineRenderer.SetVertexCount(1);
+        Vector3[] positions = new Vector3[3];
+        positions[0] = transform.position + new Vector3(0.0f, 0.0f, 0.0f);
+        positions[1] =  positions[0] + (AimingAngle);
+        lineRenderer.SetPositions(positions);
+        //lineRenderer.(transform.position,  AimingAngle * 100, Color.blue);
     }
     
     void SetTeamMaterial()
@@ -71,12 +87,22 @@ public class Soldier : MonoBehaviour
 
     public void AimHigher()
     {
-        Debug.Log("Player aim goes up");
+        /*
+        float rotationAmount = rotationSpeed * Time.deltaTime;
+
+        AimingAngle = Quaternion.AngleAxis(rotationAmount, Vector3.right) * AimingAngle;
+        AimingAngle.Normalize();
+        */
+        float rotationAmount = rotationSpeed * Time.deltaTime;
+        AimingAngle.Set(AimingAngle.x, AimingAngle.y + rotationAmount, AimingAngle.z);
+        AimingAngle.Normalize();
     }
     
     public void AimLower()
     {
-        Debug.Log("Player aim goes down");
+        float rotationAmount = rotationSpeed * Time.deltaTime;
+        AimingAngle.Set(AimingAngle.x, AimingAngle.y - rotationAmount, AimingAngle.z);
+        AimingAngle.Normalize();
     }
 
     public void Shoot()
@@ -86,7 +112,8 @@ public class Soldier : MonoBehaviour
         
         // set initial velocity
         float angle = Vector3.Angle(transform.eulerAngles, transform.forward);
-        Vector3 initialVelocity = new Vector3(20 * Mathf.Cos(angle), 30 * Mathf.Sin(angle), 0);
+        Vector3 initialVelocity = AimingAngle * 20;
+        //Vector3 initialVelocity = new Vector3(20 * Mathf.Cos(angle), 30 * Mathf.Sin(angle), 0);
         rb.velocity = initialVelocity;
     }
 
@@ -120,7 +147,8 @@ public class Soldier : MonoBehaviour
     {
         AimingMode = mode;
     }
-
+    
+    
     public float getHealth()
     {
         return health;

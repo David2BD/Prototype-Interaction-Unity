@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Ball : MonoBehaviour
 {
     private Rigidbody rb;
@@ -20,20 +21,17 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
+        /*
         transform.position += (rb.velocity * Time.deltaTime) +
                               (0.5f * Physics.gravity * Time.deltaTime * Time.deltaTime);
         rb.velocity += Physics.gravity * Time.deltaTime;
+        */
 
+        
         if (transform.position.y <= -5)
         {
             Destroy(gameObject);
         }
-
     }
     
     private void OnCollisionEnter(Collision collision)
