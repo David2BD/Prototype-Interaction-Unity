@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &274843862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 274843863}
+  - component: {fileID: 274843864}
+  m_Layer: 0
+  m_Name: _GM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &274843863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274843862}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &274843864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274843862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4b08e95d21c104eb70229a2360eacc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &357381893
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +675,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.309284, y: 0.1, z: -10}
+  m_LocalPosition: {x: -16.5, y: 0.1, z: -18}
   m_LocalScale: {x: 1.4773, y: 1.4773, z: 1.4773}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1033,6 +1077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 6718993144218268172, guid: f58c7354de6c0cc4890c9864522da651, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 7558262510186393407, guid: f58c7354de6c0cc4890c9864522da651, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24
@@ -1127,6 +1175,7 @@ MonoBehaviour:
   selectedSoldierRed: 0
   blueTeamUnits: []
   redTeamUnits: []
+  inputManager: {fileID: 0}
 --- !u!4 &1740345037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1105334057991910156, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
@@ -1530,6 +1579,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6718993144218268172, guid: f58c7354de6c0cc4890c9864522da651, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 7558262510186393407, guid: f58c7354de6c0cc4890c9864522da651, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.679284
@@ -1665,3 +1718,4 @@ SceneRoots:
   - {fileID: 939309394}
   - {fileID: 1985660775}
   - {fileID: 1213169401}
+  - {fileID: 274843863}

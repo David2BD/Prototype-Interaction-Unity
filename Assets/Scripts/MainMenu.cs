@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject optionsMenu;
+    
     public void Play()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -13,8 +15,8 @@ public class MainMenu : MonoBehaviour
 
     public void Options()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
-        SceneManager.LoadScene("Options");
+        optionsMenu.SetActive(!optionsMenu.activeSelf);
+        Debug.Log("Player enter game settings");
     }
 
     public void Quit()

@@ -10,12 +10,15 @@ public class GameLoop : MonoBehaviour
     public int selectedSoldierRed;
     public List<Soldier> blueTeamUnits = new List<Soldier>();
     public List<Soldier> redTeamUnits = new List<Soldier>();
+
+    //private Dictionary<InputManager.PlayerAction, KeyCode> currentPlayer;
     
     // Start is called before the first frame update
     void Start()
     {
         playerTurn = 1;
         selectedSoldierBlue = 0;
+        //currentPlayer = InputManager.getPlayerBlue();
         
         RegisterSoldier(new Soldier(), 1);
         RegisterSoldier(new Soldier(), 2);
@@ -86,6 +89,7 @@ public class GameLoop : MonoBehaviour
     
     public void playTurn(int player, List<Soldier> soldiers, int selectedSoldier)
     {
+        
         if (soldiers[selectedSoldier].GetAimingMode() == false)
         {
             if (Input.GetKey(KeyCode.RightArrow))
@@ -126,5 +130,49 @@ public class GameLoop : MonoBehaviour
                 EndTurn();
             }
         }
+        
+        /*
+        if (soldiers[selectedSoldier].GetAimingMode() == false)
+        {
+            if (Input.GetKey(GameManager.GM.MoveRight))
+            {
+                soldiers[selectedSoldier].MoveRight();
+            }
+            else if (Input.GetKey(GameManager.GM.MoveLeft))
+            {
+                soldiers[selectedSoldier].MoveLeft();
+            }
+            else if (Input.GetKey(GameManager.GM.EnterAimingMode)) 
+            {
+                if (soldiers[selectedSoldier].GetAimingMode() == false)
+                {
+                    soldiers[selectedSoldier].Aim();
+                }
+            }
+        }
+        else if (soldiers[selectedSoldier].GetAimingMode())
+        {
+            if (Input.GetKey(GameManager.GM.AimHigher))
+            {
+                soldiers[selectedSoldier].AimHigher();
+            }
+            else if (Input.GetKey(GameManager.GM.AimLower))
+            {
+                soldiers[selectedSoldier].AimLower();
+            }
+                
+            
+            if (Input.GetKey(GameManager.GM.Shoot))
+            {
+                // set varying force later
+                soldiers[selectedSoldier].Shoot();
+                soldiers[selectedSoldier].SetAimingMode(false);
+                //NextUnit(player);
+                soldiers[selectedSoldier].ResetMouvement();
+                EndTurn();
+            }
+        }
+        */
     }
+    
 }

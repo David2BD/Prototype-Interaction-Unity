@@ -115,7 +115,8 @@ public class Soldier : MonoBehaviour
 
     public void Shoot()
     {
-        GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+        Vector3 bulletPos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+        GameObject ball = Instantiate(ballPrefab, bulletPos, Quaternion.identity);
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         
         // set initial velocity

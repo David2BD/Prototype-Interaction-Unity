@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -40,6 +41,12 @@ public class Ball : MonoBehaviour
         {
             soldier = collision.gameObject;
             soldier.GetComponent<Soldier>().removeHealth(20);
+            //Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
         }
     }
 
