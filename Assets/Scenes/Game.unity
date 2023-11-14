@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2d79935c9e3824eb7b28c4924d9d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTurn: 0
+  playerTurn: 1
   selectedSoldierBlue: 0
   selectedSoldierRed: 0
   blueTeamUnits: []

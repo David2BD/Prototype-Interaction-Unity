@@ -136,6 +136,11 @@ public class Soldier : MonoBehaviour
         mouvement -= Math.Abs(mouvementToRemove);
     }
 
+    public void ResetMouvement()
+    {
+        mouvement = 3.0f;
+    }
+    
     public bool GetActionUsed()
     {
         return ActionUsed;

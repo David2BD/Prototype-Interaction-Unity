@@ -56,9 +56,9 @@ public class GameLoop : MonoBehaviour
         playerTurn = player;
     }
 
-    private void nextTurn(int player)
+    private void NextUnit(int player)
     {
-        playerTurn = (playerTurn + 1) % 2;
+        //playerTurn = (playerTurn + 1) % 2;
 
         if (playerTurn == 1)
         {
@@ -72,6 +72,18 @@ public class GameLoop : MonoBehaviour
         
     }
 
+    public void EndTurn()
+    {
+        if (playerTurn == 1)
+        {
+            playerTurn = 2;
+        }
+        else
+        {
+            playerTurn = 1;
+        }
+    }
+    
     public void playTurn(int player, List<Soldier> soldiers, int selectedSoldier)
     {
         if (soldiers[selectedSoldier].GetAimingMode() == false)
@@ -86,7 +98,10 @@ public class GameLoop : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.Z)) 
             {
-                soldiers[selectedSoldier].Aim();
+                if (soldiers[selectedSoldier].GetAimingMode() == false)
+                {
+                    soldiers[selectedSoldier].Aim();
+                }
             }
         }
         else if (soldiers[selectedSoldier].GetAimingMode() == true)
@@ -106,7 +121,9 @@ public class GameLoop : MonoBehaviour
                 // set varying force later
                 soldiers[selectedSoldier].Shoot();
                 soldiers[selectedSoldier].SetAimingMode(false);
-                nextTurn(player);
+                //NextUnit(player);
+                soldiers[selectedSoldier].ResetMouvement();
+                EndTurn();
             }
         }
     }
