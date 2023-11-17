@@ -1,6 +1,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class Soldier : MonoBehaviour
@@ -15,6 +16,9 @@ public class Soldier : MonoBehaviour
     public int health;
     public HPBar barScript;
     
+    //private Slider powerUp;
+    //private bool powerUpRunning = false;
+    
     //For aiming
     public Vector3 AimingAngle;
     private LineRenderer lineRenderer;
@@ -25,7 +29,7 @@ public class Soldier : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AimingAngle = new Vector3(0.5f, 0.5f, 0);
+        AimingAngle = (team == 1) ? new Vector3(0.5f, 0.5f, 0) : new Vector3(-0.5f, 0.5f, 0);
         AimingAngle.Normalize();
         soldierRenderer = GetComponent<Renderer>();
         SetTeamMaterial();
@@ -87,7 +91,7 @@ public class Soldier : MonoBehaviour
 
     public void AimHigher()
     {
-        if( AimingAngle.x > 0.25f)
+        if( AimingAngle.x > 0.25f || AimingAngle.x < -0.25f)
         {
             float rotationAmount = rotationSpeed * Time.deltaTime;
             AimingAngle.Set(AimingAngle.x, AimingAngle.y + rotationAmount, AimingAngle.z);
@@ -95,13 +99,15 @@ public class Soldier : MonoBehaviour
         }
         else
         {
-            AimingAngle.Set(0.251f, AimingAngle.y, AimingAngle.z);
+            Vector3 angle_team = (team == 1) ? new Vector3(0.251f, AimingAngle.y, AimingAngle.z) :
+                new Vector3(-0.251f, AimingAngle.y, AimingAngle.z);
+            AimingAngle.Set(angle_team.x, angle_team.y, angle_team.z);
         }
     }
     
     public void AimLower()
     {
-        if( AimingAngle.x > 0.25f)
+        if( AimingAngle.x > 0.25f || AimingAngle.x < -0.25f)
         {
             float rotationAmount = rotationSpeed * Time.deltaTime;
             AimingAngle.Set(AimingAngle.x, AimingAngle.y - rotationAmount, AimingAngle.z);
@@ -109,13 +115,17 @@ public class Soldier : MonoBehaviour
         }
         else
         {
-            AimingAngle.Set(0.251f, AimingAngle.y, AimingAngle.z);
+            Vector3 angle_team = (team == 1) ? new Vector3(0.251f, AimingAngle.y, AimingAngle.z) :
+                new Vector3(-0.251f, AimingAngle.y, AimingAngle.z);
+            AimingAngle.Set(angle_team.x, angle_team.y, angle_team.z);
         }
     }
 
     public void Shoot()
     {
-        Vector3 bulletPos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+        Vector3 bulletPos = (team == 1)
+            ? new Vector3(transform.position.x + 1, transform.position.y, transform.position.z)
+            : new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
         GameObject ball = Instantiate(ballPrefab, bulletPos, Quaternion.identity);
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         
@@ -129,6 +139,7 @@ public class Soldier : MonoBehaviour
     public void Aim()
     {
         AimingMode = true;
+        
         Debug.Log("Player start aiming");
     }
     
@@ -160,6 +171,11 @@ public class Soldier : MonoBehaviour
     public void SetAimingMode(bool mode)
     {
         AimingMode = mode;
+    }
+
+    public float getMouvement()
+    {
+        return mouvement;
     }
     
     
