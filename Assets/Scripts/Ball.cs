@@ -40,7 +40,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Soldier"))
         {
             soldier = collision.gameObject;
-            soldier.GetComponent<Soldier>().removeHealth(20);
+            soldier.GetComponent<Soldier>().removeHealth(100);
             //Destroy(gameObject);
         }
 

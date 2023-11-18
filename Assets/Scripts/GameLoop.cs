@@ -10,12 +10,21 @@ public class GameLoop : MonoBehaviour
     public int selectedSoldierRed;
     public List<Soldier> blueTeamUnits = new List<Soldier>();
     public List<Soldier> redTeamUnits = new List<Soldier>();
+    
+    public GameObject GameOverScreen;
+    public GameObject TextManagerGameOver;
+
+    public GameObject pauseMenu;
+    
+    public GameObject GameUI;
 
     public GameObject TextManager;
+    
+    private Ball activeBall;
 
     //private Dictionary<InputManager.PlayerAction, KeyCode> currentPlayer;
     
-    // Start is called before the first frame update
+ 
     void Start()
     {
         playerTurn = 1;
@@ -26,34 +35,63 @@ public class GameLoop : MonoBehaviour
         RegisterSoldier(new Soldier(), 2);
         
         TextManager.GetComponent<textManager>().setTeam(1);
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
+        activeBall = FindObjectOfType<Ball>();
+
+        /*
         // game ends, fonctionne pas
         if (blueTeamUnits.Count == 0 || redTeamUnits.Count == 0)
         {
             playerTurn = 1;
             selectedSoldierBlue = 0;
             //currentPlayer = InputManager.getPlayerBlue();
-        
+
             RegisterSoldier(new Soldier(), 1);
             RegisterSoldier(new Soldier(), 2);
         }
+        */
         
-        if (playerTurn == 1)
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            playTurn(1, blueTeamUnits, selectedSoldierBlue);
-            TextManager.GetComponent<textManager>().setTeam(1);
+            TogglePause();
         }
-        else if (playerTurn == 2)
+        
+        if (activeBall == null)
         {
-            playTurn(2, redTeamUnits, selectedSoldierRed);
-            TextManager.GetComponent<textManager>().setTeam(2);
+            if (playerTurn == 1)
+            {
+                playTurn(1, blueTeamUnits, selectedSoldierBlue);
+                TextManager.GetComponent<textManager>().setTeam(1);
+            }
+            else if (playerTurn == 2)
+            {
+                playTurn(2, redTeamUnits, selectedSoldierRed);
+                TextManager.GetComponent<textManager>().setTeam(2);
+            }
         }
     }
 
+    void TogglePause()
+    {
+        // Toggle the pause state
+        if (Time.timeScale == 0f)
+        {
+            // Resume the game
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            // Pause the game
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+        }
+    }
+    
     public void RegisterSoldier(Soldier soldier, int team)
     {
         if (team == 1)
@@ -66,15 +104,7 @@ public class GameLoop : MonoBehaviour
         }
     }
     
-    public int GetPlayerTurn()
-    {
-        return playerTurn;
-    }
-    
-    public void SetPlayerTurn(int player)
-    {
-        playerTurn = player;
-    }
+   
 
     private void NextUnit(int player)
     {
@@ -92,15 +122,35 @@ public class GameLoop : MonoBehaviour
         
     }
 
+    public void GameOver(int winningTeam)
+    {
+        if (winningTeam == 1)
+        {
+            GameOverScreen.SetActive(!GameOverScreen.activeSelf);
+            TextManagerGameOver.GetComponent<GameOverUI>().SetWinner(1);
+           // GameOverUIscript.SetWinner(1);
+            
+        }
+        else if (winningTeam == 2)
+        {
+            GameOverScreen.SetActive(!GameOverScreen.activeSelf);
+            TextManagerGameOver.GetComponent<GameOverUI>().SetWinner(2);
+            //GameOverUIscript.SetWinner(2);
+            
+        }
+    }
+    
     public void EndTurn()
     {
         if (playerTurn == 1)
         {
             playerTurn = 2;
+            redTeamUnits[0].SetActionUsed(false);
         }
         else
         {
             playerTurn = 1;
+            blueTeamUnits[0].SetActionUsed(false);
         }
     }
     
@@ -137,6 +187,7 @@ public class GameLoop : MonoBehaviour
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 soldiers[selectedSoldier].AimHigher();
+                soldiers[selectedSoldier].AimHigher();
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
@@ -154,6 +205,7 @@ public class GameLoop : MonoBehaviour
                 EndTurn();
             }
         }
+        
         
         /*
         if (soldiers[selectedSoldier].GetAimingMode() == false)
@@ -199,4 +251,13 @@ public class GameLoop : MonoBehaviour
         */
     }
     
+    public int GetPlayerTurn()
+    {
+        return playerTurn;
+    }
+    
+    public void SetPlayerTurn(int player)
+    {
+        playerTurn = player;
+    }
 }

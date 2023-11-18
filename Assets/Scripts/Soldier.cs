@@ -15,6 +15,7 @@ public class Soldier : MonoBehaviour
     private float moveSpeed = 2.0f;
     public int health;
     public HPBar barScript;
+   
     
     //private Slider powerUp;
     //private bool powerUpRunning = false;
@@ -22,7 +23,7 @@ public class Soldier : MonoBehaviour
     //For aiming
     public Vector3 AimingAngle;
     private LineRenderer lineRenderer;
-    private float rotationSpeed = 5f;
+    private float rotationSpeed = 3f;
 
     public GameObject ballPrefab;
     
@@ -37,8 +38,11 @@ public class Soldier : MonoBehaviour
         gameLoop.RegisterSoldier(this, team);
         health = 100;
         lineRenderer = GetComponent<LineRenderer>();
+        
     }
 
+    
+    
     // Update is called once per frame
     void Update()
     {
@@ -123,17 +127,22 @@ public class Soldier : MonoBehaviour
 
     public void Shoot()
     {
-        Vector3 bulletPos = (team == 1)
-            ? new Vector3(transform.position.x + 1, transform.position.y, transform.position.z)
-            : new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
-        GameObject ball = Instantiate(ballPrefab, bulletPos, Quaternion.identity);
-        Rigidbody rb = ball.GetComponent<Rigidbody>();
         
-        // set initial velocity
-        float angle = Vector3.Angle(transform.eulerAngles, transform.forward);
-        Vector3 initialVelocity = AimingAngle * 20;
-        //Vector3 initialVelocity = new Vector3(20 * Mathf.Cos(angle), 30 * Mathf.Sin(angle), 0);
-        rb.velocity = initialVelocity;
+        if (ActionUsed == false) 
+        {
+            Vector3 bulletPos = (team == 1)
+                ? new Vector3(transform.position.x + 1, transform.position.y, transform.position.z)
+                : new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
+            GameObject ball = Instantiate(ballPrefab, bulletPos, Quaternion.identity);
+            Rigidbody rb = ball.GetComponent<Rigidbody>();
+
+            // set initial velocity
+            float angle = Vector3.Angle(transform.eulerAngles, transform.forward);
+            Vector3 initialVelocity = AimingAngle * 20;
+            //Vector3 initialVelocity = new Vector3(20 * Mathf.Cos(angle), 30 * Mathf.Sin(angle), 0);
+            rb.velocity = initialVelocity;
+            ActionUsed = true;
+        }
     }
 
     public void Aim()
@@ -158,9 +167,9 @@ public class Soldier : MonoBehaviour
         return ActionUsed;
     }
 
-    public void SetActionUsed()                                       //Pas besoin de parametre on fait juste caller ca quand le player a utilise son action
+    public void SetActionUsed(bool setting)                                       //Pas besoin de parametre on fait juste caller ca quand le player a utilise son action
     {
-        ActionUsed = true;
+        ActionUsed = setting;
     }
 
     public bool GetAimingMode()
@@ -189,5 +198,16 @@ public class Soldier : MonoBehaviour
         
         health -= damage;
         barScript.Change(-damage);
+        if (health <= 0)
+        {
+            if (team == 1)
+            {
+                gameLoop.GameOver(2);
+            }
+            else if (team == 2)
+            {
+                gameLoop.GameOver(1);
+            }
+        }
     }
 }

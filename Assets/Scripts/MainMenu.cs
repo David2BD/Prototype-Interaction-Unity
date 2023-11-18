@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject optionsMenu;
+    public GameObject mainMenu;
+
     
+
     public void Play()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -16,6 +20,7 @@ public class MainMenu : MonoBehaviour
     public void Options()
     {
         optionsMenu.SetActive(!optionsMenu.activeSelf);
+        mainMenu.SetActive(false);
         Debug.Log("Player enter game settings");
     }
 

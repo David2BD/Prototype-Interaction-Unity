@@ -7,6 +7,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public GameObject settingsMenu;
+    public GameObject inputMenu;
     private Dictionary<PlayerAction, KeyCode> playerBlue;
     private Dictionary<PlayerAction, KeyCode> playerRed;
     
@@ -88,6 +89,7 @@ public class InputManager : MonoBehaviour
     public void Return()
     {
         settingsMenu.SetActive(!settingsMenu.activeSelf);
+        inputMenu.SetActive(false);
         Debug.Log("Player go back to settings menu");
     }
 }

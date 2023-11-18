@@ -48,16 +48,5 @@ public class HPBar : MonoBehaviour
 
         slowChangeBar.SetWidth(TargetWidth);
     }
-//FOR TESTING!!!!
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Change(20);
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Change(-20);
-        }
-    }
+
 }
