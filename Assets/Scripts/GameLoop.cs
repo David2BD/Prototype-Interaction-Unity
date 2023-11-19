@@ -22,6 +22,8 @@ public class GameLoop : MonoBehaviour
     
     private Ball activeBall;
 
+    private bool isPlayer2CPU;
+
     //private Dictionary<InputManager.PlayerAction, KeyCode> currentPlayer;
     
  
@@ -35,25 +37,14 @@ public class GameLoop : MonoBehaviour
         RegisterSoldier(new Soldier(), 2);
         
         TextManager.GetComponent<textManager>().setTeam(1);
-        
+
+        isPlayer2CPU = GameSettings.isPlayer2CPU;
+
     }
 
     void Update()
     {
         activeBall = FindObjectOfType<Ball>();
-
-        /*
-        // game ends, fonctionne pas
-        if (blueTeamUnits.Count == 0 || redTeamUnits.Count == 0)
-        {
-            playerTurn = 1;
-            selectedSoldierBlue = 0;
-            //currentPlayer = InputManager.getPlayerBlue();
-
-            RegisterSoldier(new Soldier(), 1);
-            RegisterSoldier(new Soldier(), 2);
-        }
-        */
         
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -67,9 +58,14 @@ public class GameLoop : MonoBehaviour
                 playTurn(1, blueTeamUnits, selectedSoldierBlue);
                 TextManager.GetComponent<textManager>().setTeam(1);
             }
-            else if (playerTurn == 2)
+            else if (playerTurn == 2 && isPlayer2CPU == false)
             {
                 playTurn(2, redTeamUnits, selectedSoldierRed);
+                TextManager.GetComponent<textManager>().setTeam(2);
+            }
+            else if (playerTurn == 2 && isPlayer2CPU == true)
+            {
+                playTurnCPU(2, redTeamUnits, selectedSoldierRed);
                 TextManager.GetComponent<textManager>().setTeam(2);
             }
         }
@@ -250,7 +246,18 @@ public class GameLoop : MonoBehaviour
         }
         */
     }
-    
+
+
+    public void playTurnCPU(int player, List<Soldier> soldiers, int selectedSoldier)
+    {
+        if (soldiers[selectedSoldier].GetAimingMode() == false)
+        {
+            // initialisation des parametre a chaque nouveau tour
+            TextManager.GetComponent<textManager>().setMovingMode(true);
+            TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
+        }
+    }
+
     public int GetPlayerTurn()
     {
         return playerTurn;
