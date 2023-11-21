@@ -24,9 +24,12 @@ public class textManager : MonoBehaviour
     private bool moving = true;
     private bool aiming = false;
     private int player = 1;
-
+    
     void Update()
     {
+        player1.text = GameManager.Instance.getName(1);
+        player2.text = GameManager.Instance.getName(2);
+        
         if (player == 1)
         {
             player1.color = active;

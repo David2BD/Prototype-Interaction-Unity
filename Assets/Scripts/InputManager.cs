@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine;
@@ -8,11 +10,22 @@ public class InputManager : MonoBehaviour
 {
     public GameObject settingsMenu;
     public GameObject inputMenu;
-    private Dictionary<PlayerAction, KeyCode> playerBlue;
-    private Dictionary<PlayerAction, KeyCode> playerRed;
+
+    public Transform player1;
+    public Transform player2;
     
-    // all possible actions that need an input
-    // add jump later?
+    private Dictionary<PlayerAction, KeyCode> playerBlue = new Dictionary<PlayerAction, KeyCode>{};
+    private Dictionary<PlayerAction, KeyCode> playerRed = new Dictionary<PlayerAction, KeyCode>{};
+    private Dictionary<GeneralAction, KeyCode> generalActions = new Dictionary<GeneralAction, KeyCode>{};
+    
+    private int playerKey = 1;
+    private int childKey = 0;
+    private bool gettingKey = true;
+    private bool waitingKey = false;
+    private KeyCode newKey = KeyCode.None;
+
+    public TextMeshProUGUI keyUpdate;
+    
     public enum PlayerAction
     {
         MoveLeft,
@@ -20,51 +33,128 @@ public class InputManager : MonoBehaviour
         EnterAimingMode,
         AimHigher,
         AimLower,
-        Shoot
+        Shoot,
+        Jump
     }
 
-    public void Start()
+    public enum GeneralAction
+    {
+        Confirm,
+        Pause,
+        Quit
+    }
+
+    public void Update()
+    {
+        // player names
+        player1.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.getName(1));
+        player2.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.getName(2));
+        
+        // get key values
+        getKeyValues(player1, 1);
+        getKeyValues(player2, 2);
+
+        switch (playerKey)
+        {
+            case 1:
+                keyUpdate.SetText(GameManager.Instance.getName(1) + " updating key.");
+                break;
+            case 2:
+                keyUpdate.SetText(GameManager.Instance.getName(2) + " updating key.");
+                break;
+        }
+        
+        
+        
+        // when setting a new keyCode
+        if (waitingKey && childKey != 0)
+        {
+            if (Input.anyKeyDown)
+            {
+                foreach (KeyCode k in System.Enum.GetValues(typeof(KeyCode)))
+                {
+                    if (Input.GetKeyDown(k))
+                    {
+                        newKey = k;
+                        updateKeyAction(playerKey);
+                        waitingKey = false;
+                        newKey = KeyCode.None;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void setControls()
     {
         setInitialConfiguration(playerBlue);
         setInitialConfiguration(playerRed);
+        setGeneralConfiguration();
+        GameManager.Instance.InputManagerUpdate(playerBlue, playerRed, generalActions);
     }
+    
 
-    public void setInitialConfiguration(Dictionary<PlayerAction, KeyCode> player)
+    private void setInitialConfiguration(Dictionary<PlayerAction, KeyCode> player)
     {
-        player.Add(PlayerAction.MoveLeft, KeyCode.RightArrow);
-        player.Add(PlayerAction.MoveRight, KeyCode.LeftArrow);
+        player.Add(PlayerAction.MoveLeft, KeyCode.LeftArrow);
+        player.Add(PlayerAction.MoveRight, KeyCode.RightArrow);
+        player.Add(PlayerAction.Jump, KeyCode.UpArrow);
         player.Add(PlayerAction.EnterAimingMode, KeyCode.Z);
         player.Add(PlayerAction.AimHigher, KeyCode.UpArrow);
         player.Add(PlayerAction.AimLower, KeyCode.DownArrow);
         player.Add(PlayerAction.Shoot, KeyCode.Space);
     }
 
-    public void setArrows()
+    private void setGeneralConfiguration()
     {
-        setArrowsKeys(playerBlue);
-        setArrowsKeys(playerRed);
+        generalActions.Add(GeneralAction.Confirm, KeyCode.Return);
+        generalActions.Add(GeneralAction.Pause, KeyCode.P);
+        generalActions.Add(GeneralAction.Quit, KeyCode.Escape);
+    }
+
+    public void setArrows(int player)
+    {
+        if (player == 1)
+        {
+            setArrowsKeys(playerBlue);
+        }
+        else
+        {
+            setArrowsKeys(playerRed);
+        }
+        GameManager.Instance.InputManagerUpdate(playerBlue, playerRed, generalActions);
     }
     
     private void setArrowsKeys(Dictionary<PlayerAction, KeyCode> dict)
     {
-        dict[PlayerAction.MoveLeft] = KeyCode.RightArrow;
-        dict[PlayerAction.MoveRight] = KeyCode.LeftArrow;
+        dict[PlayerAction.MoveLeft] = KeyCode.LeftArrow;
+        dict[PlayerAction.MoveRight] = KeyCode.RightArrow;
+        dict[PlayerAction.Jump] = KeyCode.UpArrow;
         dict[PlayerAction.EnterAimingMode] = KeyCode.Z;
         dict[PlayerAction.AimHigher] = KeyCode.UpArrow;
         dict[PlayerAction.AimLower] = KeyCode.DownArrow;
         dict[PlayerAction.Shoot] = KeyCode.Space;
     }
 
-    public void setQWERTY()
+    public void setQWERTY(int player)
     {
-        setQWERTY_Keys(playerBlue);
-        setQWERTY_Keys(playerRed);
+        if (player == 1)
+        {
+            setQWERTY_Keys(playerBlue);
+        }
+        else
+        {
+            setQWERTY_Keys(playerRed);
+        }
+        GameManager.Instance.InputManagerUpdate(playerBlue, playerRed, generalActions);
     }
 
     private void setQWERTY_Keys(Dictionary<PlayerAction, KeyCode> dict)
     {
         dict[PlayerAction.MoveLeft] = KeyCode.A;
         dict[PlayerAction.MoveRight] = KeyCode.D;
+        dict[PlayerAction.Jump] = KeyCode.W;
         dict[PlayerAction.EnterAimingMode] = KeyCode.Q;
         dict[PlayerAction.AimHigher] = KeyCode.W;
         dict[PlayerAction.AimLower] = KeyCode.S;
@@ -80,10 +170,107 @@ public class InputManager : MonoBehaviour
     {
         return playerRed;
     }
-
-    public void updateKeyAction(PlayerAction pA, Dictionary<PlayerAction, KeyCode> dict)
+    
+    
+    private void updateKeyAction(int p)
     {
-        //dict[pA] = InputField();
+        if (newKey != KeyCode.None)
+        {
+            switch (childKey)
+            {
+                case 1:
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveLeft] = newKey;
+                    break;
+                case 2:
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveRight] = newKey;
+                    break;
+                case 3:
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.EnterAimingMode] = newKey;
+                    break;
+                case 4:
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimHigher] = newKey;
+                    break;
+                case 5:
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimLower] = newKey;
+                    break;
+                case 6:
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Shoot] = newKey;
+                    break;
+                case 7:
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Jump] = newKey;
+                    break;
+            }
+        }
+    }
+
+    public void changePlayer()
+    {
+        switch (playerKey)
+        {
+            case 1 :
+                playerKey = 2;
+                break;
+            case 2 :
+                playerKey = 1;
+                break;
+        }
+    }
+
+    
+    private void getKeyValues(Transform player, int p)
+    {
+        gettingKey = true;
+        // key values player 1
+        for (int i = 1; i < player.childCount; i++)
+        {
+            if (player.GetChild(i).name == "GoLeft")
+            {
+                player.GetChild(i).GetComponent<TMP_InputField>().text = 
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveLeft].ToString();
+            }
+            else if (player.GetChild(i).name == "GoRight")
+            {
+                player.GetChild(i).GetComponent<TMP_InputField>().text = 
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveRight].ToString();
+            }
+            else if (player.GetChild(i).name == "EnterAim")
+            {
+                player.GetChild(i).GetComponent<TMP_InputField>().text = 
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.EnterAimingMode].ToString();
+            }
+            else if (player.GetChild(i).name == "AimHigh")
+            {
+                player.GetChild(i).GetComponent<TMP_InputField>().text = 
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimHigher].ToString();
+            }
+            else if (player.GetChild(i).name == "AimLow")
+            {
+                player.GetChild(i).GetComponent<TMP_InputField>().text = 
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimLower].ToString();
+            }
+            else if (player.GetChild(i).name == "Shoot")
+            {
+                player.GetChild(i).GetComponent<TMP_InputField>().text = 
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Shoot].ToString();
+            }
+            else if (player.GetChild(i).name == "Jump")
+            {
+                player.GetChild(i).GetComponent<TMP_InputField>().text = 
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Jump].ToString();
+                
+            }
+        }
+
+        gettingKey = false;
+    }
+    
+    public void StartWaitingForKey( int child)
+    {
+        if (!gettingKey)
+        {
+            waitingKey = true;
+            childKey = child;
+        }
     }
     
     public void Return()

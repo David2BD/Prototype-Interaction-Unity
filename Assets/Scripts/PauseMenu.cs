@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(GameManager.Instance.generalActions[InputManager.GeneralAction.Quit]))
         {
             SceneManager.LoadScene("Main Menu");
             Time.timeScale = 1f;
