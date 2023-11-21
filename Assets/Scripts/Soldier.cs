@@ -142,6 +142,9 @@ public class Soldier : MonoBehaviour
             //Vector3 initialVelocity = new Vector3(20 * Mathf.Cos(angle), 30 * Mathf.Sin(angle), 0);
             rb.velocity = initialVelocity;
             ActionUsed = true;
+            SetAimingMode(false);
+            ResetMouvement();
+            
         }
     }
 

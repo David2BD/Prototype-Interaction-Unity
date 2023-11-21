@@ -11,10 +11,15 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenu;
     public TextMeshProUGUI Player2Text;
     public TextMeshProUGUI Player2Button;
-    
-    
 
-    
+    void Start()
+    {
+        GameSettings.isPlayer2CPU = false;
+        GameSettings.CPUDifficulty = 0;
+    }
+
+
+
 
     public void Play()
     {
@@ -30,17 +35,26 @@ public class MainMenu : MonoBehaviour
 
     public void ChangePlayer2()
     {
-        if (Player2Button.text == "CPU")
+        if (Player2Button.text == "CPU (easy)")
         {
-            Player2Text.SetText("Player 2 : CPU");
-            Player2Button.SetText("Human");
+            Player2Text.SetText("Player 2 : CPU (easy)");
+            Player2Button.SetText("CPU (Hard)");
             GameSettings.isPlayer2CPU = true;
+            GameSettings.CPUDifficulty = 1;
+        }
+        else if (Player2Button.text == "CPU (Hard)")
+        {
+            Player2Text.SetText("Player 2 : CPU (Hard)");
+            Player2Button.SetText("Human");
+            GameSettings.isPlayer2CPU = false;
+            GameSettings.CPUDifficulty = 2;
         }
         else if (Player2Button.text == "Human")
         {
             Player2Text.SetText("Player 2 : Human");
-            Player2Button.SetText("CPU");
+            Player2Button.SetText("CPU (easy)");
             GameSettings.isPlayer2CPU = false;
+            GameSettings.CPUDifficulty = 0;
         }
     }
     

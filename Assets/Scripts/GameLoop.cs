@@ -23,6 +23,9 @@ public class GameLoop : MonoBehaviour
     private Ball activeBall;
 
     private bool isPlayer2CPU;
+    private int CPUDiff;
+
+    public Vector3 distance;                        //Fordebugging purposes
 
     //private Dictionary<InputManager.PlayerAction, KeyCode> currentPlayer;
     
@@ -39,6 +42,7 @@ public class GameLoop : MonoBehaviour
         TextManager.GetComponent<textManager>().setTeam(1);
 
         isPlayer2CPU = GameSettings.isPlayer2CPU;
+        CPUDiff = GameSettings.CPUDifficulty;
 
     }
 
@@ -65,7 +69,7 @@ public class GameLoop : MonoBehaviour
             }
             else if (playerTurn == 2 && isPlayer2CPU == true)
             {
-                playTurnCPU(2, redTeamUnits, selectedSoldierRed);
+                playTurnCPU(2, redTeamUnits, selectedSoldierRed, CPUDiff);
                 TextManager.GetComponent<textManager>().setTeam(2);
             }
         }
@@ -104,8 +108,6 @@ public class GameLoop : MonoBehaviour
 
     private void NextUnit(int player)
     {
-        //playerTurn = (playerTurn + 1) % 2;
-
         if (playerTurn == 1)
         {
             // add variable later based on team size
@@ -124,14 +126,12 @@ public class GameLoop : MonoBehaviour
         {
             GameOverScreen.SetActive(!GameOverScreen.activeSelf);
             TextManagerGameOver.GetComponent<GameOverUI>().SetWinner(1);
-           // GameOverUIscript.SetWinner(1);
             
         }
         else if (winningTeam == 2)
         {
             GameOverScreen.SetActive(!GameOverScreen.activeSelf);
             TextManagerGameOver.GetComponent<GameOverUI>().SetWinner(2);
-            //GameOverUIscript.SetWinner(2);
             
         }
     }
@@ -155,7 +155,7 @@ public class GameLoop : MonoBehaviour
         
         if (soldiers[selectedSoldier].GetAimingMode() == false)
         {
-            // initialisation des parametre a chaque nouveau tour
+            // initialisation des parametres a chaque nouveau tour
             TextManager.GetComponent<textManager>().setMovingMode(true);
             TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
                 
@@ -195,9 +195,6 @@ public class GameLoop : MonoBehaviour
             {
                 // set varying force later
                 soldiers[selectedSoldier].Shoot();
-                soldiers[selectedSoldier].SetAimingMode(false);
-                //NextUnit(player);
-                soldiers[selectedSoldier].ResetMouvement();
                 EndTurn();
             }
         }
@@ -248,13 +245,43 @@ public class GameLoop : MonoBehaviour
     }
 
 
-    public void playTurnCPU(int player, List<Soldier> soldiers, int selectedSoldier)
+    public void playTurnCPU(int player, List<Soldier> soldiers, int selectedSoldier, int difficulty)
     {
         if (soldiers[selectedSoldier].GetAimingMode() == false)
         {
             // initialisation des parametre a chaque nouveau tour
             TextManager.GetComponent<textManager>().setMovingMode(true);
             TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
+        }
+
+        /*Vector3*/ distance = soldiers[selectedSoldier].transform.position - blueTeamUnits[0].transform.position;
+        Vector3 position = soldiers[selectedSoldier].transform.position;
+        if (difficulty == 1)                        //easy
+        {
+            if (distance.x > 20.0f)
+            {
+                soldiers[selectedSoldier].MoveLeft();
+            }
+            
+            if (distance.x < 15.0f && position.x < -33)
+            {
+                soldiers[selectedSoldier].MoveRight();
+            }
+
+            if (soldiers[selectedSoldier].getMouvement() <= 0 || (distance.x <= 20.0f && distance.x >= 15.0f) || position.x >= -33)
+            {
+                soldiers[selectedSoldier].Aim();
+            }
+
+            if (soldiers[selectedSoldier].GetAimingMode() == true)
+            {
+                soldiers[selectedSoldier].Shoot();
+                EndTurn();
+            }
+        }
+        else if (difficulty == 2)                   //hard
+        {
+            
         }
     }
 
