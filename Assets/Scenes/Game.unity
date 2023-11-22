@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 605397547}
   - component: {fileID: 605397546}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PauseExitTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2303,7 +2303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press enter to go back
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3077,7 +3077,7 @@ GameObject:
   - component: {fileID: 1746128652}
   - component: {fileID: 1746128651}
   m_Layer: 5
-  m_Name: WinnerText
+  m_Name: PauseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3442,6 +3442,7 @@ MonoBehaviour:
   aimingText: {fileID: 923945696}
   player1: {fileID: 1746205091}
   player2: {fileID: 646914259}
+  pauseTextQuit: {fileID: 605397546}
   active: {r: 0, g: 1, b: 0.05268264, a: 1}
   inactive: {r: 0, g: 0, b: 0, a: 1}
 --- !u!4 &1855828337
@@ -3928,7 +3929,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Blue WIN
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3955,8 +3956,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

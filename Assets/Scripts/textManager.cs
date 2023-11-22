@@ -16,6 +16,8 @@ public class textManager : MonoBehaviour
     public TextMeshProUGUI player1;
     public TextMeshProUGUI player2;
     
+    public TextMeshProUGUI pauseTextQuit;
+    
     public Color active = Color.green; // Color when the boolean is true
     public Color inactive = Color.black; // Color when the boolean is false
 
@@ -29,6 +31,10 @@ public class textManager : MonoBehaviour
     {
         player1.text = GameManager.Instance.getName(1);
         player2.text = GameManager.Instance.getName(2);
+
+        pauseTextQuit.text = "Press " +
+                             GameManager.Instance.generalActions[InputManager.GeneralAction.Quit].ToString() +
+                             " to exit";
         
         if (player == 1)
         {

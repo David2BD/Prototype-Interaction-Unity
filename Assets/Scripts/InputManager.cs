@@ -25,6 +25,10 @@ public class InputManager : MonoBehaviour
     private KeyCode newKey = KeyCode.None;
 
     public TextMeshProUGUI keyUpdate;
+
+    public TMP_InputField pause;
+    public TMP_InputField confirm;
+    public TMP_InputField quit;
     
     public enum PlayerAction
     {
@@ -54,6 +58,10 @@ public class InputManager : MonoBehaviour
         getKeyValues(player1, 1);
         getKeyValues(player2, 2);
 
+        pause.text = GameManager.Instance.generalActions[GeneralAction.Pause].ToString();
+        confirm.text = GameManager.Instance.generalActions[GeneralAction.Confirm].ToString();
+        quit.text = GameManager.Instance.generalActions[GeneralAction.Quit].ToString();
+
         switch (playerKey)
         {
             case 1:
@@ -62,24 +70,45 @@ public class InputManager : MonoBehaviour
             case 2:
                 keyUpdate.SetText(GameManager.Instance.getName(2) + " updating key.");
                 break;
+            case 3:
+                keyUpdate.SetText( "Updating general controls.");
+                break;
         }
         
-        
-        
         // when setting a new keyCode
-        if (waitingKey && childKey != 0)
+        if (waitingKey)
         {
-            if (Input.anyKeyDown)
+            if (playerKey == 3)
+            { 
+                if (Input.anyKey) 
+                { 
+                    foreach (KeyCode k in System.Enum.GetValues(typeof(KeyCode))) 
+                    { 
+                        if (Input.GetKeyDown(k) && k != KeyCode.Mouse0) 
+                        { 
+                            newKey = k; 
+                            updateGeneral(childKey);
+                            waitingKey = false;
+                            newKey = KeyCode.None;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (playerKey != 3 && childKey != 0)
             {
-                foreach (KeyCode k in System.Enum.GetValues(typeof(KeyCode)))
-                {
-                    if (Input.GetKeyDown(k))
-                    {
-                        newKey = k;
-                        updateKeyAction(playerKey);
-                        waitingKey = false;
-                        newKey = KeyCode.None;
-                        break;
+                if (Input.anyKey)
+                { 
+                    foreach (KeyCode k in System.Enum.GetValues(typeof(KeyCode))) 
+                    { 
+                        if (Input.GetKeyDown(k) && k != KeyCode.Mouse0) 
+                        { 
+                            newKey = k; 
+                            updateKeyAction(playerKey); 
+                            waitingKey = false; 
+                            newKey = KeyCode.None; 
+                            break;
+                        } 
                     }
                 }
             }
@@ -211,6 +240,9 @@ public class InputManager : MonoBehaviour
                 playerKey = 2;
                 break;
             case 2 :
+                playerKey = 3;
+                break;
+            case 3 :
                 playerKey = 1;
                 break;
         }
@@ -272,11 +304,34 @@ public class InputManager : MonoBehaviour
             childKey = child;
         }
     }
+
+    public void updateGeneral(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                GameManager.Instance.generalActions[GeneralAction.Pause] = newKey;
+                break;
+            case 2:
+                GameManager.Instance.generalActions[GeneralAction.Confirm] = newKey;
+                break;
+            case 3:
+                GameManager.Instance.generalActions[GeneralAction.Quit] = newKey;
+                break;
+        }
+    }
     
     public void Return()
     {
         settingsMenu.SetActive(!settingsMenu.activeSelf);
         inputMenu.SetActive(false);
         Debug.Log("Player go back to settings menu");
+    }
+
+    public void resetGeneral()
+    {
+        GameManager.Instance.generalActions[GeneralAction.Pause] = KeyCode.P;
+        GameManager.Instance.generalActions[GeneralAction.Confirm] = KeyCode.Return;
+        GameManager.Instance.generalActions[GeneralAction.Quit] = KeyCode.Escape;
     }
 }

@@ -34,7 +34,6 @@ public class GameLoop : MonoBehaviour
     {
         playerTurn = 1;
         selectedSoldierBlue = 0;
-        //currentPlayer = InputManager.getPlayerBlue();
         
         RegisterSoldier(new Soldier(), 1);
         RegisterSoldier(new Soldier(), 2);

@@ -75,6 +75,16 @@ public class Options : MonoBehaviour
                 break;
         }
     }
+
+    public void saveControls()
+    {
+        GameManager.Instance.saveAllControls();
+    }
+
+    public void loadControls()
+    {
+        GameManager.Instance.loadAllControls();
+    }
     
     public void Return()
     {

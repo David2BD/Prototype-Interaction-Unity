@@ -11,7 +11,7 @@ public class GameOverUI : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(GameManager.Instance.generalActions[InputManager.GeneralAction.Quit]))
         {
             SceneManager.LoadScene("Main Menu");
             
@@ -22,11 +22,13 @@ public class GameOverUI : MonoBehaviour
     {
         if (winningTeam == 1)
         {
-            winnerText.SetText("Blue Win");
+            winnerText.SetText(GameManager.Instance.getName(1).ToString() + " win" +
+                               "\nPress " + GameManager.Instance.generalActions[InputManager.GeneralAction.Quit].ToString() + " to go back.");
         }
         else if (winningTeam == 2)
         {
-            winnerText.SetText("Red Win");
+            winnerText.SetText(GameManager.Instance.getName(2).ToString() + " win " + 
+                               "\nPress " + GameManager.Instance.generalActions[InputManager.GeneralAction.Quit].ToString() + " to go back.");
         }
     }
 }
