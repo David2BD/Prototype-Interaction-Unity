@@ -17,6 +17,8 @@ public class Soldier : MonoBehaviour
     public HPBar barScript;
    
     
+    private bool usedTP;
+    
     //private Slider powerUp;
     //private bool powerUpRunning = false;
     
@@ -38,7 +40,7 @@ public class Soldier : MonoBehaviour
         gameLoop.RegisterSoldier(this, team);
         health = 100;
         lineRenderer = GetComponent<LineRenderer>();
-        
+        usedTP = false;
     }
 
     
@@ -144,7 +146,8 @@ public class Soldier : MonoBehaviour
             ActionUsed = true;
             SetAimingMode(false);
             ResetMouvement();
-            
+            usedTP = false;
+
         }
     }
 
@@ -185,6 +188,16 @@ public class Soldier : MonoBehaviour
         AimingMode = mode;
     }
 
+    public bool GetUsedTP()
+    {
+        return usedTP;
+    }
+
+    public void SetUsedTP(bool mode)
+    {
+        usedTP = mode;
+    }
+    
     public float getMouvement()
     {
         return mouvement;
@@ -213,4 +226,6 @@ public class Soldier : MonoBehaviour
             }
         }
     }
+    
+    
 }

@@ -24,6 +24,9 @@ public class GameLoop : MonoBehaviour
 
     private bool isPlayer2CPU;
     private int CPUDiff;
+    private int aimCounter;
+
+    
 
     public Vector3 distance;                        //Fordebugging purposes
 
@@ -42,6 +45,7 @@ public class GameLoop : MonoBehaviour
 
         isPlayer2CPU = GameSettings.isPlayer2CPU;
         CPUDiff = GameSettings.CPUDifficulty;
+        aimCounter = 0;
 
     }
 
@@ -233,8 +237,34 @@ public class GameLoop : MonoBehaviour
 
             if (soldiers[selectedSoldier].GetAimingMode() == true)
             {
-                soldiers[selectedSoldier].Shoot();
-                EndTurn();
+                
+                if (aimCounter <= 0)
+                {
+                    int aimDuration = Random.Range(30, 60); 
+                    
+                    aimCounter = aimDuration;
+                }
+                
+                aimCounter--;
+
+                // Adjust aim based on the counter value
+                if (aimCounter > 0)
+                {
+                    soldiers[selectedSoldier].AimHigher();
+                }
+                else
+                {
+                    soldiers[selectedSoldier].AimLower();
+                }
+
+                // If the counter reaches 0, fire or perform other actions
+                if (aimCounter == 0)
+                {
+                    soldiers[selectedSoldier].Shoot();
+                    EndTurn();
+                }
+
+                
             }
         }
         else if (difficulty == 2)                   //hard
