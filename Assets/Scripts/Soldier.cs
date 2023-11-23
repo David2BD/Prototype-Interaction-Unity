@@ -111,6 +111,8 @@ public class Soldier : MonoBehaviour
         }
     }
     
+    
+    
     public void AimLower()
     {
         if( AimingAngle.x > 0.25f || AimingAngle.x < -0.25f)
@@ -125,6 +127,43 @@ public class Soldier : MonoBehaviour
                 new Vector3(-0.251f, AimingAngle.y, AimingAngle.z);
             AimingAngle.Set(angle_team.x, angle_team.y, angle_team.z);
         }
+    }
+    
+    
+    public Vector3 AimHigherCheat()
+    {
+        if( AimingAngle.x > 0.25f || AimingAngle.x < -0.25f)
+        {
+            float rotationAmount = rotationSpeed * Time.deltaTime;
+            AimingAngle.Set(AimingAngle.x, AimingAngle.y + rotationAmount, AimingAngle.z);
+            AimingAngle.Normalize();
+        }
+        else
+        {
+            Vector3 angle_team = (team == 1) ? new Vector3(0.251f, AimingAngle.y, AimingAngle.z) :
+                new Vector3(-0.251f, AimingAngle.y, AimingAngle.z);
+            AimingAngle.Set(angle_team.x, angle_team.y, angle_team.z);
+        }
+
+        return AimingAngle;
+    }
+    
+    public Vector3 AimLowerCheat()
+    {
+        if( AimingAngle.x > 0.25f || AimingAngle.x < -0.25f)
+        {
+            float rotationAmount = rotationSpeed * Time.deltaTime;
+            AimingAngle.Set(AimingAngle.x, AimingAngle.y - rotationAmount, AimingAngle.z);
+            AimingAngle.Normalize();
+        }
+        else
+        {
+            Vector3 angle_team = (team == 1) ? new Vector3(0.251f, AimingAngle.y, AimingAngle.z) :
+                new Vector3(-0.251f, AimingAngle.y, AimingAngle.z);
+            AimingAngle.Set(angle_team.x, angle_team.y, angle_team.z);
+        }
+        
+        return AimingAngle;
     }
 
     public void Shoot()

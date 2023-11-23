@@ -287,7 +287,34 @@ public class GameLoop : MonoBehaviour
         }
         else if (difficulty == 2)                   //hard
         {
+            if (soldiers[selectedSoldier].GetAimingMode() == false)
+            {
+                // initialisation des parametre a chaque nouveau tour
+                TextManager.GetComponent<textManager>().setMovingMode(true);
+                TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
+            }
             
+            if (distance.x > 20.0f)
+            {
+                soldiers[selectedSoldier].MoveLeft();
+            }
+            
+            if (distance.x < 15.0f && position.x < -33)
+            {
+                soldiers[selectedSoldier].MoveRight();
+            }
+
+            if (soldiers[selectedSoldier].getMouvement() <= 0 || (distance.x <= 20.0f && distance.x >= 15.0f) || position.x >= -33)
+            {
+                soldiers[selectedSoldier].Aim();
+            }
+
+            if (soldiers[selectedSoldier].GetAimingMode() == true)
+            {
+                
+                
+                
+            }
         }
     }
 
