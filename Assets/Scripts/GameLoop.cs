@@ -45,7 +45,7 @@ public class GameLoop : MonoBehaviour
 
         isPlayer2CPU = GameSettings.isPlayer2CPU;
         CPUDiff = GameSettings.CPUDifficulty;
-        aimCounter = 0;
+        aimCounter = -1;
 
     }
 
@@ -62,17 +62,29 @@ public class GameLoop : MonoBehaviour
         {
             if (playerTurn == 1)
             {
-                playTurn(1, blueTeamUnits, selectedSoldierBlue);
+                if (blueTeamUnits[selectedSoldierBlue] != null)
+                {
+                    playTurn(1, blueTeamUnits, selectedSoldierBlue);
+                }
+
                 TextManager.GetComponent<textManager>().setTeam(1);
             }
             else if (playerTurn == 2 && isPlayer2CPU == false)
             {
-                playTurn(2, redTeamUnits, selectedSoldierRed);
+                if (redTeamUnits[selectedSoldierRed] != null)
+                {
+                    playTurn(2, redTeamUnits, selectedSoldierRed);
+                }
+
                 TextManager.GetComponent<textManager>().setTeam(2);
             }
             else if (playerTurn == 2 && isPlayer2CPU == true)
             {
-                playTurnCPU(2, redTeamUnits, selectedSoldierRed, CPUDiff);
+                if (redTeamUnits[selectedSoldierRed] != null)
+                {
+                    playTurnCPU(2, redTeamUnits, selectedSoldierRed, CPUDiff);
+                }
+
                 TextManager.GetComponent<textManager>().setTeam(2);
             }
         }
@@ -215,8 +227,8 @@ public class GameLoop : MonoBehaviour
             TextManager.GetComponent<textManager>().setMovingMode(true);
             TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
         }
-
-        /*Vector3*/ distance = soldiers[selectedSoldier].transform.position - blueTeamUnits[0].transform.position;
+        
+        distance = soldiers[selectedSoldier].transform.position - blueTeamUnits[0].transform.position;
         Vector3 position = soldiers[selectedSoldier].transform.position;
         if (difficulty == 1)                        //easy
         {
@@ -238,29 +250,35 @@ public class GameLoop : MonoBehaviour
             if (soldiers[selectedSoldier].GetAimingMode() == true)
             {
                 
-                if (aimCounter <= 0)
+                if (aimCounter < 0)
                 {
-                    int aimDuration = Random.Range(30, 60); 
+                    int aimDuration = Random.Range(300, 700); 
                     
                     aimCounter = aimDuration;
                 }
                 
                 aimCounter--;
 
-                // Adjust aim based on the counter value
+                
                 if (aimCounter > 0)
                 {
-                    soldiers[selectedSoldier].AimHigher();
+                    int aimDirection = Random.Range(1, 3); 
+                    if (aimDirection == 1)
+                    {
+                        soldiers[selectedSoldier].AimHigher();
+                    }
+                    else if (aimDirection == 2)
+                    {
+                        soldiers[selectedSoldier].AimLower();
+                    }
                 }
-                else
-                {
-                    soldiers[selectedSoldier].AimLower();
-                }
+                
 
                 // If the counter reaches 0, fire or perform other actions
                 if (aimCounter == 0)
                 {
                     soldiers[selectedSoldier].Shoot();
+                    aimCounter = -1;
                     EndTurn();
                 }
 

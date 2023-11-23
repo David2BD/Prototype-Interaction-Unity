@@ -21,7 +21,7 @@ public class NewBehaviourScript : MonoBehaviour
             controls.GetComponent<InputManager>().setControls();
         }
 
-        pressText.SetText("Press \n" + GameManager.Instance.generalActions[InputManager.GeneralAction.Confirm].ToString());
+        pressText.SetText("Press " + GameManager.Instance.generalActions[InputManager.GeneralAction.Confirm].ToString());
         
         if (Input.GetKeyDown(GameManager.Instance.generalActions[InputManager.GeneralAction.Confirm]))
         {
