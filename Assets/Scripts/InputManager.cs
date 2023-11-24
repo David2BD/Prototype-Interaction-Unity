@@ -11,13 +11,16 @@ public class InputManager : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject inputMenu;
 
+    // parent for all controls
     public Transform player1;
     public Transform player2;
     
+    // controls of each player and general controls
     private Dictionary<PlayerAction, KeyCode> playerBlue = new Dictionary<PlayerAction, KeyCode>{};
     private Dictionary<PlayerAction, KeyCode> playerRed = new Dictionary<PlayerAction, KeyCode>{};
     private Dictionary<GeneralAction, KeyCode> generalActions = new Dictionary<GeneralAction, KeyCode>{};
     
+    // for updating player controls values
     private int playerKey = 1;
     private int childKey = 0;
     private bool gettingKey = true;
@@ -26,10 +29,12 @@ public class InputManager : MonoBehaviour
 
     public TextMeshProUGUI keyUpdate;
 
+    // for updating general controls values
     public TMP_InputField pause;
     public TMP_InputField confirm;
     public TMP_InputField quit;
     
+    // possible actions player can do
     public enum PlayerAction
     {
         MoveLeft,
@@ -41,6 +46,7 @@ public class InputManager : MonoBehaviour
         Jump
     }
 
+    // general controls
     public enum GeneralAction
     {
         Confirm,
@@ -54,7 +60,7 @@ public class InputManager : MonoBehaviour
         player1.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.getName(1));
         player2.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.getName(2));
         
-        // get key values
+        // updating text based on current values
         getKeyValues(player1, 1);
         getKeyValues(player2, 2);
 
@@ -62,6 +68,7 @@ public class InputManager : MonoBehaviour
         confirm.text = GameManager.Instance.generalActions[GeneralAction.Confirm].ToString();
         quit.text = GameManager.Instance.generalActions[GeneralAction.Quit].ToString();
 
+        // who is currently updating
         switch (playerKey)
         {
             case 1:
@@ -78,7 +85,7 @@ public class InputManager : MonoBehaviour
         // when setting a new keyCode
         if (waitingKey)
         {
-            if (playerKey == 3)
+            if (playerKey == 3) // general controls
             { 
                 if (Input.anyKey) 
                 { 
@@ -95,7 +102,7 @@ public class InputManager : MonoBehaviour
                     }
                 }
             }
-            else if (playerKey != 3 && childKey != 0)
+            else if (playerKey != 3 && childKey != 0) // player controls
             {
                 if (Input.anyKey)
                 { 
@@ -201,6 +208,7 @@ public class InputManager : MonoBehaviour
     }
     
     
+   // update control key
     private void updateKeyAction(int p)
     {
         if (newKey != KeyCode.None)
@@ -249,6 +257,7 @@ public class InputManager : MonoBehaviour
     }
 
     
+    // get current control value
     private void getKeyValues(Transform player, int p)
     {
         gettingKey = true;
@@ -296,6 +305,7 @@ public class InputManager : MonoBehaviour
         gettingKey = false;
     }
     
+    // if we're expecting new key value
     public void StartWaitingForKey( int child)
     {
         if (!gettingKey)
@@ -321,6 +331,7 @@ public class InputManager : MonoBehaviour
         }
     }
     
+    // go back
     public void Return()
     {
         settingsMenu.SetActive(!settingsMenu.activeSelf);
@@ -328,6 +339,7 @@ public class InputManager : MonoBehaviour
         Debug.Log("Player go back to settings menu");
     }
 
+    // reset values for general controls
     public void resetGeneral()
     {
         GameManager.Instance.generalActions[GeneralAction.Pause] = KeyCode.P;

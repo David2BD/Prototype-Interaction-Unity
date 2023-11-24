@@ -185,7 +185,7 @@ public class GameLoop : MonoBehaviour
             }
             else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.Jump]))
             {
-                // function jump
+                soldiers[selectedSoldier].Jump();
             }
             else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.EnterAimingMode]))
             {

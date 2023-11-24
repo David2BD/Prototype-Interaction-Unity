@@ -32,17 +32,6 @@ public class GameManager : MonoBehaviour
 
     private string player1_name = "Player 1"; // nom par defaut
     private string player2_name = "Player 2"; // nom par defaut
-        
-    // Start is called before the first frame update
-    void Start()
-    {
-    
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
     
     // Singleton
     void Awake()

@@ -9,7 +9,7 @@ public class Soldier : MonoBehaviour
     private GameLoop gameLoop;
     private Renderer soldierRenderer;
     public int team;
-    private float mouvement  = 3.0f;                //Pour avoir la longueur du mouvement qui reste pour le tour
+    private float mouvement  = 5.0f;                //Pour avoir la longueur du mouvement qui reste pour le tour
     private bool AimingMode = false;
     private bool ActionUsed = false;
     private float moveSpeed = 2.0f;
@@ -170,7 +170,7 @@ public class Soldier : MonoBehaviour
 
     public void ResetMouvement()
     {
-        mouvement = 3.0f;
+        mouvement = 5.0f;
     }
     
     public bool GetActionUsed()
@@ -207,8 +207,13 @@ public class Soldier : MonoBehaviour
     {
         return mouvement;
     }
-    
-    
+
+    public void Jump()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(0, 10, 0, ForceMode.Impulse);
+    }
+
     public float getHealth()
     {
         return health;
