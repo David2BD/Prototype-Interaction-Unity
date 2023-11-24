@@ -50,22 +50,15 @@ public class MainMenu : MonoBehaviour
 
     public void ChangePlayer2()
     {
-        count = (count + 1) % 3;
+        count = (count + 1) % 2;
         
         // le texte du bouton est le niveau/adversaire
         if (count == 1)
         {
             current.SetText("CPU (easy)");
-            Player2Button.SetText("Change : CPU (hard)");
+            Player2Button.SetText("Change : Human");
             GameSettings.isPlayer2CPU = true;
             GameSettings.CPUDifficulty = 1;
-        }
-        else if (count == 2)
-        {
-            current.SetText("CPU (hard)");
-            Player2Button.SetText("Change : Human");
-            GameSettings.isPlayer2CPU = false;
-            GameSettings.CPUDifficulty = 2;
         }
         else if (count == 0)
         {
