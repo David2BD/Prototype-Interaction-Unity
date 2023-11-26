@@ -28,25 +28,25 @@ public class InputManager : MonoBehaviour
     public void Update()
     {
         // player names
-        player1.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.getName(1));
-        player2.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.getName(2));
+        player1.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.GetName(1));
+        player2.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.GetName(2));
         
         // updating text based on current values
         GetKeyValues(player1, 1);
         GetKeyValues(player2, 2);
 
-        pause.text = GameManager.Instance.generalActions[GeneralAction.Pause].ToString();
-        confirm.text = GameManager.Instance.generalActions[GeneralAction.Confirm].ToString();
-        quit.text = GameManager.Instance.generalActions[GeneralAction.Quit].ToString();
+        pause.text = GameManager.Instance.GeneralActions[GeneralAction.Pause].ToString();
+        confirm.text = GameManager.Instance.GeneralActions[GeneralAction.Confirm].ToString();
+        quit.text = GameManager.Instance.GeneralActions[GeneralAction.Quit].ToString();
 
         // who is currently updating
         switch (_playerKey)
         {
             case 1:
-                keyUpdate.SetText(GameManager.Instance.getName(1) + " updating key.");
+                keyUpdate.SetText(GameManager.Instance.GetName(1) + " updating key.");
                 break;
             case 2:
-                keyUpdate.SetText(GameManager.Instance.getName(2) + " updating key.");
+                keyUpdate.SetText(GameManager.Instance.GetName(2) + " updating key.");
                 break;
             case 3:
                 keyUpdate.SetText( "Updating general controls.");
@@ -95,7 +95,7 @@ public class InputManager : MonoBehaviour
     
     public void SetArrows(int player)
     {
-        SetArrowsKeys(player == 1 ? GameManager.Instance.playerBlue : GameManager.Instance.playerRed);
+        SetArrowsKeys(player == 1 ? GameManager.Instance.PlayerBlue : GameManager.Instance.PlayerRed);
     }
     
     private static void SetArrowsKeys(Dictionary<PlayerAction, KeyCode> dict)
@@ -111,7 +111,7 @@ public class InputManager : MonoBehaviour
 
     public void SetQwerty(int player)
     {
-        setQWERTY_Keys(player == 1 ? GameManager.Instance.playerBlue : GameManager.Instance.playerRed);
+        setQWERTY_Keys(player == 1 ? GameManager.Instance.PlayerBlue : GameManager.Instance.PlayerRed);
     }
 
     private void setQWERTY_Keys(Dictionary<PlayerAction, KeyCode> dict)
@@ -134,25 +134,25 @@ public class InputManager : MonoBehaviour
             switch (_childKey)
             {
                 case 1:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveLeft] = _newKey;
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.MoveLeft] = _newKey;
                     break;
                 case 2:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveRight] = _newKey;
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.MoveRight] = _newKey;
                     break;
                 case 3:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.EnterAimingMode] = _newKey;
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.EnterAimingMode] = _newKey;
                     break;
                 case 4:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimHigher] = _newKey;
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.AimHigher] = _newKey;
                     break;
                 case 5:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimLower] = _newKey;
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.AimLower] = _newKey;
                     break;
                 case 6:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Shoot] = _newKey;
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.Shoot] = _newKey;
                     break;
                 case 7:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Jump] = _newKey;
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.Jump] = _newKey;
                     break;
             }
         }
@@ -185,37 +185,37 @@ public class InputManager : MonoBehaviour
             if (player.GetChild(i).name == "GoLeft")
             {
                 player.GetChild(i).GetComponent<TMP_InputField>().text = 
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveLeft].ToString();
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.MoveLeft].ToString();
             }
             else if (player.GetChild(i).name == "GoRight")
             {
                 player.GetChild(i).GetComponent<TMP_InputField>().text = 
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveRight].ToString();
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.MoveRight].ToString();
             }
             else if (player.GetChild(i).name == "EnterAim")
             {
                 player.GetChild(i).GetComponent<TMP_InputField>().text = 
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.EnterAimingMode].ToString();
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.EnterAimingMode].ToString();
             }
             else if (player.GetChild(i).name == "AimHigh")
             {
                 player.GetChild(i).GetComponent<TMP_InputField>().text = 
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimHigher].ToString();
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.AimHigher].ToString();
             }
             else if (player.GetChild(i).name == "AimLow")
             {
                 player.GetChild(i).GetComponent<TMP_InputField>().text = 
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimLower].ToString();
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.AimLower].ToString();
             }
             else if (player.GetChild(i).name == "Shoot")
             {
                 player.GetChild(i).GetComponent<TMP_InputField>().text = 
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Shoot].ToString();
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.Shoot].ToString();
             }
             else if (player.GetChild(i).name == "Jump")
             {
                 player.GetChild(i).GetComponent<TMP_InputField>().text = 
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Jump].ToString();
+                    GameManager.Instance.GetPlayerKeys(p)[PlayerAction.Jump].ToString();
                 
             }
         }
@@ -238,13 +238,13 @@ public class InputManager : MonoBehaviour
         switch (i)
         {
             case 1:
-                GameManager.Instance.generalActions[GeneralAction.Pause] = _newKey;
+                GameManager.Instance.GeneralActions[GeneralAction.Pause] = _newKey;
                 break;
             case 2:
-                GameManager.Instance.generalActions[GeneralAction.Confirm] = _newKey;
+                GameManager.Instance.GeneralActions[GeneralAction.Confirm] = _newKey;
                 break;
             case 3:
-                GameManager.Instance.generalActions[GeneralAction.Quit] = _newKey;
+                GameManager.Instance.GeneralActions[GeneralAction.Quit] = _newKey;
                 break;
         }
     }
@@ -260,8 +260,8 @@ public class InputManager : MonoBehaviour
     // reset values for general controls
     public void ResetGeneral()
     {
-        GameManager.Instance.generalActions[GeneralAction.Pause] = KeyCode.P;
-        GameManager.Instance.generalActions[GeneralAction.Confirm] = KeyCode.Return;
-        GameManager.Instance.generalActions[GeneralAction.Quit] = KeyCode.Escape;
+        GameManager.Instance.GeneralActions[GeneralAction.Pause] = KeyCode.P;
+        GameManager.Instance.GeneralActions[GeneralAction.Confirm] = KeyCode.Return;
+        GameManager.Instance.GeneralActions[GeneralAction.Quit] = KeyCode.Escape;
     }
 }

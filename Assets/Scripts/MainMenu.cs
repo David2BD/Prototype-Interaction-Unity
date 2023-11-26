@@ -33,8 +33,8 @@ public class MainMenu : MonoBehaviour
     {
         if (player1Name != null && player2Name != null)
         {
-            player1Name.SetText(GameManager.Instance.getName(1));
-            player2Name.SetText(GameManager.Instance.getName(2));
+            player1Name.SetText(GameManager.Instance.GetName(1));
+            player2Name.SetText(GameManager.Instance.GetName(2));
         }
     }
 

@@ -28,11 +28,11 @@ public class textManager : MonoBehaviour
     
     void Update()
     {
-        player1.text = GameManager.Instance.getName(1);
-        player2.text = GameManager.Instance.getName(2);
+        player1.text = GameManager.Instance.GetName(1);
+        player2.text = GameManager.Instance.GetName(2);
 
         pauseTextQuit.text = "Press " +
-                             GameManager.Instance.generalActions[GeneralAction.Quit].ToString() +
+                             GameManager.Instance.GeneralActions[GeneralAction.Quit].ToString() +
                              " to exit";
         
         if (player == 1)

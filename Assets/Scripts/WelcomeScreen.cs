@@ -14,9 +14,9 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        pressText.SetText("Press " + GameManager.Instance.generalActions[GeneralAction.Confirm].ToString());
+        pressText.SetText("Press " + GameManager.Instance.GeneralActions[GeneralAction.Confirm].ToString());
         
-        if (Input.GetKeyDown(GameManager.Instance.generalActions[GeneralAction.Confirm]))
+        if (Input.GetKeyDown(GameManager.Instance.GeneralActions[GeneralAction.Confirm]))
         {
             mainMenu.SetActive(!mainMenu.activeSelf);
             welcomeScreen.SetActive(false);

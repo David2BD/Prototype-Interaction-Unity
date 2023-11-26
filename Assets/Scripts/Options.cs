@@ -15,16 +15,16 @@ public class Options : MonoBehaviour
 
     public void Update()
     {
-        player1.text = GameManager.Instance.getName(1);
-        player2.text = GameManager.Instance.getName(2);
+        player1.text = GameManager.Instance.GetName(1);
+        player2.text = GameManager.Instance.GetName(2);
         
         switch (_currentPlayer)
         {
             case 1:
-                textOptions.SetText(GameManager.Instance.getName(1) + " updating controls.");
+                textOptions.SetText(GameManager.Instance.GetName(1) + " updating controls.");
                 break;
             case 2:
-                textOptions.SetText(GameManager.Instance.getName(2) + " updating controls.");
+                textOptions.SetText(GameManager.Instance.GetName(2) + " updating controls.");
                 break;
         }
     }
@@ -40,11 +40,11 @@ public class Options : MonoBehaviour
     {
         if (player == 1 && player1.text != null)
         {
-            GameManager.Instance.setName(1, player1.text);
+            GameManager.Instance.SetName(1, player1.text);
         }
         else if (player == 2 && player2.text != null)
         {
-            GameManager.Instance.setName(2, player2.text);
+            GameManager.Instance.SetName(2, player2.text);
         }
     }
 
@@ -65,12 +65,12 @@ public class Options : MonoBehaviour
 
     public void SaveControls()
     {
-        GameManager.Instance.saveAllControls();
+        GameManager.Instance.SaveAllControls();
     }
 
     public void LoadControls()
     {
-        GameManager.Instance.loadAllControls();
+        GameManager.Instance.LoadAllControls();
     }
     
     public void Return()

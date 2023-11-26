@@ -2826,6 +2826,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: barScript
       value: 
       objectReference: {fileID: 746841297}
@@ -3759,8 +3763,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurn: 1
-  selectedSoldierBlue: 0
-  selectedSoldierRed: 0
+  selectedSoldierBlue: 1
+  selectedSoldierRed: 1
   blueTeamUnits: []
   redTeamUnits: []
   GameOverScreen: {fileID: 1902548623}

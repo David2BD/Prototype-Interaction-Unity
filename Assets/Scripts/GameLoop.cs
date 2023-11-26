@@ -4,8 +4,8 @@ using UnityEngine;
 public class GameLoop : MonoBehaviour
 {
     public int playerTurn;
-    public int selectedSoldierBlue;
-    public int selectedSoldierRed;
+    public int selectedSoldierBlue = 1;
+    public int selectedSoldierRed = 1;
     public List<Soldier> blueTeamUnits = new List<Soldier>();
     public List<Soldier> redTeamUnits = new List<Soldier>();
     
@@ -34,7 +34,7 @@ public class GameLoop : MonoBehaviour
     void Start()
     {
         playerTurn = 1;
-        selectedSoldierBlue = 0;
+        //selectedSoldierBlue = 1;
         
         RegisterSoldier(new Soldier(), 1);
         RegisterSoldier(new Soldier(), 2);
@@ -51,7 +51,7 @@ public class GameLoop : MonoBehaviour
     {
         activeBall = FindObjectOfType<Ball>();
         
-        if (Input.GetKeyDown(GameManager.Instance.generalActions[GeneralAction.Pause]))
+        if (Input.GetKeyDown(GameManager.Instance.GeneralActions[GeneralAction.Pause]))
         {
             TogglePause();
         }
@@ -64,7 +64,6 @@ public class GameLoop : MonoBehaviour
                 {
                     playTurn(1, blueTeamUnits, selectedSoldierBlue);
                 }
-
                 TextManager.GetComponent<textManager>().setTeam(1);
             }
             else if (playerTurn == 2 && isPlayer2CPU == false)
@@ -73,7 +72,6 @@ public class GameLoop : MonoBehaviour
                 {
                     playTurn(2, redTeamUnits, selectedSoldierRed);
                 }
-
                 TextManager.GetComponent<textManager>().setTeam(2);
             }
             else if (playerTurn == 2 && isPlayer2CPU == true)
@@ -130,7 +128,6 @@ public class GameLoop : MonoBehaviour
         {
             selectedSoldierRed = (selectedSoldierRed + 1) % 1;
         }
-        
     }
 
     public void GameOver(int winningTeam)
@@ -154,12 +151,12 @@ public class GameLoop : MonoBehaviour
         if (playerTurn == 1)
         {
             playerTurn = 2;
-            redTeamUnits[0].SetActionUsed(false);
+            redTeamUnits[1].SetActionUsed(false);
         }
         else
         {
             playerTurn = 1;
-            blueTeamUnits[0].SetActionUsed(false);
+            blueTeamUnits[1].SetActionUsed(false);
         }
     }
     
@@ -171,21 +168,21 @@ public class GameLoop : MonoBehaviour
             TextManager.GetComponent<textManager>().setMovingMode(true);
             TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
                 
-            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.MoveRight]))
+            if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.MoveRight]))
             {
                 soldiers[selectedSoldier].MoveRight();
                 TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
             }
-            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.MoveLeft]))
+            else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.MoveLeft]))
             {
                 soldiers[selectedSoldier].MoveLeft();
                 TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
             }
-            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.Jump]))
+            else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.Jump]))
             {
                 soldiers[selectedSoldier].Jump();
             }
-            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.EnterAimingMode]))
+            else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.EnterAimingMode]))
             {
                 if (soldiers[selectedSoldier].GetAimingMode() == false)
                 {
@@ -196,18 +193,18 @@ public class GameLoop : MonoBehaviour
         else if (soldiers[selectedSoldier].GetAimingMode())
         {
             TextManager.GetComponent<textManager>().setMovingMode(false);
-            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.AimHigher]))
+            if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.AimHigher]))
             {
                 soldiers[selectedSoldier].AimHigher();
                 soldiers[selectedSoldier].AimHigher();
             }
-            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.AimLower]))
+            else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.AimLower]))
             {
                 soldiers[selectedSoldier].AimLower();
             }
                 
             
-            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.Shoot]))
+            if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.Shoot]))
             {
                 // set varying force later
                 soldiers[selectedSoldier].Shoot();
