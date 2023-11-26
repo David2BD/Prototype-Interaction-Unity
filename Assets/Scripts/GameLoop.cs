@@ -1,6 +1,4 @@
-
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameLoop : MonoBehaviour
@@ -28,7 +26,7 @@ public class GameLoop : MonoBehaviour
 
     
 
-    public Vector3 distance;                        //Fordebugging purposes
+    public Vector3 distance;                        //For debugging purposes
 
     //private Dictionary<InputManager.PlayerAction, KeyCode> currentPlayer;
     
@@ -53,7 +51,7 @@ public class GameLoop : MonoBehaviour
     {
         activeBall = FindObjectOfType<Ball>();
         
-        if (Input.GetKeyDown(GameManager.Instance.generalActions[InputManager.GeneralAction.Pause]))
+        if (Input.GetKeyDown(GameManager.Instance.generalActions[GeneralAction.Pause]))
         {
             TogglePause();
         }
@@ -173,21 +171,21 @@ public class GameLoop : MonoBehaviour
             TextManager.GetComponent<textManager>().setMovingMode(true);
             TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
                 
-            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.MoveRight]))
+            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.MoveRight]))
             {
                 soldiers[selectedSoldier].MoveRight();
                 TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
             }
-            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.MoveLeft]))
+            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.MoveLeft]))
             {
                 soldiers[selectedSoldier].MoveLeft();
                 TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
             }
-            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.Jump]))
+            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.Jump]))
             {
                 soldiers[selectedSoldier].Jump();
             }
-            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.EnterAimingMode]))
+            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.EnterAimingMode]))
             {
                 if (soldiers[selectedSoldier].GetAimingMode() == false)
                 {
@@ -195,21 +193,21 @@ public class GameLoop : MonoBehaviour
                 }
             }
         }
-        else if (soldiers[selectedSoldier].GetAimingMode() == true)
+        else if (soldiers[selectedSoldier].GetAimingMode())
         {
             TextManager.GetComponent<textManager>().setMovingMode(false);
-            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.AimHigher]))
+            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.AimHigher]))
             {
                 soldiers[selectedSoldier].AimHigher();
                 soldiers[selectedSoldier].AimHigher();
             }
-            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.AimLower]))
+            else if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.AimLower]))
             {
                 soldiers[selectedSoldier].AimLower();
             }
                 
             
-            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[InputManager.PlayerAction.Shoot]))
+            if (Input.GetKey(GameManager.Instance.getPlayerKeys(player)[PlayerAction.Shoot]))
             {
                 // set varying force later
                 soldiers[selectedSoldier].Shoot();

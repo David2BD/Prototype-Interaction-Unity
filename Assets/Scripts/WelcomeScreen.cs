@@ -8,26 +8,18 @@ public class NewBehaviourScript : MonoBehaviour
     
     public GameObject mainMenu;
     public GameObject welcomeScreen;
-    public GameObject controls;
 
     public TextMeshProUGUI pressText;
     
     // Update is called once per frame
     public void Update()
     {
-        if (GameManager.Instance.generalActions == null)
-        {
-            // initialize control
-            controls.GetComponent<InputManager>().setControls();
-        }
-
-        pressText.SetText("Press " + GameManager.Instance.generalActions[InputManager.GeneralAction.Confirm].ToString());
+        pressText.SetText("Press " + GameManager.Instance.generalActions[GeneralAction.Confirm].ToString());
         
-        if (Input.GetKeyDown(GameManager.Instance.generalActions[InputManager.GeneralAction.Confirm]))
+        if (Input.GetKeyDown(GameManager.Instance.generalActions[GeneralAction.Confirm]))
         {
             mainMenu.SetActive(!mainMenu.activeSelf);
             welcomeScreen.SetActive(false);
-            
         }
         
     }

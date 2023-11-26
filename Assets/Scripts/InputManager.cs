@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.UI;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -15,17 +11,12 @@ public class InputManager : MonoBehaviour
     public Transform player1;
     public Transform player2;
     
-    // controls of each player and general controls
-    private Dictionary<PlayerAction, KeyCode> playerBlue = new Dictionary<PlayerAction, KeyCode>{};
-    private Dictionary<PlayerAction, KeyCode> playerRed = new Dictionary<PlayerAction, KeyCode>{};
-    private Dictionary<GeneralAction, KeyCode> generalActions = new Dictionary<GeneralAction, KeyCode>{};
-    
     // for updating player controls values
-    private int playerKey = 1;
-    private int childKey = 0;
-    private bool gettingKey = true;
-    private bool waitingKey = false;
-    private KeyCode newKey = KeyCode.None;
+    private int _playerKey = 1;
+    private int _childKey;
+    private bool _gettingKey = true;
+    private bool _waitingKey = false;
+    private KeyCode _newKey = KeyCode.None;
 
     public TextMeshProUGUI keyUpdate;
 
@@ -33,26 +24,6 @@ public class InputManager : MonoBehaviour
     public TMP_InputField pause;
     public TMP_InputField confirm;
     public TMP_InputField quit;
-    
-    // possible actions player can do
-    public enum PlayerAction
-    {
-        MoveLeft,
-        MoveRight,
-        EnterAimingMode,
-        AimHigher,
-        AimLower,
-        Shoot,
-        Jump
-    }
-
-    // general controls
-    public enum GeneralAction
-    {
-        Confirm,
-        Pause,
-        Quit
-    }
 
     public void Update()
     {
@@ -61,15 +32,15 @@ public class InputManager : MonoBehaviour
         player2.GetComponentInChildren<TextMeshProUGUI>().SetText(GameManager.Instance.getName(2));
         
         // updating text based on current values
-        getKeyValues(player1, 1);
-        getKeyValues(player2, 2);
+        GetKeyValues(player1, 1);
+        GetKeyValues(player2, 2);
 
         pause.text = GameManager.Instance.generalActions[GeneralAction.Pause].ToString();
         confirm.text = GameManager.Instance.generalActions[GeneralAction.Confirm].ToString();
         quit.text = GameManager.Instance.generalActions[GeneralAction.Quit].ToString();
 
         // who is currently updating
-        switch (playerKey)
+        switch (_playerKey)
         {
             case 1:
                 keyUpdate.SetText(GameManager.Instance.getName(1) + " updating key.");
@@ -83,9 +54,9 @@ public class InputManager : MonoBehaviour
         }
         
         // when setting a new keyCode
-        if (waitingKey)
+        if (_waitingKey)
         {
-            if (playerKey == 3) // general controls
+            if (_playerKey == 3) // general controls
             { 
                 if (Input.anyKey) 
                 { 
@@ -93,16 +64,16 @@ public class InputManager : MonoBehaviour
                     { 
                         if (Input.GetKeyDown(k) && k != KeyCode.Mouse0) 
                         { 
-                            newKey = k; 
-                            updateGeneral(childKey);
-                            waitingKey = false;
-                            newKey = KeyCode.None;
+                            _newKey = k; 
+                            UpdateGeneral(_childKey);
+                            _waitingKey = false;
+                            _newKey = KeyCode.None;
                             break;
                         }
                     }
                 }
             }
-            else if (playerKey != 3 && childKey != 0) // player controls
+            else if (_playerKey != 3 && _childKey != 0) // player controls
             {
                 if (Input.anyKey)
                 { 
@@ -110,10 +81,10 @@ public class InputManager : MonoBehaviour
                     { 
                         if (Input.GetKeyDown(k) && k != KeyCode.Mouse0) 
                         { 
-                            newKey = k; 
-                            updateKeyAction(playerKey); 
-                            waitingKey = false; 
-                            newKey = KeyCode.None; 
+                            _newKey = k; 
+                            UpdateKeyAction(_playerKey); 
+                            _waitingKey = false; 
+                            _newKey = KeyCode.None; 
                             break;
                         } 
                     }
@@ -121,48 +92,13 @@ public class InputManager : MonoBehaviour
             }
         }
     }
-
-    public void setControls()
+    
+    public void SetArrows(int player)
     {
-        setInitialConfiguration(playerBlue);
-        setInitialConfiguration(playerRed);
-        setGeneralConfiguration();
-        GameManager.Instance.InputManagerUpdate(playerBlue, playerRed, generalActions);
+        SetArrowsKeys(player == 1 ? GameManager.Instance.playerBlue : GameManager.Instance.playerRed);
     }
     
-
-    private void setInitialConfiguration(Dictionary<PlayerAction, KeyCode> player)
-    {
-        player.Add(PlayerAction.MoveLeft, KeyCode.LeftArrow);
-        player.Add(PlayerAction.MoveRight, KeyCode.RightArrow);
-        player.Add(PlayerAction.Jump, KeyCode.UpArrow);
-        player.Add(PlayerAction.EnterAimingMode, KeyCode.Z);
-        player.Add(PlayerAction.AimHigher, KeyCode.UpArrow);
-        player.Add(PlayerAction.AimLower, KeyCode.DownArrow);
-        player.Add(PlayerAction.Shoot, KeyCode.Space);
-    }
-
-    private void setGeneralConfiguration()
-    {
-        generalActions.Add(GeneralAction.Confirm, KeyCode.Return);
-        generalActions.Add(GeneralAction.Pause, KeyCode.P);
-        generalActions.Add(GeneralAction.Quit, KeyCode.Escape);
-    }
-
-    public void setArrows(int player)
-    {
-        if (player == 1)
-        {
-            setArrowsKeys(playerBlue);
-        }
-        else
-        {
-            setArrowsKeys(playerRed);
-        }
-        GameManager.Instance.InputManagerUpdate(playerBlue, playerRed, generalActions);
-    }
-    
-    private void setArrowsKeys(Dictionary<PlayerAction, KeyCode> dict)
+    private static void SetArrowsKeys(Dictionary<PlayerAction, KeyCode> dict)
     {
         dict[PlayerAction.MoveLeft] = KeyCode.LeftArrow;
         dict[PlayerAction.MoveRight] = KeyCode.RightArrow;
@@ -173,17 +109,9 @@ public class InputManager : MonoBehaviour
         dict[PlayerAction.Shoot] = KeyCode.Space;
     }
 
-    public void setQWERTY(int player)
+    public void SetQwerty(int player)
     {
-        if (player == 1)
-        {
-            setQWERTY_Keys(playerBlue);
-        }
-        else
-        {
-            setQWERTY_Keys(playerRed);
-        }
-        GameManager.Instance.InputManagerUpdate(playerBlue, playerRed, generalActions);
+        setQWERTY_Keys(player == 1 ? GameManager.Instance.playerBlue : GameManager.Instance.playerRed);
     }
 
     private void setQWERTY_Keys(Dictionary<PlayerAction, KeyCode> dict)
@@ -197,70 +125,60 @@ public class InputManager : MonoBehaviour
         dict[PlayerAction.Shoot] = KeyCode.E;
     }
     
-    public Dictionary<PlayerAction, KeyCode> getPlayerBlue()
-    {
-        return playerBlue;
-    }
-   
-    public Dictionary<PlayerAction, KeyCode> getPlayerRed()
-    {
-        return playerRed;
-    }
-    
     
    // update control key
-    private void updateKeyAction(int p)
+    private void UpdateKeyAction(int p)
     {
-        if (newKey != KeyCode.None)
+        if (_newKey != KeyCode.None)
         {
-            switch (childKey)
+            switch (_childKey)
             {
                 case 1:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveLeft] = newKey;
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveLeft] = _newKey;
                     break;
                 case 2:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveRight] = newKey;
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.MoveRight] = _newKey;
                     break;
                 case 3:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.EnterAimingMode] = newKey;
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.EnterAimingMode] = _newKey;
                     break;
                 case 4:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimHigher] = newKey;
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimHigher] = _newKey;
                     break;
                 case 5:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimLower] = newKey;
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.AimLower] = _newKey;
                     break;
                 case 6:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Shoot] = newKey;
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Shoot] = _newKey;
                     break;
                 case 7:
-                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Jump] = newKey;
+                    GameManager.Instance.getPlayerKeys(p)[PlayerAction.Jump] = _newKey;
                     break;
             }
         }
     }
 
-    public void changePlayer()
+    public void ChangePlayer()
     {
-        switch (playerKey)
+        switch (_playerKey)
         {
             case 1 :
-                playerKey = 2;
+                _playerKey = 2;
                 break;
             case 2 :
-                playerKey = 3;
+                _playerKey = 3;
                 break;
             case 3 :
-                playerKey = 1;
+                _playerKey = 1;
                 break;
         }
     }
 
     
     // get current control value
-    private void getKeyValues(Transform player, int p)
+    private void GetKeyValues(Transform player, int p)
     {
-        gettingKey = true;
+        _gettingKey = true;
         // key values player 1
         for (int i = 1; i < player.childCount; i++)
         {
@@ -302,31 +220,31 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        gettingKey = false;
+        _gettingKey = false;
     }
     
     // if we're expecting new key value
     public void StartWaitingForKey( int child)
     {
-        if (!gettingKey)
+        if (!_gettingKey)
         {
-            waitingKey = true;
-            childKey = child;
+            _waitingKey = true;
+            _childKey = child;
         }
     }
 
-    public void updateGeneral(int i)
+    private void UpdateGeneral(int i)
     {
         switch (i)
         {
             case 1:
-                GameManager.Instance.generalActions[GeneralAction.Pause] = newKey;
+                GameManager.Instance.generalActions[GeneralAction.Pause] = _newKey;
                 break;
             case 2:
-                GameManager.Instance.generalActions[GeneralAction.Confirm] = newKey;
+                GameManager.Instance.generalActions[GeneralAction.Confirm] = _newKey;
                 break;
             case 3:
-                GameManager.Instance.generalActions[GeneralAction.Quit] = newKey;
+                GameManager.Instance.generalActions[GeneralAction.Quit] = _newKey;
                 break;
         }
     }
@@ -340,7 +258,7 @@ public class InputManager : MonoBehaviour
     }
 
     // reset values for general controls
-    public void resetGeneral()
+    public void ResetGeneral()
     {
         GameManager.Instance.generalActions[GeneralAction.Pause] = KeyCode.P;
         GameManager.Instance.generalActions[GeneralAction.Confirm] = KeyCode.Return;

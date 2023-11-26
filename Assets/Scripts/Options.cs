@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
-using Unity.VisualScripting;
 
 public class Options : MonoBehaviour
 {
@@ -12,7 +7,7 @@ public class Options : MonoBehaviour
     public GameObject controllerMenu;
     public GameObject optionMenu;
 
-    private int currentPlayer = 1;
+    private int _currentPlayer = 1;
     public TextMeshProUGUI textOptions;
     
     public TMP_InputField player1;
@@ -23,7 +18,7 @@ public class Options : MonoBehaviour
         player1.text = GameManager.Instance.getName(1);
         player2.text = GameManager.Instance.getName(2);
         
-        switch (currentPlayer)
+        switch (_currentPlayer)
         {
             case 1:
                 textOptions.SetText(GameManager.Instance.getName(1) + " updating controls.");
@@ -34,54 +29,46 @@ public class Options : MonoBehaviour
         }
     }
 
-    public void setControls()
+    public void SetControls()
     {
         controllerMenu.SetActive(!controllerMenu.activeSelf);
         optionMenu.SetActive(false);
         Debug.Log("Player enter settings menu");
     }
 
-    public void changeName(int player)
+    public void ChangeName(int player)
     {
         if (player == 1 && player1.text != null)
         {
-            GameManager.Instance.setName(1, player1.text.ToString());
+            GameManager.Instance.setName(1, player1.text);
         }
         else if (player == 2 && player2.text != null)
         {
-            GameManager.Instance.setName(2, player2.text.ToString());
+            GameManager.Instance.setName(2, player2.text);
         }
     }
 
-    public void updateControlQWERTY()
+    public void UpdateControlQwerty()
     {
-        controllerMenu.GetComponent<InputManager>().setQWERTY(currentPlayer);
+        controllerMenu.GetComponent<InputManager>().SetQwerty(_currentPlayer);
     }
     
-    public void updateControlArrow()
+    public void UpdateControlArrow()
     {
-        controllerMenu.GetComponent<InputManager>().setArrows(currentPlayer);
+        controllerMenu.GetComponent<InputManager>().SetArrows(_currentPlayer);
     }
 
-    public void changePlayer()
+    public void ChangePlayer()
     {
-        switch (currentPlayer)
-        {
-            case 1 :
-                currentPlayer = 2;
-                break;
-            case 2 :
-                currentPlayer = 1;
-                break;
-        }
+        _currentPlayer = (_currentPlayer == 1) ? 2 : 1; 
     }
 
-    public void saveControls()
+    public void SaveControls()
     {
         GameManager.Instance.saveAllControls();
     }
 
-    public void loadControls()
+    public void LoadControls()
     {
         GameManager.Instance.loadAllControls();
     }

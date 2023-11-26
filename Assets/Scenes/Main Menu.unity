@@ -3396,7 +3396,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93018856}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: changePlayer
+        m_MethodName: ChangePlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4559,7 +4559,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1244566753}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: resetGeneral
+        m_MethodName: ResetGeneral
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5064,7 +5064,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93018856}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: loadControls
+        m_MethodName: LoadControls
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5233,7 +5233,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93018856}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: changeName
+        m_MethodName: ChangeName
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5346,10 +5346,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 93018851}
   mainMenu: {fileID: 655966855}
-  Player2Button: {fileID: 1933898956}
+  player2Button: {fileID: 1933898956}
   current: {fileID: 1531594289}
-  player1_name: {fileID: 94097991}
-  player2_name: {fileID: 2109347912}
+  player1Name: {fileID: 94097991}
+  player2Name: {fileID: 2109347912}
 --- !u!1 &669122908
 GameObject:
   m_ObjectHideFlags: 0
@@ -7370,7 +7370,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93018856}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: setControls
+        m_MethodName: SetControls
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8232,7 +8232,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93018856}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: updateControlQWERTY
+        m_MethodName: UpdateControlQwerty
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10241,7 +10241,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93018856}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: changeName
+        m_MethodName: ChangeName
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14931,7 +14931,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93018856}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: saveControls
+        m_MethodName: SaveControls
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17315,7 +17315,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93018856}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: updateControlArrow
+        m_MethodName: UpdateControlArrow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17978,7 +17978,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1244566753}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: changePlayer
+        m_MethodName: ChangePlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18831,10 +18831,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 93018851}
   mainMenu: {fileID: 655966855}
-  Player2Button: {fileID: 1933898956}
+  player2Button: {fileID: 1933898956}
   current: {fileID: 1531594289}
-  player1_name: {fileID: 94097991}
-  player2_name: {fileID: 2109347912}
+  player1Name: {fileID: 0}
+  player2Name: {fileID: 2109347912}
 --- !u!4 &2096021400
 Transform:
   m_ObjectHideFlags: 0
@@ -18865,7 +18865,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 655966855}
   welcomeScreen: {fileID: 2096021398}
-  controls: {fileID: 1244566747}
   pressText: {fileID: 2018521446}
 --- !u!1 &2109347910
 GameObject:

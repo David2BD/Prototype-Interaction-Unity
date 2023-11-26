@@ -32,7 +32,7 @@ public class textManager : MonoBehaviour
         player2.text = GameManager.Instance.getName(2);
 
         pauseTextQuit.text = "Press " +
-                             GameManager.Instance.generalActions[InputManager.GeneralAction.Quit].ToString() +
+                             GameManager.Instance.generalActions[GeneralAction.Quit].ToString() +
                              " to exit";
         
         if (player == 1)

@@ -3,6 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// possible actions player can do
+public enum PlayerAction
+{
+    MoveLeft,
+    MoveRight,
+    EnterAimingMode,
+    AimHigher,
+    AimLower,
+    Shoot,
+    Jump
+}
+
+// general controls
+public enum GeneralAction
+{
+    Confirm,
+    Pause,
+    Quit
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -26,9 +46,9 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public Dictionary<InputManager.PlayerAction, KeyCode> playerBlue;
-    public Dictionary<InputManager.PlayerAction, KeyCode> playerRed;
-    public Dictionary<InputManager.GeneralAction, KeyCode> generalActions;
+    public Dictionary<PlayerAction, KeyCode> playerBlue;
+    public Dictionary<PlayerAction, KeyCode> playerRed;
+    public Dictionary<GeneralAction, KeyCode> generalActions;
 
     private string player1_name = "Player 1"; // nom par defaut
     private string player2_name = "Player 2"; // nom par defaut
@@ -39,6 +59,41 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            
+            // initialisation des valeurs de bases pour les controles
+            // valeurs controles generaux
+            generalActions = new Dictionary<GeneralAction, KeyCode>()
+            {
+                { GeneralAction.Pause, KeyCode.P },
+                { GeneralAction.Confirm, KeyCode.Return },
+                { GeneralAction.Quit, KeyCode.Escape }
+            };
+            
+            // valeurs controles joueur 1
+            playerBlue = new Dictionary<PlayerAction, KeyCode>()
+            {
+                { PlayerAction.MoveLeft, KeyCode.LeftArrow },
+                { PlayerAction.MoveRight, KeyCode.RightArrow },
+                { PlayerAction.Jump, KeyCode.UpArrow },
+                { PlayerAction.EnterAimingMode, KeyCode.Z },
+                { PlayerAction.AimHigher, KeyCode.UpArrow },
+                { PlayerAction.AimLower, KeyCode.DownArrow },
+                { PlayerAction.Shoot, KeyCode.Space },
+            };
+            
+            // valeurs controles joueur 2
+            playerRed = new Dictionary<PlayerAction, KeyCode>()
+            {
+                { PlayerAction.MoveLeft, KeyCode.LeftArrow },
+                { PlayerAction.MoveRight, KeyCode.RightArrow },
+                { PlayerAction.Jump, KeyCode.UpArrow },
+                { PlayerAction.EnterAimingMode, KeyCode.Z },
+                { PlayerAction.AimHigher, KeyCode.UpArrow },
+                { PlayerAction.AimLower, KeyCode.DownArrow },
+                { PlayerAction.Shoot, KeyCode.Space },
+            };
+            
+            // existe entre les scenes
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -47,7 +102,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public Dictionary<InputManager.PlayerAction, KeyCode> getPlayerKeys(int player)
+    public Dictionary<PlayerAction, KeyCode> getPlayerKeys(int player)
     {
         if (player == 1)
         {
@@ -57,15 +112,6 @@ public class GameManager : MonoBehaviour
         {
             return playerRed;
         }
-    }
-
-    public void InputManagerUpdate(Dictionary<InputManager.PlayerAction, KeyCode> blue,
-        Dictionary<InputManager.PlayerAction, KeyCode> red,
-        Dictionary<InputManager.GeneralAction, KeyCode> general)
-    {
-        playerBlue = blue;
-        playerRed = red;
-        generalActions = general;
     }
 
     public string getName (int player)
@@ -101,27 +147,27 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetString("Player2", GameManager.Instance.player2_name);
         
         // general controls
-        PlayerPrefs.SetString("Pause", generalActions[InputManager.GeneralAction.Pause].ToString());
-        PlayerPrefs.SetString("Confirm", generalActions[InputManager.GeneralAction.Confirm].ToString());
-        PlayerPrefs.SetString("Quit", generalActions[InputManager.GeneralAction.Quit].ToString());
+        PlayerPrefs.SetString("Pause", generalActions[GeneralAction.Pause].ToString());
+        PlayerPrefs.SetString("Confirm", generalActions[GeneralAction.Confirm].ToString());
+        PlayerPrefs.SetString("Quit", generalActions[GeneralAction.Quit].ToString());
         
         // player 1 controls
-        PlayerPrefs.SetString("Left1", playerBlue[InputManager.PlayerAction.MoveLeft].ToString());
-        PlayerPrefs.SetString("Right1", playerBlue[InputManager.PlayerAction.MoveRight].ToString());
-        PlayerPrefs.SetString("Aim1", playerBlue[InputManager.PlayerAction.EnterAimingMode].ToString());
-        PlayerPrefs.SetString("AimH1", playerBlue[InputManager.PlayerAction.AimHigher].ToString());
-        PlayerPrefs.SetString("AimL1", playerBlue[InputManager.PlayerAction.AimLower].ToString());
-        PlayerPrefs.SetString("Shoot1", playerBlue[InputManager.PlayerAction.Shoot].ToString());
-        PlayerPrefs.SetString("Jump1", playerBlue[InputManager.PlayerAction.Jump].ToString());
+        PlayerPrefs.SetString("Left1", playerBlue[PlayerAction.MoveLeft].ToString());
+        PlayerPrefs.SetString("Right1", playerBlue[PlayerAction.MoveRight].ToString());
+        PlayerPrefs.SetString("Aim1", playerBlue[PlayerAction.EnterAimingMode].ToString());
+        PlayerPrefs.SetString("AimH1", playerBlue[PlayerAction.AimHigher].ToString());
+        PlayerPrefs.SetString("AimL1", playerBlue[PlayerAction.AimLower].ToString());
+        PlayerPrefs.SetString("Shoot1", playerBlue[PlayerAction.Shoot].ToString());
+        PlayerPrefs.SetString("Jump1", playerBlue[PlayerAction.Jump].ToString());
         
         // player 2 controls
-        PlayerPrefs.SetString("Left2", playerRed[InputManager.PlayerAction.MoveLeft].ToString());
-        PlayerPrefs.SetString("Right2", playerRed[InputManager.PlayerAction.MoveRight].ToString());
-        PlayerPrefs.SetString("Aim2", playerRed[InputManager.PlayerAction.EnterAimingMode].ToString());
-        PlayerPrefs.SetString("AimH2", playerRed[InputManager.PlayerAction.AimHigher].ToString());
-        PlayerPrefs.SetString("AimL2", playerRed[InputManager.PlayerAction.AimLower].ToString());
-        PlayerPrefs.SetString("Shoot2", playerRed[InputManager.PlayerAction.Shoot].ToString());
-        PlayerPrefs.SetString("Jump2", playerRed[InputManager.PlayerAction.Jump].ToString());
+        PlayerPrefs.SetString("Left2", playerRed[PlayerAction.MoveLeft].ToString());
+        PlayerPrefs.SetString("Right2", playerRed[PlayerAction.MoveRight].ToString());
+        PlayerPrefs.SetString("Aim2", playerRed[PlayerAction.EnterAimingMode].ToString());
+        PlayerPrefs.SetString("AimH2", playerRed[PlayerAction.AimHigher].ToString());
+        PlayerPrefs.SetString("AimL2", playerRed[PlayerAction.AimLower].ToString());
+        PlayerPrefs.SetString("Shoot2", playerRed[PlayerAction.Shoot].ToString());
+        PlayerPrefs.SetString("Jump2", playerRed[PlayerAction.Jump].ToString());
         
         PlayerPrefs.Save();
     }
@@ -133,43 +179,43 @@ public class GameManager : MonoBehaviour
         player2_name = PlayerPrefs.GetString("Player2");
 
         // general controls
-        generalActions[InputManager.GeneralAction.Pause] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        generalActions[GeneralAction.Pause] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Pause"));
-        generalActions[InputManager.GeneralAction.Confirm] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        generalActions[GeneralAction.Confirm] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Confirm"));
-        generalActions[InputManager.GeneralAction.Quit] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        generalActions[GeneralAction.Quit] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Quit"));
         
         // player 1 controls
-        playerBlue[InputManager.PlayerAction.MoveLeft] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerBlue[PlayerAction.MoveLeft] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Left1"));
-        playerBlue[InputManager.PlayerAction.MoveRight] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerBlue[PlayerAction.MoveRight] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Right1"));
-        playerBlue[InputManager.PlayerAction.EnterAimingMode] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerBlue[PlayerAction.EnterAimingMode] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Aim1"));
-        playerBlue[InputManager.PlayerAction.AimHigher] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerBlue[PlayerAction.AimHigher] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("AimH1"));
-        playerBlue[InputManager.PlayerAction.AimLower] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerBlue[PlayerAction.AimLower] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("AimL1"));
-        playerBlue[InputManager.PlayerAction.Shoot] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerBlue[PlayerAction.Shoot] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Shoot1"));
-        playerBlue[InputManager.PlayerAction.Jump] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerBlue[PlayerAction.Jump] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Jump1"));
 
         // player 2 controls
-        playerRed[InputManager.PlayerAction.MoveLeft] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerRed[PlayerAction.MoveLeft] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Left2"));
-        playerRed[InputManager.PlayerAction.MoveRight] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerRed[PlayerAction.MoveRight] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Right2"));
-        playerRed[InputManager.PlayerAction.EnterAimingMode] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerRed[PlayerAction.EnterAimingMode] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Aim2"));
-        playerRed[InputManager.PlayerAction.AimHigher] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerRed[PlayerAction.AimHigher] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("AimH2"));
-        playerRed[InputManager.PlayerAction.AimLower] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerRed[PlayerAction.AimLower] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("AimL2"));
-        playerRed[InputManager.PlayerAction.Shoot] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerRed[PlayerAction.Shoot] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Shoot2"));
-        playerRed[InputManager.PlayerAction.Jump] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
+        playerRed[PlayerAction.Jump] = (KeyCode)System.Enum.Parse(typeof(KeyCode),
             PlayerPrefs.GetString("Jump2"));
     }
 }
