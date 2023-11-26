@@ -11,15 +11,22 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenu;
 
     private int count = 0;
-    
-    public TextMeshProUGUI Player2Button = new TextMeshProUGUI();
-    public TextMeshProUGUI current = new TextMeshProUGUI();
 
-    public TextMeshProUGUI player1_name = new TextMeshProUGUI();
-    public TextMeshProUGUI player2_name = new TextMeshProUGUI();
+
+    public TextMeshProUGUI Player2Button;
+    public TextMeshProUGUI current;
+
+    public TextMeshProUGUI player1_name;
+    public TextMeshProUGUI player2_name;
 
     void Start()
     {
+        //Player2Button = GetComponent<TextMeshProUGUI>();
+        //current = GetComponent<TextMeshProUGUI>();
+        //player1_name = GetComponent<TextMeshProUGUI>();
+        //player2_name = GetComponent<TextMeshProUGUI>();
+        
+        
         GameSettings.isPlayer2CPU = false;
         GameSettings.CPUDifficulty = 0;
 
@@ -32,8 +39,11 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        player1_name.SetText(GameManager.Instance.getName(1));
-        player2_name.SetText(GameManager.Instance.getName(2));
+        if (player1_name != null && player2_name != null)
+        {
+            player1_name.SetText(GameManager.Instance.getName(1));
+            player2_name.SetText(GameManager.Instance.getName(2));
+        }
     }
 
     public void Play()
