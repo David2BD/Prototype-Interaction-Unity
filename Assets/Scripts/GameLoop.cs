@@ -223,7 +223,7 @@ public class GameLoop : MonoBehaviour
             TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
         }
         
-        distance = soldiers[selectedSoldier].transform.position - blueTeamUnits[0].transform.position;
+        distance = soldiers[selectedSoldier].transform.position - blueTeamUnits[1].transform.position;
         Vector3 position = soldiers[selectedSoldier].transform.position;
         if (difficulty == 1)                        //easy
         {
