@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     private string _player1Name = "Player 1"; // nom par defaut
     private string _player2Name = "Player 2"; // nom par defaut
+
+    private int current_turn = 1;
     
     // Singleton
     void Awake()
@@ -135,6 +137,16 @@ public class GameManager : MonoBehaviour
         {
             _player2Name = name;
         }
+    }
+
+    public void setTurn(int t)
+    {
+        current_turn = t;
+    }
+
+    public int getTurn()
+    {
+        return current_turn;
     }
     
     public void SaveAllControls()
