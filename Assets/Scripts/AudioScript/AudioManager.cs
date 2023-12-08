@@ -98,11 +98,11 @@ namespace AudioScript
         {
             if (game)
             {
-                menuAudioSource.Stop();
+                //menuAudioSource.Stop();
             }
             else
             {
-                gameAudioSource.Stop();
+                //gameAudioSource.Stop();
             }
         }
 
@@ -118,6 +118,7 @@ namespace AudioScript
 
         IEnumerator playMenuBGM()
         {
+            gameAudioSource.Stop();
             menuAudioSource.clip = menuTracks[menuTrackIndex];
             menuAudioSource.Play();
             yield return new WaitForSeconds(menuAudioSource.clip.length + 1f); // Wait for the track to finish
@@ -126,6 +127,7 @@ namespace AudioScript
     
         IEnumerator playGameBGM()
         {
+            menuAudioSource.Stop();
             gameAudioSource.clip = gameTracks[gameTrackIndex];
             gameAudioSource.Play();
             yield return StartCoroutine(WaitForSoundToEnd(gameAudioSource.clip)); // Wait for the track to finish

@@ -29,8 +29,10 @@ namespace AudioScript
         void Start()
         {
             natureSource = gameObject.AddComponent<AudioSource>();
-            natureSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/Foleys")[0]; 
-            natureIndex = Random.Range(0, natureTracks.Length);
+            natureSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/Foleys")[0];
+            //natureIndex = Random.Range(0, natureTracks.Length);
+            
+            StartCoroutine(playNature());
         }
 
         // Update is called once per frame
@@ -38,7 +40,7 @@ namespace AudioScript
         {
             turn = GameManager.Instance.getTurn();
             portalSound(turn);
-            //StartCoroutine(playNature());
+            
         }
         
         IEnumerator playNature()
@@ -52,6 +54,7 @@ namespace AudioScript
         void portalSound(int turn)
         {
             Transform current = (turn == 1) ? soldierBlue : soldierRed;
+            
             Vector3 pos = current.position;
             float distancePortal1 = Vector3.Distance(pos, portals[0].position);
             float distancePortal2 = Vector3.Distance(pos, portals[1].position);

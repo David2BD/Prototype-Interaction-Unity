@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using AudioScript;
 using UnityEngine;
 
 namespace GameScripts
@@ -25,6 +27,9 @@ namespace GameScripts
         private bool isPlayer2CPU;
         private int CPUDiff;
         private int aimCounter;
+
+        public GameObject SFX_sounds;
+        public GameObject jingles_sounds;
         
         public Vector3 distance;                        //For debugging purposes
 
@@ -165,6 +170,10 @@ namespace GameScripts
     
         public void playTurn(int player, List<Soldier> soldiers, int selectedSoldier)
         {
+            if (soldiers[selectedSoldier].getHealth() <= 40)
+            {
+                //StartCoroutine(playLowHealth());
+            }
             if (soldiers[selectedSoldier].GetAimingMode() == false)
             {
                 // initialisation des parametres a chaque nouveau tour
@@ -173,16 +182,25 @@ namespace GameScripts
                 
                 if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.MoveRight]))
                 {
+                    if (soldiers[selectedSoldier].getMouvement() > 0)
+                    {
+                        SFX_sounds.GetComponent<playerSFX>().playMovement();
+                    }
                     soldiers[selectedSoldier].MoveRight();
                     TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
                 }
                 else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.MoveLeft]))
                 {
+                    if (soldiers[selectedSoldier].getMouvement() > 0)
+                    {
+                        SFX_sounds.GetComponent<playerSFX>().playMovement();
+                    }
                     soldiers[selectedSoldier].MoveLeft();
                     TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
                 }
                 else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.Jump]))
                 {
+                    SFX_sounds.GetComponent<playerSFX>().playJump();
                     soldiers[selectedSoldier].Jump();
                 }
                 else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.EnterAimingMode]))
@@ -191,6 +209,10 @@ namespace GameScripts
                     {
                         soldiers[selectedSoldier].Aim();
                     }
+                }
+                else
+                {
+                    SFX_sounds.GetComponent<playerSFX>().stopSound();
                 }
             }
             else if (soldiers[selectedSoldier].GetAimingMode())
@@ -210,6 +232,7 @@ namespace GameScripts
                 if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.Shoot]))
                 {
                     // set varying force later
+                    SFX_sounds.GetComponent<playerSFX>().playShoot();
                     soldiers[selectedSoldier].Shoot();
                     EndTurn();
                 }
@@ -294,6 +317,18 @@ namespace GameScripts
         public void SetPlayerTurn(int player)
         {
             playerTurn = player;
+        }
+        
+        IEnumerator playLowHealth()
+        {
+
+                while (true)
+                {
+                    jingles_sounds.GetComponent<JinglesController>().lowHealthState();
+                    yield return new WaitForSeconds(1f);
+                    
+                    yield return new WaitForSeconds(6f);
+                }
         }
     }
 }
