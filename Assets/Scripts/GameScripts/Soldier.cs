@@ -54,7 +54,7 @@ namespace GameScripts
         
             //lineRenderer.SetVertexCount(1);
             Vector3[] positions = new Vector3[3];
-            positions[0] = transform.position + new Vector3(0.0f, 0.0f, 0.0f);
+            positions[0] = transform.position + new Vector3(0.0f, 0.6f, 0.0f);
             positions[1] =  positions[0] + (AimingAngle);
             lineRenderer.SetPositions(positions);
             //lineRenderer.(transform.position,  AimingAngle * 100, Color.blue);
@@ -137,8 +137,8 @@ namespace GameScripts
             if (ActionUsed == false) 
             {
                 Vector3 bulletPos = (team == 1)
-                    ? new Vector3(transform.position.x + 1, transform.position.y, transform.position.z)
-                    : new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
+                    ? new Vector3(transform.position.x + 1, transform.position.y + 0.8f, transform.position.z)
+                    : new Vector3(transform.position.x - 1, transform.position.y + 0.8f, transform.position.z);
                 GameObject ball = Instantiate(ballPrefab, bulletPos, Quaternion.identity);
                 Rigidbody rb = ball.GetComponent<Rigidbody>();
 
