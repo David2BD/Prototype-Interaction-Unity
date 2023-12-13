@@ -179,7 +179,14 @@ namespace GameScripts
                 // initialisation des parametres a chaque nouveau tour
                 TextManager.GetComponent<textManager>().setMovingMode(true);
                 TextManager.GetComponent<textManager>().setMovesLeft(soldiers[selectedSoldier].getMouvement());
-                
+                if (Input.GetKeyUp(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.MoveRight]))
+                {
+                    soldiers[selectedSoldier].StopMoving();
+                }
+                if (Input.GetKeyUp(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.MoveLeft]))
+                {
+                    soldiers[selectedSoldier].StopMoving();
+                }
                 if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.MoveRight]))
                 {
                     if (soldiers[selectedSoldier].getMouvement() > 0)

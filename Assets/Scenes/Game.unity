@@ -1346,6 +1346,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7558262510186393407, guid: f58c7354de6c0cc4890c9864522da651, type: 3}
   m_PrefabInstance: {fileID: 314042321}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &477265738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8410611282657765341, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+  m_PrefabInstance: {fileID: 939309394}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &480296280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2872,6 +2877,10 @@ PrefabInstance:
       propertyPath: mouvement
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: soldier_demo
+      value: 
+      objectReference: {fileID: 477265738}
     - target: {fileID: 6342854788603026787, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: m_Name
       value: SoldierRed1
@@ -3332,6 +3341,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1186434641601297552, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186434641601297552, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: m_UpdateMode
       value: 0
       objectReference: {fileID: 0}
@@ -3360,6 +3373,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: soldier_demo
+      value: 
+      objectReference: {fileID: 1540635891}
+    - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: audioSources.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -3370,6 +3387,10 @@ PrefabInstance:
     - target: {fileID: 6342854788603026787, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: m_TagString
       value: Soldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913008725943494244, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: m_Avatar
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4084,6 +4105,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7558262510186393407, guid: f58c7354de6c0cc4890c9864522da651, type: 3}
   m_PrefabInstance: {fileID: 1502322988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1540635891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8410611282657765341, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+  m_PrefabInstance: {fileID: 1135241630}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1544206413
 GameObject:

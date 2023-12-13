@@ -14,8 +14,11 @@ namespace GameScripts
         private float moveSpeed = 2.0f;
         public int health;
         public HPBar barScript;
-   
-    
+        
+        private Animator animator;
+        public GameObject soldier_demo;
+        private bool moving;
+        
         private bool usedTP;
     
         //private Slider powerUp;
@@ -39,6 +42,8 @@ namespace GameScripts
             gameLoop.RegisterSoldier(this, team);
             health = 100;
             lineRenderer = GetComponent<LineRenderer>();
+           
+            animator = soldier_demo.GetComponent<Animator>();
             usedTP = false;
         }
 
@@ -47,6 +52,7 @@ namespace GameScripts
         // Update is called once per frame
         void Update()
         {
+            //moving = false;
             if (health <= 0)
             {
                 Destroy(gameObject);
@@ -58,6 +64,18 @@ namespace GameScripts
             positions[1] =  positions[0] + (AimingAngle);
             lineRenderer.SetPositions(positions);
             //lineRenderer.(transform.position,  AimingAngle * 100, Color.blue);
+            
+            //Animations
+            /*
+            if (moving == true)
+            {
+                animator.SetBool("Moving", true);
+            }
+            else
+            {
+                animator.SetBool("Moving", false);
+            }
+            */
         }
     
         void SetTeamMaterial()
@@ -72,10 +90,14 @@ namespace GameScripts
             }
         }
 
+        
+        
         public void MoveRight()
         {
+            
             if (mouvement > 0)                                               //On sassure quil reste du mouvement au soldat
             {
+                animator.SetBool("Moving", true);
                 Vector3 currentPosition = transform.position;
                 Vector3 newPosition = currentPosition + new Vector3(moveSpeed * Time.deltaTime, 0.0f, 0.0f);
                 RemoveMouvement(newPosition.x - currentPosition.x);                //Retire le mouvement fait
@@ -85,8 +107,10 @@ namespace GameScripts
     
         public void MoveLeft()
         {
+            
             if (mouvement > 0)                                               //On sassure quil reste du mouvement au soldat
             {
+                animator.SetBool("Moving", true);
                 Vector3 currentPosition = transform.position;
                 Vector3 newPosition = currentPosition + new Vector3(-moveSpeed * Time.deltaTime, 0.0f, 0.0f);
                 RemoveMouvement(newPosition.x - currentPosition.x);                //Retire le mouvement fait
@@ -94,6 +118,11 @@ namespace GameScripts
             }
         }
 
+        public void StopMoving()
+        {
+            animator.SetBool("Moving", false);
+        }
+        
         public void AimHigher()
         {
             if( AimingAngle.x > 0.25f || AimingAngle.x < -0.25f)
