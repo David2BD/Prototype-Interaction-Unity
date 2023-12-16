@@ -14,12 +14,15 @@ namespace AudioScript
         public AudioClip lowHealth;
         private AudioSource audioSource;
 
-        private float delay = 3f;
         // Start is called before the first frame update
         void Start()
         {
             audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/SFX")[0];   
+            audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/SFX")[0]; 
+            
+            audioSource.minDistance = 1;
+            audioSource.maxDistance = 300;
+            audioSource.spatialBlend = 1.0f;
         }
 
         // Update is called once per frame

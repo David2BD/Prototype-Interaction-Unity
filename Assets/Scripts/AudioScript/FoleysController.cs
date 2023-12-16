@@ -28,9 +28,19 @@ namespace AudioScript
         // Start is called before the first frame update
         void Start()
         {
-            natureSource = gameObject.AddComponent<AudioSource>();
-            natureSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/Foleys")[0];
-            //natureIndex = Random.Range(0, natureTracks.Length);
+            audioSource[0].minDistance = 100;
+            audioSource[0].maxDistance = 300;
+            audioSource[0].spatialBlend = 1.0f;
+            
+            audioSource[1].maxDistance = 100;
+            audioSource[1].maxDistance = 300;
+            audioSource[1].spatialBlend = 1.0f;
+            
+            natureSource.minDistance = 100;
+            natureSource.maxDistance = 300;
+            natureSource.spatialBlend = 1.0f;
+            natureSource.volume = audioSource[0].volume * 0.3f; 
+            // forcer le volume pour pouvoir entendre les autres bruits
             
             StartCoroutine(playNature());
         }

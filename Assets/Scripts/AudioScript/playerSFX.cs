@@ -13,6 +13,10 @@ public class playerSFX : MonoBehaviour
 
     private void Start()
     {
+        audioSource.minDistance = 100;
+        audioSource.maxDistance = 300;
+        audioSource.spatialBlend = 1.0f;
+        
         audioSource.clip = tracks[0];
         
     }

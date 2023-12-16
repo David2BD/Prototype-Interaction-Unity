@@ -1104,7 +1104,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1165,7 +1165,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1200,7 +1200,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1296,7 +1296,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2765,7 +2765,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3883,7 +3883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 1fde45baf6dbb9740a6680e4feec2f54, type: 2}
   menuTracks:
-  - {fileID: 8300000, guid: 47f45ef7b5767674393cc401fc325705, type: 3}
+  - {fileID: 8300000, guid: bb32fbe58e3904a5d94ef8995c7d5570, type: 3}
   - {fileID: 8300000, guid: 30510a35bfd53435e9963c3a7594417b, type: 3}
   - {fileID: 8300000, guid: 3d472c788bcb94841ad65e6ddcdbc28f, type: 3}
   - {fileID: 8300000, guid: 816b6eab58d24c646a55f35fb63b0f1f, type: 3}
@@ -3892,7 +3892,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
   - {fileID: 8300000, guid: 0ad591428b0c18c4da51fe3bf98dbc63, type: 3}
   - {fileID: 8300000, guid: bef0cef2ded0f0645ad90c6e5bdd4965, type: 3}
-  - {fileID: 8300000, guid: bb32fbe58e3904a5d94ef8995c7d5570, type: 3}
   buttonsSound:
   - {fileID: 8300000, guid: f8cab9ed881c12249b7c8b4795964bdd, type: 3}
   - {fileID: 8300000, guid: dca3084cb66e8824bab682c584bec504, type: 3}
@@ -3907,7 +3906,7 @@ Transform:
   m_GameObject: {fileID: 1443347483}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 476.77927, y: 407.09583, z: 0}
+  m_LocalPosition: {x: -55, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4286,7 +4285,7 @@ Transform:
   m_GameObject: {fileID: 1602030958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 476.77927, y: 407.09583, z: 0}
+  m_LocalPosition: {x: -55, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4529,7 +4528,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
