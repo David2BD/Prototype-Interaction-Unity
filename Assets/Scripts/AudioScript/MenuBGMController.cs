@@ -17,28 +17,26 @@ namespace AudioScript
         private AudioSource buttonAudioSource;
 
         // fondu croise
-        private float fadeDuration = 10.0f;
+        private float fadeDuration = 15.0f;
         private bool isFading;
         private float trackInterval = 45.0f;
-
-        private AudioSource transitionAudioSource;
 
         // Start is called before the first frame update
         void Start()
         {
             menuTrackIndex = Random.Range(0, menuTracks.Length);
 
-            menuAudioSource = gameObject.AddComponent<AudioSource>();
+            if (menuAudioSource == null)
+            {
+                menuAudioSource = gameObject.AddComponent<AudioSource>();
+            }
             menuAudioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/BackgroundMenu")[0];
             menuAudioSource.minDistance = 200;
             menuAudioSource.maxDistance = 500;
-            menuAudioSource.spatialBlend = 1.0f;
-
-            transitionAudioSource = gameObject.AddComponent<AudioSource>();
-            transitionAudioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/BackgroundMenu")[0];
-            transitionAudioSource.minDistance = 200;
-            transitionAudioSource.maxDistance = 500;
-            transitionAudioSource.spatialBlend = 1.0f;
+            menuAudioSource.spatialBlend = 1.0f;  
+            
+            menuAudioSource.clip = menuTracks[menuTrackIndex];
+            menuAudioSource.Play();
             
             StartCoroutine(playMenuBGM());
         }
@@ -61,28 +59,22 @@ namespace AudioScript
 
         IEnumerator playMenuBGM()
         {
-            transitionAudioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/BackgroundMenu")[0];
-            
-            menuAudioSource.clip = menuTracks[menuTrackIndex];
-            
-            if (menuAudioSource.clip == null)
-            {
-                menuTrackIndex = 0;
-                menuAudioSource.clip = menuTracks[menuTrackIndex];
-            }
-
-            menuAudioSource.Play();
-
-            menuTrackIndex = (menuTrackIndex + 1) % menuTracks.Length;
             while (true)
             {
-                yield return new WaitForSeconds(trackInterval);
+                yield return new WaitForSeconds(trackInterval - fadeDuration);
 
-                if (!isFading && menuTrackIndex < menuTracks.Length)
+                if (!isFading)
                 {
                     isFading = true;
+                    int nextTrackIndex = (menuTrackIndex + 1) % menuTracks.Length;
 
-                    transitionAudioSource.clip = menuTracks[menuTrackIndex];
+                    AudioSource transitionAudioSource = gameObject.AddComponent<AudioSource>();
+                    transitionAudioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/BackgroundMenu")[0];
+                    transitionAudioSource.minDistance = 200;
+                    transitionAudioSource.maxDistance = 500;
+                    transitionAudioSource.spatialBlend = 1.0f;  
+                    
+                    transitionAudioSource.clip = menuTracks[nextTrackIndex];
                     transitionAudioSource.volume = 0f;
                     transitionAudioSource.Play();
 
@@ -98,10 +90,10 @@ namespace AudioScript
 
                         yield return null;
                     }
-
-                    menuAudioSource.Stop();
+                    
+                    Destroy(menuAudioSource);
                     menuAudioSource = transitionAudioSource;
-                    menuTrackIndex = (menuTrackIndex + 1) % menuTracks.Length;
+                    menuTrackIndex = nextTrackIndex;
 
                     isFading = false;
                 }

@@ -50,7 +50,10 @@ namespace GameScripts
             CPUDiff = GameSettings.CPUDifficulty;
             aimCounter = -1;
             
-            instruments_sounds.GetComponent<InstrumentController>().startAll();
+            GameManager.Instance.setCounterMusicLevel(0);
+            
+            // start music
+            instruments_sounds.GetComponent<InstrumentController>().PlayAll(false);
         }
 
         void Update()
@@ -94,15 +97,23 @@ namespace GameScripts
 
         void TogglePause()
         {
+            bool aiming = (playerTurn == 1)
+                ? blueTeamUnits[selectedSoldierBlue].GetAimingMode()
+                : redTeamUnits[selectedSoldierRed].GetAimingMode();
+            
             // Toggle the pause state
             if (Time.timeScale == 0f)
             {
                 // Resume the game
                 Time.timeScale = 1f;
                 pauseMenu.SetActive(false);
+                instruments_sounds.GetComponent<InstrumentController>().PlayPause(false);
+                instruments_sounds.GetComponent<InstrumentController>().PlayAll(aiming);
             }
             else
             {
+                instruments_sounds.GetComponent<InstrumentController>().PlayPause(true);
+                
                 // Pause the game
                 Time.timeScale = 0f;
                 pauseMenu.SetActive(true);
@@ -138,6 +149,7 @@ namespace GameScripts
 
         public void GameOver(int winningTeam)
         {
+            instruments_sounds.GetComponent<InstrumentController>().StopAll();
             if (winningTeam == 1)
             {
                 GameOverScreen.SetActive(!GameOverScreen.activeSelf);
@@ -167,6 +179,7 @@ namespace GameScripts
                 //GameManager.Instance.setTurn(1);
                 blueTeamUnits[0].SetActionUsed(false);
             }
+            instruments_sounds.GetComponent<InstrumentController>().PlayAll(false);
         }
     
         public void playTurn(int player, List<Soldier> soldiers, int selectedSoldier)

@@ -195,12 +195,13 @@ namespace GameScripts
                 SetAimingMode(false);
                 ResetMouvement();
                 usedTP = false;
-
             }
         }
 
         public void Aim()
         {
+            instruments_sounds.GetComponent<InstrumentController>().PlayAll(true);
+            
             SFX_sounds.GetComponent<playerSFX>().playArming();
             SFX_sounds.GetComponent<playerSFX>().playVoiceAttack();
             AimingMode = true;
@@ -280,6 +281,9 @@ namespace GameScripts
             SFX_sounds.GetComponent<playerSFX>().playVoiceHit();
             health -= damage;
             barScript.Change(-damage);
+            
+            GameManager.Instance.updateMusicLevel();
+            instruments_sounds.GetComponent<InstrumentController>().PlayAll(false);
 
             if (health <= 40)
             {

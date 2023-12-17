@@ -664,10 +664,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee3691f826c8024c842fdd03bd3d0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruments:
-  - {fileID: 8300000, guid: 27b18cac037a585458810c36e79bd5fe, type: 3}
-  - {fileID: 8300000, guid: 2829f1d6c5244cd43adb912e2950e956, type: 3}
   mixer: {fileID: 24100000, guid: 1fde45baf6dbb9740a6680e4feec2f54, type: 2}
+  BassClips:
+  - {fileID: 8300000, guid: 4ede2237f6ff64199a91c0bf61e00586, type: 3}
+  - {fileID: 8300000, guid: 0a308cdcda8404264b4405e80b6fe988, type: 3}
+  - {fileID: 8300000, guid: ede69ff325a4c4d008a0600b3b828892, type: 3}
+  PianoClips:
+  - {fileID: 8300000, guid: 906a80fc5ba9d42e48294b202190ec47, type: 3}
+  - {fileID: 8300000, guid: 5dcfb628d43eb4381974e56b58e4e37b, type: 3}
+  - {fileID: 8300000, guid: 6ca06d2e6d417437484c21ade8d0ac92, type: 3}
+  - {fileID: 8300000, guid: 7b4c8388fedab4bb0b5bddb9021e883b, type: 3}
+  ViolinClips:
+  - {fileID: 8300000, guid: fb3c0560676ee419493a05b00a45b811, type: 3}
+  - {fileID: 8300000, guid: 7690ce68995544a8fbcf6dedbd711eba, type: 3}
+  - {fileID: 8300000, guid: 1d2d8c4ba15b240b7923b92f4baf3d00, type: 3}
+  BeatClips:
+  - {fileID: 8300000, guid: aff6a8b2f66b28740910621caa4d1e21, type: 3}
+  - {fileID: 8300000, guid: 01567eccd5611864ba886c5c4cc4077d, type: 3}
+  - {fileID: 8300000, guid: fe2aecb3de09179428e097d59d190101, type: 3}
+  - {fileID: 8300000, guid: bdde9cb5b673db849984073c4abc0740, type: 3}
+  - {fileID: 8300000, guid: b43823a387fa3704887ab4b65a931a78, type: 3}
+  DrumClips:
+  - {fileID: 8300000, guid: 837c60ca076df42d68aeb91922899bf8, type: 3}
+  - {fileID: 8300000, guid: 772c51f67a50c4fe1b5323d90a41aa89, type: 3}
+  - {fileID: 8300000, guid: 72ac020ff02731043891dc322b7bb4fa, type: 3}
+  PauseClips:
+  - {fileID: 8300000, guid: f72c4a37d08ed49c6949396e70e71239, type: 3}
+  - {fileID: 8300000, guid: 42bac8a536ae94abfb377c7f0411cdc9, type: 3}
 --- !u!1 &274843862
 GameObject:
   m_ObjectHideFlags: 0

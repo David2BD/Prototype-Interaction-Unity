@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
     private string _player2Name = "Player 2"; // nom par defaut
 
     private int current_turn = 1;
+
+    // to change musicLevel
+    private int counterMusic = 0;
     
     // Singleton
     void Awake()
@@ -147,6 +150,29 @@ public class GameManager : MonoBehaviour
     public int getTurn()
     {
         return current_turn;
+    }
+
+    public void updateMusicLevel()
+    {
+        counterMusic += 1;
+    }
+
+    public void setCounterMusicLevel(int i)
+    {
+        counterMusic = i;
+    }
+
+    public int getMusicLevel()
+    {
+        return counterMusic switch
+        {
+            0 => 1,
+            1 => 2,
+            2 => 3,
+            3 => 3,
+            4 => 4,
+            _ => 5
+        };
     }
     
     public void SaveAllControls()
