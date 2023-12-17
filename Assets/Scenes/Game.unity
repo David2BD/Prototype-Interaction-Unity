@@ -620,6 +620,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7558262510186393407, guid: f58c7354de6c0cc4890c9864522da651, type: 3}
   m_PrefabInstance: {fileID: 2073939698}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &246718398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 246718399}
+  - component: {fileID: 246718400}
+  m_Layer: 0
+  m_Name: InstrumentController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &246718399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246718398}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1602030959}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &246718400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246718398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee3691f826c8024c842fdd03bd3d0f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instruments:
+  - {fileID: 8300000, guid: 27b18cac037a585458810c36e79bd5fe, type: 3}
+  - {fileID: 8300000, guid: 2829f1d6c5244cd43adb912e2950e956, type: 3}
+  mixer: {fileID: 24100000, guid: 1fde45baf6dbb9740a6680e4feec2f54, type: 2}
 --- !u!1 &274843862
 GameObject:
   m_ObjectHideFlags: 0
@@ -2878,9 +2926,17 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: SFX_sounds
+      value: 
+      objectReference: {fileID: 1668607627}
+    - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: soldier_demo
       value: 
       objectReference: {fileID: 477265738}
+    - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: instruments_sounds
+      value: 
+      objectReference: {fileID: 246718398}
     - target: {fileID: 6342854788603026787, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: m_Name
       value: SoldierRed1
@@ -3373,9 +3429,17 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: SFX_sounds
+      value: 
+      objectReference: {fileID: 1668607627}
+    - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: soldier_demo
       value: 
       objectReference: {fileID: 1540635891}
+    - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
+      propertyPath: instruments_sounds
+      value: 
+      objectReference: {fileID: 246718398}
     - target: {fileID: 5507899010588959158, guid: 47dcb60bc9a8a464da2e34850dd09aab, type: 3}
       propertyPath: audioSources.Array.size
       value: 0
@@ -3852,66 +3916,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f58c7354de6c0cc4890c9864522da651, type: 3}
---- !u!1 &1443347483
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1443347485}
-  - component: {fileID: 1443347484}
-  m_Layer: 0
-  m_Name: MusicManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1443347484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443347483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfdbc864bd2aee445997eb09938e3501, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 1fde45baf6dbb9740a6680e4feec2f54, type: 2}
-  menuTracks:
-  - {fileID: 8300000, guid: bb32fbe58e3904a5d94ef8995c7d5570, type: 3}
-  - {fileID: 8300000, guid: 30510a35bfd53435e9963c3a7594417b, type: 3}
-  - {fileID: 8300000, guid: 3d472c788bcb94841ad65e6ddcdbc28f, type: 3}
-  - {fileID: 8300000, guid: 816b6eab58d24c646a55f35fb63b0f1f, type: 3}
-  gameTracks:
-  - {fileID: 8300000, guid: 033766cc31c97904bae4404b8a079544, type: 3}
-  - {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
-  - {fileID: 8300000, guid: 0ad591428b0c18c4da51fe3bf98dbc63, type: 3}
-  - {fileID: 8300000, guid: bef0cef2ded0f0645ad90c6e5bdd4965, type: 3}
-  buttonsSound:
-  - {fileID: 8300000, guid: f8cab9ed881c12249b7c8b4795964bdd, type: 3}
-  - {fileID: 8300000, guid: dca3084cb66e8824bab682c584bec504, type: 3}
-  - {fileID: 8300000, guid: eb29844b03df258489a10c01c6e51552, type: 3}
-  - {fileID: 8300000, guid: 805b9257f76a9ce47b16409048985f89, type: 3}
---- !u!4 &1443347485
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443347483}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1447370426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4270,7 +4274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602030959}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4292,6 +4296,7 @@ Transform:
   - {fileID: 428895133}
   - {fileID: 1668607628}
   - {fileID: 158220743}
+  - {fileID: 246718399}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1612277955 stripped
@@ -4419,8 +4424,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 851515549}
   GameUI: {fileID: 1985660771}
   TextManager: {fileID: 1855828335}
-  SFX_sounds: {fileID: 1668607627}
   jingles_sounds: {fileID: 158220742}
+  instruments_sounds: {fileID: 246718398}
   distance: {x: 0, y: 0, z: 0}
 --- !u!1 &1668607627
 GameObject:
@@ -4469,8 +4474,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tracks:
   - {fileID: 8300000, guid: b01794fa6fa394a3ea0205908447e500, type: 3}
-  - {fileID: 8300000, guid: 5e1a9f876d3dafd47bc6b3dde25135fa, type: 3}
+  - {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
   - {fileID: 8300000, guid: c6a04df0a6c990e4d96821ef721bd9d5, type: 3}
+  - {fileID: 8300000, guid: 9158afb6966d445db9caf1dccf7acbcc, type: 3}
+  attacks:
+  - {fileID: 8300000, guid: 0a7c03121252644499335fa72b0b7b94, type: 3}
+  - {fileID: 8300000, guid: 153e13709459e574aa8763e525510c61, type: 3}
+  - {fileID: 8300000, guid: 4f6f25ed64ad36f4aa679280f3e68b54, type: 3}
+  - {fileID: 8300000, guid: 02b60162f632acd4d9d62c7acee0b20b, type: 3}
+  - {fileID: 8300000, guid: 7a598b4dc16f08a4e9558534f417d74c, type: 3}
+  - {fileID: 8300000, guid: 0999239cc059aba4982e1741d2a20429, type: 3}
+  lowHealth:
+  - {fileID: 8300000, guid: 9b2e375c1599b1740ae6bf429412ca83, type: 3}
+  - {fileID: 8300000, guid: 5462d78bac009734fa9ef665947d66ad, type: 3}
+  - {fileID: 8300000, guid: 850b2ae296f5f294484f3ae05fb045ee, type: 3}
+  - {fileID: 8300000, guid: 3dfa12ddbdddc904cabc8bd268fe62b0, type: 3}
+  - {fileID: 8300000, guid: 0174ff0590dcc9e408c154c0dfb37db2, type: 3}
+  - {fileID: 8300000, guid: 6be7051b644035e4c8b43c09c460b2b0, type: 3}
+  hit:
+  - {fileID: 8300000, guid: 81f1a91af0194854faa381a304b8df30, type: 3}
+  - {fileID: 8300000, guid: 6566ab515f6a464418d1f17d691c4eeb, type: 3}
+  - {fileID: 8300000, guid: e81834573d4df4f468eabaf381bd19e7, type: 3}
+  - {fileID: 8300000, guid: ecc517e7a0e396e42a4f3012969ff7d3, type: 3}
+  - {fileID: 8300000, guid: 44f2bfb3cae026e48a0609f0c35c45da, type: 3}
+  - {fileID: 8300000, guid: c6c0f54cfae2140418cf635ed7052392, type: 3}
   audioSource: {fileID: 1668607631}
 --- !u!82 &1668607631
 AudioSource:
@@ -5804,5 +5831,4 @@ SceneRoots:
   - {fileID: 1845941880}
   - {fileID: 1412494910}
   - {fileID: 102094915}
-  - {fileID: 1443347485}
   - {fileID: 1602030959}

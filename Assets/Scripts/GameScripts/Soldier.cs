@@ -30,6 +30,11 @@ namespace GameScripts
         private float rotationSpeed = 3f;
 
         public GameObject ballPrefab;
+
+        public GameObject SFX_sounds;
+        public GameObject instruments_sounds;
+
+        private bool lowHealth = false;
     
         // Start is called before the first frame update
         void Start()
@@ -97,24 +102,34 @@ namespace GameScripts
             
             if (mouvement > 0)                                               //On sassure quil reste du mouvement au soldat
             {
+                SFX_sounds.GetComponent<playerSFX>().playMovement();
                 animator.SetBool("Moving", true);
                 Vector3 currentPosition = transform.position;
                 Vector3 newPosition = currentPosition + new Vector3(moveSpeed * Time.deltaTime, 0.0f, 0.0f);
                 RemoveMouvement(newPosition.x - currentPosition.x);                //Retire le mouvement fait
                 transform.position = newPosition;
             }
+            else
+            {
+                SFX_sounds.GetComponent<playerSFX>().stopSound();
+            }
+            
         }
     
         public void MoveLeft()
         {
-            
             if (mouvement > 0)                                               //On sassure quil reste du mouvement au soldat
             {
+                SFX_sounds.GetComponent<playerSFX>().playMovement();
                 animator.SetBool("Moving", true);
                 Vector3 currentPosition = transform.position;
                 Vector3 newPosition = currentPosition + new Vector3(-moveSpeed * Time.deltaTime, 0.0f, 0.0f);
                 RemoveMouvement(newPosition.x - currentPosition.x);                //Retire le mouvement fait
                 transform.position = newPosition;
+            }
+            else
+            {
+                SFX_sounds.GetComponent<playerSFX>().stopSound();
             }
         }
 
@@ -162,9 +177,9 @@ namespace GameScripts
 
         public void Shoot()
         {
-        
             if (ActionUsed == false) 
             {
+                SFX_sounds.GetComponent<playerSFX>().playShoot();
                 Vector3 bulletPos = (team == 1)
                     ? new Vector3(transform.position.x + 1, transform.position.y + 0.8f, transform.position.z)
                     : new Vector3(transform.position.x - 1, transform.position.y + 0.8f, transform.position.z);
@@ -186,6 +201,8 @@ namespace GameScripts
 
         public void Aim()
         {
+            SFX_sounds.GetComponent<playerSFX>().playArming();
+            SFX_sounds.GetComponent<playerSFX>().playVoiceAttack();
             AimingMode = true;
         
             Debug.Log("Player start aiming");
@@ -238,6 +255,7 @@ namespace GameScripts
 
         public void Jump()
         {
+            SFX_sounds.GetComponent<playerSFX>().playJump();
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.AddForce(0, 10, 0, ForceMode.Impulse);
         }
@@ -247,11 +265,28 @@ namespace GameScripts
             return health;
         }
 
+        public void stopSound()
+        {
+            SFX_sounds.GetComponent<playerSFX>().stopSound();
+        }
+
+        public bool getLowHealth()
+        {
+            return lowHealth;
+        }
+
         public void removeHealth(int damage)
         {
-        
+            SFX_sounds.GetComponent<playerSFX>().playVoiceHit();
             health -= damage;
             barScript.Change(-damage);
+
+            if (health <= 40)
+            {
+                lowHealth = true;
+                SFX_sounds.GetComponent<playerSFX>().playVoiceLowHealth();
+            }
+            
             if (health <= 0)
             {
                 if (team == 1)

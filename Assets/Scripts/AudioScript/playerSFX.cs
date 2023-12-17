@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using GameScripts;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class playerSFX : MonoBehaviour
 {
     public AudioClip[] tracks; // Reference to the AudioSource component
-    // 0 - shoot, 1 - walk, 2 - jump
+    // 0 - walk, 1 - shoot, 2 - jump, 3 - arming gun
+
+    public AudioClip[] attacks;
+    public AudioClip[] lowHealth;
+    public AudioClip[] hit;
 
     public AudioSource audioSource;
 
@@ -30,6 +35,43 @@ public class playerSFX : MonoBehaviour
     {
         audioSource.Stop();
     }
+
+    public void playVoiceAttack()
+    {
+        // possible to have no voiceline
+        int randomIndex = Random.Range(0, (int)(attacks.Length * 1.3));
+        if (attacks.Length > 0 && randomIndex < attacks.Length)
+        {
+            audioSource.PlayOneShot(attacks[randomIndex]);
+        }
+    }
+    
+    public void playVoiceHit()
+    {
+        // possible to have no voiceline
+        int randomIndex = Random.Range(0, (int)(hit.Length * 1.3));
+        if (hit.Length > 0 && randomIndex < hit.Length)
+        {
+            StartCoroutine(delayedAction(hit[randomIndex]));
+        }
+    }
+    
+    public void playVoiceLowHealth()
+    {
+        // possible to have no voiceline
+        int randomIndex = Random.Range(0, (int)(lowHealth.Length * 1.3));
+        if (lowHealth.Length > 0 && randomIndex < lowHealth.Length)
+        {
+            StartCoroutine(delayedAction(lowHealth[randomIndex]));
+        }
+    }
+
+    IEnumerator delayedAction(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+        yield return new WaitForSeconds(clip.length + 1f);
+    }
+    
     public void playMovement()
     {
         audioSource.clip = tracks[0];
@@ -39,6 +81,14 @@ public class playerSFX : MonoBehaviour
         }  
     }
 
+    public void playArming()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(tracks[3]);
+        }
+    }
+
     public void playJump()
     {
         audioSource.clip = tracks[2];
@@ -46,13 +96,11 @@ public class playerSFX : MonoBehaviour
         {
             audioSource.Play();
         }
-        //play jump sound
     }
 
     public void playShoot()
     {
-        audioSource.clip = tracks[1];
-        audioSource.Play();
+        audioSource.PlayOneShot(tracks[1]);
     }
 
 }

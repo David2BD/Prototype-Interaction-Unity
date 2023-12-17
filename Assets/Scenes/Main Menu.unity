@@ -5741,11 +5741,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 30510a35bfd53435e9963c3a7594417b, type: 3}
   - {fileID: 8300000, guid: 3d472c788bcb94841ad65e6ddcdbc28f, type: 3}
   - {fileID: 8300000, guid: 816b6eab58d24c646a55f35fb63b0f1f, type: 3}
-  gameTracks:
-  - {fileID: 8300000, guid: 033766cc31c97904bae4404b8a079544, type: 3}
-  - {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
-  - {fileID: 8300000, guid: 0ad591428b0c18c4da51fe3bf98dbc63, type: 3}
-  - {fileID: 8300000, guid: bef0cef2ded0f0645ad90c6e5bdd4965, type: 3}
   buttonsSound:
   - {fileID: 8300000, guid: f8cab9ed881c12249b7c8b4795964bdd, type: 3}
   - {fileID: 8300000, guid: dca3084cb66e8824bab682c584bec504, type: 3}
@@ -15199,7 +15194,7 @@ GameObject:
   - component: {fileID: 1383263249}
   - component: {fileID: 1383263250}
   m_Layer: 0
-  m_Name: sliderBGM_Game
+  m_Name: sliderInstrument
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

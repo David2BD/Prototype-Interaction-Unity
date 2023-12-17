@@ -32,7 +32,10 @@ namespace AudioScript
 
         public void lowHealthState()
         {
-            audioSource.PlayOneShot(lowHealth);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(lowHealth);
+            }
         }
 
         public void playWin()

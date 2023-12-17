@@ -34,7 +34,7 @@ namespace MenuScripts
                         mixer.SetFloat("BackgroundMenu_Volume", volumeDB);
                         break;
                     case 1:
-                        mixer.SetFloat("BackgroundGame_Volume", volumeDB);
+                        mixer.SetFloat("Instrument_Volume", volumeDB);
                         break;
                     case 2:
                         mixer.SetFloat("SFX_Volume", volumeDB);
@@ -69,10 +69,6 @@ namespace MenuScripts
             mixer.GetFloat("BackgroundMenu_Volume", out bgVolumeMenu);
             slidersVolume[0].value = VolumeToSliderValue(bgVolumeMenu);
             
-            float bgVolumeGame;
-            mixer.GetFloat("BackgroundMenu_Volume", out bgVolumeGame);
-            slidersVolume[1].value = VolumeToSliderValue(bgVolumeGame);
-            
             float sfxVolume;
             mixer.GetFloat("SFX_Volume", out sfxVolume);
             slidersVolume[2].value = VolumeToSliderValue(sfxVolume);
@@ -86,6 +82,10 @@ namespace MenuScripts
             mixer.GetFloat("Buttons_Volume", out buttonsVolume);
             slidersVolume[4].value = VolumeToSliderValue(buttonsVolume);
             getValue = false; 
+            
+            float bgVolumeGame;
+            mixer.GetFloat("Instrument_Volume", out bgVolumeGame);
+            slidersVolume[1].value = VolumeToSliderValue(bgVolumeGame);
         }
     
         public void Return()
