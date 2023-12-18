@@ -67,9 +67,7 @@ SkinnedMeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 802ecdafe09a7ae43a746bbc3f31c0f1, type: 2}
-  - {fileID: 2100000, guid: f1ffde0cab3b53e4b8db6c78d825b21a, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -189,8 +187,11 @@ MonoBehaviour:
   team: 0
   health: 0
   barScript: {fileID: 0}
+  soldier_demo: {fileID: 0}
   AimingAngle: {x: 0, y: 0, z: 0}
   ballPrefab: {fileID: 8803550432705336890, guid: ede61747aaa2ff0488dae69657c29bd7, type: 3}
+  SFX_sounds: {fileID: 0}
+  instruments_sounds: {fileID: 0}
 --- !u!120 &8210581775452994223
 LineRenderer:
   serializedVersion: 2

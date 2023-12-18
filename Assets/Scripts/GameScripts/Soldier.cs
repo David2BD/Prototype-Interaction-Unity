@@ -42,13 +42,14 @@ namespace GameScripts
             AimingAngle = (team == 1) ? new Vector3(0.5f, 0.5f, 0) : new Vector3(-0.5f, 0.5f, 0);
             AimingAngle.Normalize();
             soldierRenderer = GetComponent<Renderer>();
-            SetTeamMaterial();
+            //SetTeamMaterial();
             gameLoop = FindObjectOfType<GameLoop>();
             gameLoop.RegisterSoldier(this, team);
             health = 100;
             lineRenderer = GetComponent<LineRenderer>();
            
             animator = soldier_demo.GetComponent<Animator>();
+            //soldier.GetComponent<>
             usedTP = false;
         }
 

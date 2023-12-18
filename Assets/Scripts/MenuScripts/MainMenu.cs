@@ -10,6 +10,7 @@ namespace MenuScripts
         public GameObject optionsMenu;
         public GameObject mainMenu;
         public GameObject audioMenu;
+        public GameObject customizeMenu;
 
         private int _count;
 
@@ -55,10 +56,16 @@ namespace MenuScripts
 
         public void Audio()
         {
-            audioMenu.SetActive(!audioMenu.activeSelf);
+            customizeMenu.SetActive(!audioMenu.activeSelf);
             mainMenu.SetActive(false);
         }
-
+        
+        public void CustomizeMenu()
+        {
+            customizeMenu.SetActive(!customizeMenu.activeSelf);
+            mainMenu.SetActive(false);
+        }
+        
         public void ChangePlayer2()
         {
             _count = (_count + 1) % 2;
