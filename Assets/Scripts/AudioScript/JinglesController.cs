@@ -42,8 +42,8 @@ namespace AudioScript
 
         public void lowHealthState()
         {
-            audioSource.pitch = 0.8f;
-            audioSource.volume = 0.6f;
+            audioSource.pitch = 0.6f;
+            audioSource.volume = 0.4f;
             if (!audioSource.isPlaying)
             {
                 audioSource.PlayOneShot(lowHealth);

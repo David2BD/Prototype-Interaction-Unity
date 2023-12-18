@@ -8,11 +8,13 @@ namespace GameScripts
         private Vector3 initialPosition;
 
         public GameObject soldier;
+        private bool hit;
     
         void Start()
         {
             rb = GetComponent<Rigidbody>();
             initialPosition = transform.position;
+            hit = false;
         }
     
         void Update()
@@ -25,12 +27,9 @@ namespace GameScripts
     
         private void OnCollisionEnter(Collision collision)
         {
-            int player = soldier.GetComponent<Soldier>().getTeam();
-            bool hit = false;
-            
             if (collision.gameObject.CompareTag("Soldier"))
             {
-                GameManager.Instance.ballHitIncrease(player);
+                GameManager.Instance.ballHitIncrease();
                 hit = true;
                 
                 soldier = collision.gameObject;
@@ -39,7 +38,7 @@ namespace GameScripts
 
             if (!hit)
             {
-                GameManager.Instance.ballMissIncrease(player);
+                GameManager.Instance.ballMissIncrease();
             }
 
             if (collision.gameObject.CompareTag("Ground"))

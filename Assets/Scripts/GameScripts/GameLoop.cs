@@ -71,18 +71,18 @@ namespace GameScripts
                 ToggleAudio();
             }
             
-            if (GameManager.Instance.getBallMiss(playerTurn) == 1)
+            if (GameManager.Instance.getBallMiss())
             {
                 // play jingle ball miss
-                //jingles_sounds.GetComponent<JinglesController>().playBallMiss();
-                //GameManager.Instance.resetBallMiss(playerTurn);
+                jingles_sounds.GetComponent<JinglesController>().playBallMiss();
+                GameManager.Instance.resetBallMiss();
             }
             
-            if (GameManager.Instance.getBallHit(playerTurn) == 1)
+            if (GameManager.Instance.getBallHit())
             {
                 // play jingle ball hit
-                //jingles_sounds.GetComponent<JinglesController>().playBallHit();
-                //GameManager.Instance.resetBallHit(playerTurn);
+                jingles_sounds.GetComponent<JinglesController>().playBallHit();
+                GameManager.Instance.resetBallHit();
             }
         
             if (activeBall == null)
@@ -221,6 +221,8 @@ namespace GameScripts
     
         public void playTurn(int player, List<Soldier> soldiers, int selectedSoldier)
         {
+            GameManager.Instance.setTurn(player);
+            
             if (soldiers[selectedSoldier].getLowHealth())
             {
                 jingles_sounds.GetComponent<JinglesController>().lowHealthState();

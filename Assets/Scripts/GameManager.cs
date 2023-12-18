@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
     // to know when to play hit/miss jingles
     private int[] ballHits = new int[2] {0, 0};
     private int[] ballMiss = new int[2] {0, 0};
+
+    private int maxMiss = 2;
+    private int maxHit = 2;
     
     // Singleton
     void Awake()
@@ -181,14 +184,14 @@ public class GameManager : MonoBehaviour
         };
     }
 
-    public int getBallHit(int player)
+    public bool getBallHit()
     {
-        return (player == 1) ? ballHits[0] : ballHits[1];
+        return (ballHits[0] == maxHit || ballHits[1] == maxHit) ;
     }
 
-    public void ballHitIncrease(int player)
+    public void ballHitIncrease()
     {
-        if (player == 1)
+        if (current_turn == 1)
         {
             ballHits[0] += 1;
         }
@@ -196,29 +199,30 @@ public class GameManager : MonoBehaviour
         {
             ballHits[1] += 1;
         }
-        resetBallMiss(player);
+        resetBallMiss();
     }
     
-    public void resetBallHit(int player)
+    public void resetBallHit()
     {
-        if (player == 1)
+        if (ballHits[0] == maxHit)
         {
             ballHits[0] = 0;
         }
-        else
+        
+        if (ballHits[1] == maxHit)
         {
             ballHits[1] = 0;
         }
     }
     
-    public int getBallMiss(int player)
+    public bool getBallMiss()
     {
-        return (player == 1) ? ballMiss[0] : ballMiss[1];
+        return (ballMiss[0] == maxMiss || ballMiss[1] == maxMiss);
     }
     
-    public void ballMissIncrease(int player)
+    public void ballMissIncrease()
     {
-        if (player == 1)
+        if (current_turn == 1)
         {
             ballMiss[0] += 1;
         }
@@ -227,16 +231,17 @@ public class GameManager : MonoBehaviour
             ballMiss[1] += 1;
         }
 
-        resetBallHit(player);
+        resetBallHit();
     }
     
-    public void resetBallMiss(int player)
+    public void resetBallMiss()
     {
-        if (player == 1)
+        if (ballMiss[0] == maxMiss)
         {
             ballMiss[0] = 0;
         }
-        else
+
+        if (ballMiss[1] == maxMiss)
         {
             ballMiss[1] = 0;
         }

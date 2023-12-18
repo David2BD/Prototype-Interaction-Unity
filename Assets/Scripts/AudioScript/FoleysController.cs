@@ -64,29 +64,32 @@ namespace AudioScript
         void portalSound(int turn)
         {
             Transform current = (turn == 1) ? soldierBlue : soldierRed;
+            if (current != null)
+            {
+                Vector3 pos = current.position;
+                float distancePortal1 = Vector3.Distance(pos, portals[0].position);
+                float distancePortal2 = Vector3.Distance(pos, portals[1].position);
+                float distancePortal3 = Vector3.Distance(pos, portals[2].position);
+                float distancePortal4 = Vector3.Distance(pos, portals[3].position);
             
-            Vector3 pos = current.position;
-            float distancePortal1 = Vector3.Distance(pos, portals[0].position);
-            float distancePortal2 = Vector3.Distance(pos, portals[1].position);
-            float distancePortal3 = Vector3.Distance(pos, portals[2].position);
-            float distancePortal4 = Vector3.Distance(pos, portals[3].position);
-        
-            if ((distancePortal1 <= distanceSound || distancePortal2 <= distanceSound) && !audioSource[0].isPlaying)
-            {
-                PlaySound(audioSource[0]);
+                if ((distancePortal1 <= distanceSound || distancePortal2 <= distanceSound) && !audioSource[0].isPlaying)
+                {
+                    PlaySound(audioSource[0]);
+                }
+                else if ((distancePortal1 > distanceSound && distancePortal2 > distanceSound) && audioSource[0].isPlaying)
+                {
+                    StopSound(audioSource[0]);
+                }
+                if ((distancePortal3 <= distanceSound || distancePortal4 <= distanceSound) && !audioSource[1].isPlaying)
+                {
+                    PlaySound(audioSource[1]);
+                }
+                else if ((distancePortal3 > distanceSound && distancePortal4 > distanceSound) && audioSource[1].isPlaying)
+                {
+                    StopSound(audioSource[1]);
+                }                
             }
-            else if ((distancePortal1 > distanceSound && distancePortal2 > distanceSound) && audioSource[0].isPlaying)
-            {
-                StopSound(audioSource[0]);
-            }
-            if ((distancePortal3 <= distanceSound || distancePortal4 <= distanceSound) && !audioSource[1].isPlaying)
-            {
-                PlaySound(audioSource[1]);
-            }
-            else if ((distancePortal3 > distanceSound && distancePortal4 > distanceSound) && audioSource[1].isPlaying)
-            {
-                StopSound(audioSource[1]);
-            }
+
         }
                 
         void PlaySound(AudioSource audioSource)
