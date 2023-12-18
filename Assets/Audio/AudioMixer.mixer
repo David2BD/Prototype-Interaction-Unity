@@ -29,7 +29,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -5959414227867169207}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 2
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -76,7 +76,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 4506426677842084454}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 6
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -140,14 +140,32 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 0dbabdf56ee539642b0c922a56ce1436
     name: BackgroundMenu_Volume
+  - guid: a8519750cc05432418fce2e6d5c8f421
+    name: Beat_Volume
+  - guid: c4cacecd69877344aa9bfd31805928f7
+    name: Beat_Pitch
   - guid: fa770877bdca01148b8154ac94856913
     name: Buttons_Volume
+  - guid: 77822369f5914b14da22a9133c31ce21
+    name: Drum_Volume
+  - guid: 25a6bcb1bd5319e43a3ee832052f27db
+    name: Drum_Pitch
   - guid: 575228f4ce5e7a64a8c582b10a1f99e7
     name: Foleys_Volume
   - guid: d4b72cb553764c741bd285d51ee94da8
     name: Instrument_Volume
+  - guid: cbcd3591b2f4ef946bc9318170c59dec
+    name: Other_Volume
+  - guid: b3f6434fbf4c02b4ca12be1b4207b813
+    name: Piano_Volume
+  - guid: 945fc536ca751e14a895a04dba5a034a
+    name: Piano_Pitch
   - guid: bbdce6679df7cf2449e3474f2eb5ea3a
     name: SFX_Volume
+  - guid: d85552b58f67ee24584ce78cbd3e8b65
+    name: Violin_Volume
+  - guid: e0531baf64996754aa0f29499ab276f7
+    name: Violin_Pitch
   m_AudioMixerGroupViews:
   - guids:
     - b73d510f0fce5124d962408df269f82c
@@ -160,6 +178,7 @@ AudioMixerController:
     - d32e40655661ae340aea2c75c5a8fda3
     - 27d17efb4776cc042b694b5140a360ed
     - a326eb846eef7354cb3dd4136e77564c
+    - 4c0bd2a386200874b943b08d00c0167f
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -183,7 +202,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 3
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -214,12 +233,13 @@ AudioMixerSnapshotController:
     d9e56fd1bafbedb428592c47d09ea2ab: 2000
     575228f4ce5e7a64a8c582b10a1f99e7: -8.841784
     c29fc69547aaa9b42b356841ea9a9355: -14.816608
-    d4b72cb553764c741bd285d51ee94da8: -7.8940816
+    d4b72cb553764c741bd285d51ee94da8: -0.02577656
     0dbabdf56ee539642b0c922a56ce1436: -9.960263
     bbdce6679df7cf2449e3474f2eb5ea3a: -6.991066
     fa770877bdca01148b8154ac94856913: -5.7224774
     e6cbd45bcbf50604fb2380c60da30ac9: 0.033
     4b67722d9cc6ab34e8298fcea3698bb2: 86037
+    c4cacecd69877344aa9bfd31805928f7: 1
   m_TransitionOverrides: {}
 --- !u!243 &516478185930949326
 AudioMixerGroupController:
@@ -236,7 +256,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -7274739813793783181}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 2
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -255,7 +275,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -1096544787553658525}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 8
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -288,7 +308,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 3005414417962760085}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 8
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -298,7 +318,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Percussion
+  m_Name: Beat
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: e549892426e871b47991729c7e8afc4d
   m_Children: []
@@ -307,7 +327,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -3068064465442907331}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 2
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -326,7 +346,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -671985482734422931}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 2
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -358,6 +378,39 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &5969178655609573186
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Drum
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 4c0bd2a386200874b943b08d00c0167f
+  m_Children: []
+  m_Volume: 77822369f5914b14da22a9133c31ce21
+  m_Pitch: 25a6bcb1bd5319e43a3ee832052f27db
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 6138421719796602568}
+  m_UserColorIndex: 2
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &6138421719796602568
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: a18eab26573c93646827b0cbd1480baa
+  m_EffectName: Attenuation
+  m_MixLevel: e5da6c985df66bd4d977f310a70b1127
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &7080256991567317023
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -373,7 +426,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 5305727963993538522}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 8
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -391,12 +444,13 @@ AudioMixerGroupController:
   - {fileID: 4386753104520229472}
   - {fileID: 516478185930949326}
   - {fileID: -6960019965382598114}
+  - {fileID: 5969178655609573186}
   m_Volume: d4b72cb553764c741bd285d51ee94da8
   m_Pitch: 15c85191cd1af8a4d88f1fd523523ad8
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -4883424974290926237}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 6
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
