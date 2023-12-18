@@ -56,7 +56,7 @@ namespace MenuScripts
 
         public void Audio()
         {
-            customizeMenu.SetActive(!audioMenu.activeSelf);
+            audioMenu.SetActive(!audioMenu.activeSelf);
             mainMenu.SetActive(false);
         }
         

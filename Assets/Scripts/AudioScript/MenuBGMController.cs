@@ -13,6 +13,7 @@ namespace AudioScript
         private AudioSource menuAudioSource;
         private int menuTrackIndex;
         
+        // 0 - start game, 1 - confirm, 2 - change, 3 - back
         public AudioClip[] buttonsSound;
         private AudioSource buttonAudioSource;
 
