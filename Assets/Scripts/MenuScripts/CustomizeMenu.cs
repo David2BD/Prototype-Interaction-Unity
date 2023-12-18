@@ -11,8 +11,12 @@ public class CustomizeMenu : MonoBehaviour
     public GameObject mainMenu;
     public GameObject customizeMenu;
     
-    public GameObject dropdownMenuColor;
-    private TMP_Dropdown colorMenu;
+    public GameObject dropdownBodyColor;
+    private TMP_Dropdown colorBodyMenu;
+    
+    public GameObject dropdownWeapColor;
+    private TMP_Dropdown colorWeaponMenu;
+    
     public GameObject dropdownMenuModel;
     private Dropdown modelMenu;
     
@@ -24,7 +28,9 @@ public class CustomizeMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        colorMenu = dropdownMenuColor.GetComponent<TMP_Dropdown>();
+        colorBodyMenu = GameObject.Find("BodyColorDropdown").GetComponent<TMP_Dropdown>();
+        //colorBodyMenu = dropdownBodyColor.GetComponent<TMP_Dropdown>();
+        colorWeaponMenu = GameObject.Find("WeaponColorDropdown").GetComponent<TMP_Dropdown>();
        // mesh = Soldier.GetComponent<MeshFilter>();
         //material = mesh.GetComponent<Material>();
     }
@@ -33,10 +39,41 @@ public class CustomizeMenu : MonoBehaviour
     void Update()
     {
         
-        if (colorMenu.value == 0)
+        if (colorBodyMenu.value == 0)
         {
-           soldier.ChangeBodyColor(Color.green);
+           soldier.ChangeBodyColor(Color.white);
         }
+        else if (colorBodyMenu.value == 1)
+        {
+            soldier.ChangeBodyColor(Color.blue);
+        }
+        else if (colorBodyMenu.value == 2)
+        {
+            soldier.ChangeBodyColor(Color.red);
+        }
+        else if (colorBodyMenu.value == 3)
+        {
+            soldier.ChangeBodyColor(Color.green);
+        }
+        
+        
+        if (colorWeaponMenu.value == 0)
+        {
+            soldier.ChangeWeaponColor(Color.white);
+        }
+        else if (colorWeaponMenu.value == 1)
+        {
+            soldier.ChangeWeaponColor(Color.blue);
+        }
+        else if (colorWeaponMenu.value == 2)
+        {
+            soldier.ChangeWeaponColor(Color.red);
+        }
+        else if (colorWeaponMenu.value == 3)
+        {
+            soldier.ChangeWeaponColor(Color.green);
+        }
+        
     }
     
     public void Return()

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class SoldierCustomization : MonoBehaviour
 {
-    private Color color;
+    private Color bodyColor;
+    private Color weaponColor;
     private int model;
     public Material materialBody;
     public Material materialWeapon;
@@ -13,7 +14,8 @@ public class SoldierCustomization : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        color = Color.clear;
+        bodyColor = Color.white;
+        weaponColor = Color.white;
         model = 0;
     }
 
@@ -25,7 +27,13 @@ public class SoldierCustomization : MonoBehaviour
 
     public void ChangeBodyColor(Color p_color)
     {
-        color = p_color;
-        materialBody.color = color;
+        bodyColor = p_color;
+        materialBody.color = bodyColor;
+    }
+
+    public void ChangeWeaponColor(Color p_color)
+    {
+        weaponColor = p_color;
+        materialWeapon.color = weaponColor;
     }
 }
