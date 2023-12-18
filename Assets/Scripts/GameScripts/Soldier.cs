@@ -58,30 +58,17 @@ namespace GameScripts
         // Update is called once per frame
         void Update()
         {
-            //moving = false;
             if (health <= 0)
             {
                 Destroy(gameObject);
             }
             
-            //lineRenderer.SetVertexCount(1);
+            
             Vector3[] positions = new Vector3[3];
             positions[0] = transform.position + new Vector3(0.0f, 0.6f, 0.0f);
             positions[1] =  positions[0] + (AimingAngle);
             lineRenderer.SetPositions(positions);
-            //lineRenderer.(transform.position,  AimingAngle * 100, Color.blue);
             
-            //Animations
-            /*
-            if (moving == true)
-            {
-                animator.SetBool("Moving", true);
-            }
-            else
-            {
-                animator.SetBool("Moving", false);
-            }
-            */
         }
     
         void SetTeamMaterial()
