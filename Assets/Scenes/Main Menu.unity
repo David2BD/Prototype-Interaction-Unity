@@ -4973,7 +4973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &361488996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28966,7 +28966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2096021399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29616,6 +29616,7 @@ GameObject:
   - component: {fileID: 2125429783}
   - component: {fileID: 2125429782}
   - component: {fileID: 2125429781}
+  - component: {fileID: 2125429784}
   m_Layer: 0
   m_Name: Play
   m_TagString: Untagged
@@ -29749,6 +29750,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125429779}
   m_CullTransparentMesh: 1
+--- !u!114 &2125429784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125429779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a373bb20985a0429942f81d732d7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1651356750}
+  hoverColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
+  normalColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
+  animationTime: 0
 --- !u!1 &2140972274
 GameObject:
   m_ObjectHideFlags: 0

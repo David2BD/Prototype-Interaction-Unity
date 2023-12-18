@@ -55,6 +55,9 @@ namespace GameScripts
             
             // start music
             instruments_sounds.GetComponent<InstrumentController>().PlayAll(false);
+            
+            GameManager.Instance.resetBallHit();
+            GameManager.Instance.resetBallMiss();
         }
 
         void Update()
