@@ -63,7 +63,7 @@ namespace GameScripts
             {
                 Destroy(gameObject);
             }
-        
+            
             //lineRenderer.SetVertexCount(1);
             Vector3[] positions = new Vector3[3];
             positions[0] = transform.position + new Vector3(0.0f, 0.6f, 0.0f);
@@ -96,7 +96,15 @@ namespace GameScripts
             }
         }
 
-        
+        public void setTeam(int t)
+        {
+            team = t;
+        }
+
+        public int getTeam()
+        {
+            return team;
+        }
         
         public void MoveRight()
         {

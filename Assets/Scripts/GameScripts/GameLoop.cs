@@ -70,6 +70,20 @@ namespace GameScripts
             {
                 ToggleAudio();
             }
+            
+            if (GameManager.Instance.getBallMiss(playerTurn) == 1)
+            {
+                // play jingle ball miss
+                //jingles_sounds.GetComponent<JinglesController>().playBallMiss();
+                //GameManager.Instance.resetBallMiss(playerTurn);
+            }
+            
+            if (GameManager.Instance.getBallHit(playerTurn) == 1)
+            {
+                // play jingle ball hit
+                //jingles_sounds.GetComponent<JinglesController>().playBallHit();
+                //GameManager.Instance.resetBallHit(playerTurn);
+            }
         
             if (activeBall == null)
             {
@@ -147,10 +161,12 @@ namespace GameScripts
         {
             if (team == 1)
             { 
+                soldier.setTeam(1);
                 blueTeamUnits.Add(soldier);
             }
             else if (team == 2)
             {
+                soldier.setTeam(2);
                 redTeamUnits.Add(soldier);
             }
         }
@@ -192,14 +208,12 @@ namespace GameScripts
             if (playerTurn == 1)
             {
                 playerTurn = 2;
-                //GameManager.Instance.setTurn(2);
                 // set to 1 for build
                 redTeamUnits[0].SetActionUsed(false);
             }
             else
             {
                 playerTurn = 1;
-                //GameManager.Instance.setTurn(1);
                 blueTeamUnits[0].SetActionUsed(false);
             }
             instruments_sounds.GetComponent<InstrumentController>().PlayAll(false);

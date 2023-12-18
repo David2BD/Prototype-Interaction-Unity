@@ -1115,6 +1115,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 516769428}
+        m_TargetAssemblyTypeName: AudioScript.MenuBGMController, Assembly-CSharp
+        m_MethodName: playButtonSound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &120892095
 GameObject:
   m_ObjectHideFlags: 0
@@ -5784,6 +5796,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 516769428}
+        m_TargetAssemblyTypeName: AudioScript.MenuBGMController, Assembly-CSharp
+        m_MethodName: playButtonSound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &461300400
 GameObject:
   m_ObjectHideFlags: 0
@@ -6671,6 +6695,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dca3084cb66e8824bab682c584bec504, type: 3}
   - {fileID: 8300000, guid: eb29844b03df258489a10c01c6e51552, type: 3}
   - {fileID: 8300000, guid: 805b9257f76a9ce47b16409048985f89, type: 3}
+  - {fileID: 8300000, guid: 7096c237e384d435ab4bf80e18bf6a18, type: 3}
 --- !u!1 &545662843
 GameObject:
   m_ObjectHideFlags: 0
@@ -17439,6 +17464,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 516769428}
+        m_TargetAssemblyTypeName: AudioScript.MenuBGMController, Assembly-CSharp
+        m_MethodName: playButtonSound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1397337754
 GameObject:
   m_ObjectHideFlags: 0
@@ -20531,6 +20568,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1564142738}
         m_TargetAssemblyTypeName: MenuScripts.Audio, Assembly-CSharp
         m_MethodName: SetVolume
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 516769428}
+        m_TargetAssemblyTypeName: AudioScript.MenuBGMController, Assembly-CSharp
+        m_MethodName: playButtonSound
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25723,6 +25772,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 516769428}
+        m_TargetAssemblyTypeName: AudioScript.MenuBGMController, Assembly-CSharp
+        m_MethodName: playButtonSound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

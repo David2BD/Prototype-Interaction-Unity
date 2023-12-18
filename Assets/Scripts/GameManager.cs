@@ -57,6 +57,10 @@ public class GameManager : MonoBehaviour
     // to change musicLevel
     private int counterMusic = 0;
     
+    // to know when to play hit/miss jingles
+    private int[] ballHits = new int[2] {0, 0};
+    private int[] ballMiss = new int[2] {0, 0};
+    
     // Singleton
     void Awake()
     {
@@ -97,7 +101,7 @@ public class GameManager : MonoBehaviour
                 { PlayerAction.AimLower, KeyCode.DownArrow },
                 { PlayerAction.Shoot, KeyCode.Space },
             };
-            
+
             // existe entre les scenes
             DontDestroyOnLoad(gameObject);
         }
@@ -176,6 +180,68 @@ public class GameManager : MonoBehaviour
             _ => 5
         };
     }
+
+    public int getBallHit(int player)
+    {
+        return (player == 1) ? ballHits[0] : ballHits[1];
+    }
+
+    public void ballHitIncrease(int player)
+    {
+        if (player == 1)
+        {
+            ballHits[0] += 1;
+        }
+        else
+        {
+            ballHits[1] += 1;
+        }
+        resetBallMiss(player);
+    }
+    
+    public void resetBallHit(int player)
+    {
+        if (player == 1)
+        {
+            ballHits[0] = 0;
+        }
+        else
+        {
+            ballHits[1] = 0;
+        }
+    }
+    
+    public int getBallMiss(int player)
+    {
+        return (player == 1) ? ballMiss[0] : ballMiss[1];
+    }
+    
+    public void ballMissIncrease(int player)
+    {
+        if (player == 1)
+        {
+            ballMiss[0] += 1;
+        }
+        else
+        {
+            ballMiss[1] += 1;
+        }
+
+        resetBallHit(player);
+    }
+    
+    public void resetBallMiss(int player)
+    {
+        if (player == 1)
+        {
+            ballMiss[0] = 0;
+        }
+        else
+        {
+            ballMiss[1] = 0;
+        }
+    }
+    
     
     public void SaveAllControls()
     {

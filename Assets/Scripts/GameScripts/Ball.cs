@@ -25,10 +25,21 @@ namespace GameScripts
     
         private void OnCollisionEnter(Collision collision)
         {
+            int player = soldier.GetComponent<Soldier>().getTeam();
+            bool hit = false;
+            
             if (collision.gameObject.CompareTag("Soldier"))
             {
+                GameManager.Instance.ballHitIncrease(player);
+                hit = true;
+                
                 soldier = collision.gameObject;
                 soldier.GetComponent<Soldier>().removeHealth(20);
+            }
+
+            if (!hit)
+            {
+                GameManager.Instance.ballMissIncrease(player);
             }
 
             if (collision.gameObject.CompareTag("Ground"))

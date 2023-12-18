@@ -13,7 +13,7 @@ namespace AudioScript
         private AudioSource menuAudioSource;
         private int menuTrackIndex;
         
-        // 0 - start game, 1 - confirm, 2 - change, 3 - back
+        // 0 - start game, 1 - confirm, 2 - change, 3 - back, 4 - slider
         public AudioClip[] buttonsSound;
         private AudioSource buttonAudioSource;
 
@@ -55,7 +55,19 @@ namespace AudioScript
                 buttonAudioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/Buttons")[0];
             }
 
-            buttonAudioSource.PlayOneShot(buttonsSound[i]);
+            if (i != 4)
+            {
+                buttonAudioSource.PlayOneShot(buttonsSound[i]);
+            }
+            else
+            {
+                if (!buttonAudioSource.isPlaying)
+                {
+                    buttonAudioSource.PlayOneShot(buttonsSound[i]);
+                }
+            }
+
+
         }
 
         IEnumerator playMenuBGM()

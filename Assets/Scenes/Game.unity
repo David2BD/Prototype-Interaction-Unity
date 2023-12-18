@@ -467,6 +467,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b938ce4dd1efd144ebf397ff9b3baf22, type: 3}
   - {fileID: 8300000, guid: db6d136f2edd9a34b86e9894645fe7f3, type: 3}
   - {fileID: 8300000, guid: 192c872109c705046b9dda311afba027, type: 3}
+  ballMissTracks:
+  - {fileID: 8300000, guid: a5855d8b1d0949641bc45bba45bea58d, type: 3}
+  - {fileID: 8300000, guid: 63af92c30e5d6d644a6bbd882d56c6b8, type: 3}
+  - {fileID: 8300000, guid: 011450b5d5b5b7a4999eebcac91ba1bb, type: 3}
+  - {fileID: 8300000, guid: 598c5f666d5f89c4684017b68fb40932, type: 3}
+  ballHitTracks:
+  - {fileID: 8300000, guid: 0a926ec5082400b49be3ea96e1b94a3d, type: 3}
+  - {fileID: 8300000, guid: 5a6713dbdea8ec64ba9841467b4331a1, type: 3}
+  - {fileID: 8300000, guid: 7b32cadc10ce5e746a7feca04f343265, type: 3}
+  - {fileID: 8300000, guid: 68200acbac8f92141987986cf7acd3ea, type: 3}
   lowHealth: {fileID: 8300000, guid: 6390bc508b03426428f898267b2cca60, type: 3}
 --- !u!1 &165073331
 GameObject:
@@ -985,10 +995,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 1fde45baf6dbb9740a6680e4feec2f54, type: 2}
-  BassClips:
-  - {fileID: 8300000, guid: 4ede2237f6ff64199a91c0bf61e00586, type: 3}
-  - {fileID: 8300000, guid: 0a308cdcda8404264b4405e80b6fe988, type: 3}
-  - {fileID: 8300000, guid: ede69ff325a4c4d008a0600b3b828892, type: 3}
   PianoClips:
   - {fileID: 8300000, guid: 906a80fc5ba9d42e48294b202190ec47, type: 3}
   - {fileID: 8300000, guid: 5dcfb628d43eb4381974e56b58e4e37b, type: 3}
