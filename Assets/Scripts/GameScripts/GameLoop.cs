@@ -17,6 +17,7 @@ namespace GameScripts
         public GameObject TextManagerGameOver;
 
         public GameObject pauseMenu;
+        public GameObject audioMenu;
     
         public GameObject GameUI;
 
@@ -63,6 +64,11 @@ namespace GameScripts
             if (Input.GetKeyDown(GameManager.Instance.GeneralActions[GeneralAction.Pause]))
             {
                 TogglePause();
+            }
+
+            if (Input.GetKeyDown(GameManager.Instance.GeneralActions[GeneralAction.Audio]))
+            {
+                ToggleAudio();
             }
         
             if (activeBall == null)
@@ -117,6 +123,23 @@ namespace GameScripts
                 // Pause the game
                 Time.timeScale = 0f;
                 pauseMenu.SetActive(true);
+            }
+        }
+        
+        void ToggleAudio()
+        {
+            // Toggle the pause state
+            if (Time.timeScale == 0f)
+            {
+                // Resume the game
+                Time.timeScale = 1f;
+                audioMenu.SetActive(false);
+            }
+            else
+            {
+                // Pause the game
+                Time.timeScale = 0f;
+                audioMenu.SetActive(true);
             }
         }
     

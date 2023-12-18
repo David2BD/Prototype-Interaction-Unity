@@ -18,6 +18,7 @@ public enum GeneralAction
 {
     Confirm,
     Pause,
+    Audio,
     Quit
 }
 
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
             {
                 { GeneralAction.Pause, KeyCode.P },
                 { GeneralAction.Confirm, KeyCode.Return },
+                { GeneralAction.Audio, KeyCode.O },
                 { GeneralAction.Quit, KeyCode.Escape }
             };
             

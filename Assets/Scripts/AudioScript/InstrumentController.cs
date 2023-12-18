@@ -190,7 +190,7 @@ public class InstrumentController : MonoBehaviour
 
     private void PlayPiano(bool levelChange)
     {
-        if (level < 5 && levelChange)
+        if (level < 4 && levelChange)
         {
             _pianoClipsAudioSource.Stop();
             _pianoClipsAudioSource.clip = PianoClips[level - 1];
