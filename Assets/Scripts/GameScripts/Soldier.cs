@@ -17,6 +17,7 @@ namespace GameScripts
         
         private Animator animator;
         public GameObject soldier_demo;
+        public GameObject soldier_toon;
         private bool moving;
         
         private bool usedTP;
@@ -35,10 +36,26 @@ namespace GameScripts
         public GameObject instruments_sounds;
 
         private bool lowHealth = false;
+        
+        private GameObject model1;
+        private GameObject model2;
+
+        public Material demoWeaponMat;
+        public Material demoBodyMat;
+        public Material toonSoldierBodyMat;
+        
+        public GameObject vikingHat;
+        public GameObject magicianHat;
+        public GameObject minerHat;
+
+        public GameObject jetPackParticles;
+        private bool jetPackOn = false;
     
         // Start is called before the first frame update
         void Start()
         {
+            SetupCustomization();
+            
             AimingAngle = (team == 1) ? new Vector3(0.5f, 0.5f, 0) : new Vector3(-0.5f, 0.5f, 0);
             AimingAngle.Normalize();
             soldierRenderer = GetComponent<Renderer>();
@@ -47,10 +64,20 @@ namespace GameScripts
             gameLoop.RegisterSoldier(this, team);
             health = 100;
             lineRenderer = GetComponent<LineRenderer>();
-           
-            animator = soldier_demo.GetComponent<Animator>();
+            
+            if (CustomizeMenu.model == 0)
+            {
+                animator = soldier_demo.GetComponent<Animator>();
+            }
+            else if (CustomizeMenu.model == 1)
+            {
+                animator = soldier_toon.GetComponent<Animator>();
+            }
+            
+
             //soldier.GetComponent<>
             usedTP = false;
+            
         }
 
     
@@ -70,7 +97,72 @@ namespace GameScripts
             lineRenderer.SetPositions(positions);
             
         }
-    
+
+        public bool getJetPackStatus()
+        {
+            return jetPackOn;
+        }
+        
+        public void setJetPackStatus(bool status)
+        {
+            jetPackOn = status;
+        }
+        
+        public void TurnOnJetPack()
+        {
+            jetPackParticles.SetActive(!jetPackParticles.activeSelf);
+            jetPackOn = true;
+        }
+        public void TurnOffJetPack()
+        {
+            jetPackParticles.SetActive(false);
+            jetPackOn = false;
+        }
+        
+        private void SetupCustomization()
+        {
+            if (CustomizeMenu.model == 0)
+            {
+                soldier_demo.SetActive(!soldier_demo.activeSelf);
+                soldier_toon.SetActive(false);
+                demoWeaponMat.color = CustomizeMenu.colorWeapon;
+                demoBodyMat.color = CustomizeMenu.colorBody;
+                
+                if (CustomizeMenu.currentHat == 0)
+                {
+                    magicianHat.SetActive(false);
+                    minerHat.SetActive(false);
+                    vikingHat.SetActive(false);
+                }
+                else if (CustomizeMenu.currentHat == 1) 
+                {
+                    magicianHat.SetActive(false);
+                    minerHat.SetActive(false);
+                    vikingHat.SetActive(!vikingHat.activeSelf);
+                }
+                else if (CustomizeMenu.currentHat == 2)
+                {
+                    magicianHat.SetActive(false);
+                    vikingHat.SetActive(false);
+                    minerHat.SetActive(!minerHat.activeSelf);
+                }
+                else if (CustomizeMenu.currentHat == 3)
+                {
+                    minerHat.SetActive(false);
+                    vikingHat.SetActive(false);
+                    magicianHat.SetActive(!magicianHat.activeSelf);
+                }
+                
+            }
+            if (CustomizeMenu.model == 1)
+            {
+                soldier_demo.SetActive(false);
+                soldier_toon.SetActive(!soldier_toon.activeSelf);
+                toonSoldierBodyMat.color = CustomizeMenu.colorBody;
+            }
+            
+        }
+        
         void SetTeamMaterial()
         {
             if (team == 1)
@@ -193,7 +285,7 @@ namespace GameScripts
                 usedTP = false;
             }
         }
-
+        
         public void Aim()
         {
             instruments_sounds.GetComponent<InstrumentController>().PlayAll(true);

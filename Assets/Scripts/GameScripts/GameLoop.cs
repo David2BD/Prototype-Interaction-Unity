@@ -261,6 +261,18 @@ namespace GameScripts
                 else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.Jump]))
                 {
                     soldiers[selectedSoldier].Jump();
+                    
+                    if (soldiers[selectedSoldier].getJetPackStatus() == false)
+                    {
+                        soldiers[selectedSoldier].TurnOnJetPack();
+                    }
+                }
+                else if (Input.GetKeyUp(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.Jump]))
+                {
+                    if (soldiers[selectedSoldier].getJetPackStatus() == true)
+                    {
+                        soldiers[selectedSoldier].TurnOffJetPack();
+                    }
                 }
                 else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.EnterAimingMode]))
                 {

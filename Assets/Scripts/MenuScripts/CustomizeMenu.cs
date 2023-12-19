@@ -16,7 +16,7 @@ public class CustomizeMenu : MonoBehaviour
     private TMP_Dropdown modelMenu;
     
     private bool modelSwitched = false;
-    private int currentHat = 0;
+    
     
     private TMP_Dropdown AccMenu;
     
@@ -27,6 +27,11 @@ public class CustomizeMenu : MonoBehaviour
     public Soldier2Customization soldier2;
     private MeshFilter mesh;
     private Material material;
+
+    public static int model = 0 ;
+    public static Color colorBody = Color.white;
+    public static Color colorWeapon = Color.white;
+    public static int currentHat = 0;
     
     
     // Start is called before the first frame update
@@ -47,14 +52,14 @@ public class CustomizeMenu : MonoBehaviour
         {
             soldier1Visual.SetActive(!soldier1Visual.activeSelf);
             soldier2Visual.SetActive(false);
-            
+            model = 0;
             modelSwitched = true;
         }
         else if (modelMenu.value == 1 && modelSwitched)
         {
             soldier2Visual.SetActive(!soldier2Visual.activeSelf);
             soldier1Visual.SetActive(false);
-            
+            model = 1;
             modelSwitched = false;
         }
         
@@ -64,39 +69,47 @@ public class CustomizeMenu : MonoBehaviour
         {
            soldier.ChangeBodyColor(Color.white);
            soldier2.ChangeBodyColor(Color.white);
+           colorBody = Color.white;
         }
         else if (colorBodyMenu.value == 1)
         {
             soldier.ChangeBodyColor(Color.blue);
             soldier2.ChangeBodyColor(Color.blue);
+            colorBody = Color.blue;
         }
         else if (colorBodyMenu.value == 2)
         {
             soldier.ChangeBodyColor(Color.red);
             soldier2.ChangeBodyColor(Color.red);
+            colorBody = Color.red;
         }
         else if (colorBodyMenu.value == 3)
         {
             soldier.ChangeBodyColor(Color.green);
             soldier2.ChangeBodyColor(Color.green);
+            colorBody = Color.green;
         }
         
         //weapon color swap
         if (colorWeaponMenu.value == 0)
         {
             soldier.ChangeWeaponColor(Color.white);
+            colorWeapon = Color.white;
         }
         else if (colorWeaponMenu.value == 1)
         {
             soldier.ChangeWeaponColor(Color.blue);
+            colorWeapon = Color.blue;
         }
         else if (colorWeaponMenu.value == 2)
         {
             soldier.ChangeWeaponColor(Color.red);
+            colorWeapon = Color.red;
         }
         else if (colorWeaponMenu.value == 3)
         {
             soldier.ChangeWeaponColor(Color.green);
+            colorWeapon = Color.green;
         }
         
         //Hat swap
