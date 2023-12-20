@@ -7436,16 +7436,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 1fde45baf6dbb9740a6680e4feec2f54, type: 2}
   menuTracks:
-  - {fileID: 8300000, guid: bb32fbe58e3904a5d94ef8995c7d5570, type: 3}
   - {fileID: 8300000, guid: 30510a35bfd53435e9963c3a7594417b, type: 3}
   - {fileID: 8300000, guid: 3d472c788bcb94841ad65e6ddcdbc28f, type: 3}
+  - {fileID: 8300000, guid: bb32fbe58e3904a5d94ef8995c7d5570, type: 3}
   - {fileID: 8300000, guid: 816b6eab58d24c646a55f35fb63b0f1f, type: 3}
   buttonsSound:
   - {fileID: 8300000, guid: f8cab9ed881c12249b7c8b4795964bdd, type: 3}
   - {fileID: 8300000, guid: dca3084cb66e8824bab682c584bec504, type: 3}
   - {fileID: 8300000, guid: eb29844b03df258489a10c01c6e51552, type: 3}
   - {fileID: 8300000, guid: 805b9257f76a9ce47b16409048985f89, type: 3}
-  - {fileID: 8300000, guid: 7096c237e384d435ab4bf80e18bf6a18, type: 3}
 --- !u!1 &524792007
 GameObject:
   m_ObjectHideFlags: 0
@@ -29762,18 +29761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a373bb20985a0429942f81d732d7a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1651356750}
-  hoverColor:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
-  normalColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 1
-  animationTime: 0
 --- !u!1 &2140972274
 GameObject:
   m_ObjectHideFlags: 0

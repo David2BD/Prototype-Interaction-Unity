@@ -1,4 +1,5 @@
 using System;
+using AudioScript;
 using UnityEngine;
 
 namespace GameScripts
@@ -389,6 +390,14 @@ namespace GameScripts
                 {
                     gameLoop.GameOver(1);
                 }
+            }
+        }
+        
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                TurnOffJetPack();
             }
         }
     

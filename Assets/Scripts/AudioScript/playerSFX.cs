@@ -15,6 +15,7 @@ public class playerSFX : MonoBehaviour
     public AudioClip[] hit;
 
     public AudioSource audioSource;
+    public AudioSource voiceSource;
 
     private void Start()
     {
@@ -24,10 +25,11 @@ public class playerSFX : MonoBehaviour
         
         audioSource.clip = tracks[0];
         
-    }
-
-    void Update()
-    {
+        voiceSource.minDistance = 100;
+        voiceSource.maxDistance = 300;
+        voiceSource.spatialBlend = 1.0f;
+        
+        voiceSource.clip = attacks[0];
         
     }
 
@@ -42,7 +44,7 @@ public class playerSFX : MonoBehaviour
         int randomIndex = Random.Range(0, (int)(attacks.Length * 1.3));
         if (attacks.Length > 0 && randomIndex < attacks.Length)
         {
-            audioSource.PlayOneShot(attacks[randomIndex]);
+            voiceSource.PlayOneShot(attacks[randomIndex]);
         }
     }
     
@@ -68,7 +70,7 @@ public class playerSFX : MonoBehaviour
 
     IEnumerator delayedAction(AudioClip clip)
     {
-        audioSource.PlayOneShot(clip);
+        voiceSource.PlayOneShot(clip);
         yield return new WaitForSeconds(clip.length + 1f);
     }
     

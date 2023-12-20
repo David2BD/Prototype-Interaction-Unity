@@ -191,7 +191,7 @@ namespace GameScripts
 
         public void GameOver(int winningTeam)
         {
-            instruments_sounds.GetComponent<InstrumentController>().StopAll();
+            instruments_sounds.GetComponent<InstrumentController>().StopAllSudden();
             if (winningTeam == 1)
             {
                 GameOverScreen.SetActive(!GameOverScreen.activeSelf);
@@ -260,19 +260,12 @@ namespace GameScripts
                 }
                 else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.Jump]))
                 {
-                    soldiers[selectedSoldier].Jump();
-                    
                     if (soldiers[selectedSoldier].getJetPackStatus() == false)
                     {
                         soldiers[selectedSoldier].TurnOnJetPack();
                     }
-                }
-                else if (Input.GetKeyUp(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.Jump]))
-                {
-                    if (soldiers[selectedSoldier].getJetPackStatus() == true)
-                    {
-                        soldiers[selectedSoldier].TurnOffJetPack();
-                    }
+                    soldiers[selectedSoldier].Jump();
+                    
                 }
                 else if (Input.GetKey(GameManager.Instance.GetPlayerKeys(player)[PlayerAction.EnterAimingMode]))
                 {

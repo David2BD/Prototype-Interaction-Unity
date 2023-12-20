@@ -34,7 +34,8 @@ namespace AudioScript
             menuAudioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Master/BackgroundMenu")[0];
             menuAudioSource.minDistance = 200;
             menuAudioSource.maxDistance = 500;
-            menuAudioSource.spatialBlend = 1.0f;  
+            menuAudioSource.spatialBlend = 1.0f;
+            menuAudioSource.loop = true;
             
             menuAudioSource.clip = menuTracks[menuTrackIndex];
             menuAudioSource.Play();
