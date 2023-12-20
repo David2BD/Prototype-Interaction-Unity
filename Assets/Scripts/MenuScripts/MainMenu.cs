@@ -13,13 +13,18 @@ namespace MenuScripts
         public GameObject customizeMenu;
 
         private int _count;
-
-
+        
         public TextMeshProUGUI player2Button;
         public TextMeshProUGUI current;
 
         public TextMeshProUGUI player1Name; 
         public TextMeshProUGUI player2Name;
+        
+        public GameObject playButton;
+        public GameObject optionButton;
+        public GameObject audioButton;
+
+        public Canvas canvas;
 
         void Start()
         {
@@ -35,6 +40,8 @@ namespace MenuScripts
 
         private void Update()
         {
+            PlayButtonAnimation();
+            ButtonsHorizontalSlide();
             if (player1Name != null && player2Name != null)
             {
                 player1Name.SetText(GameManager.Instance.GetName(1));
@@ -42,6 +49,29 @@ namespace MenuScripts
             }
         }
 
+        private void PlayButtonAnimation()
+        {
+            if (playButton.transform.position.y > Screen.height / 2)
+            {
+                playButton.transform.position = new Vector3(playButton.transform.position.x,
+                    playButton.transform.position.y-2, playButton.transform.position.z);
+            }
+        }
+
+        private void ButtonsHorizontalSlide()
+        {
+            if (optionButton.transform.position.x < Screen.width / 2)
+            {
+                optionButton.transform.position = new Vector3(optionButton.transform.position.x + 2,
+                    optionButton.transform.position.y, optionButton.transform.position.z);
+            }
+            if (audioButton.transform.position.x < Screen.width / 2)
+            {
+                audioButton.transform.position = new Vector3(audioButton.transform.position.x + 2,
+                    audioButton.transform.position.y, audioButton.transform.position.z);
+            }
+        }
+        
         public void Play()
         {
             SceneManager.LoadScene("LoadingScreen");
