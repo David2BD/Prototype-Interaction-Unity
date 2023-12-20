@@ -51,6 +51,8 @@ namespace GameScripts
 
         public GameObject jetPackParticles;
         private bool jetPackOn = false;
+
+        public ParticlePoolingManager ParticlePool;
     
         // Start is called before the first frame update
         void Start()
@@ -111,7 +113,7 @@ namespace GameScripts
         
         public void TurnOnJetPack()
         {
-            jetPackParticles.SetActive(!jetPackParticles.activeSelf);
+           jetPackParticles.SetActive(!jetPackParticles.activeSelf);
             jetPackOn = true;
         }
         public void TurnOffJetPack()
