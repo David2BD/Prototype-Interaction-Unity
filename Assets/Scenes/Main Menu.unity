@@ -8860,7 +8860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &655966856
 Transform:
   m_ObjectHideFlags: 0
@@ -28961,7 +28961,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2096021400}
-  - component: {fileID: 2096021399}
   - component: {fileID: 2096021401}
   m_Layer: 0
   m_Name: WelcomeScreen
@@ -28969,31 +28968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2096021399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096021398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 887d751b648f31e4f9d838eb2a133b41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  optionsMenu: {fileID: 93018851}
-  mainMenu: {fileID: 655966855}
-  audioMenu: {fileID: 1564142732}
-  customizeMenu: {fileID: 0}
-  player2Button: {fileID: 1933898956}
-  current: {fileID: 1531594289}
-  player1Name: {fileID: 94097991}
-  player2Name: {fileID: 2109347912}
-  playButton: {fileID: 0}
-  optionButton: {fileID: 0}
-  audioButton: {fileID: 0}
-  canvas: {fileID: 0}
+  m_IsActive: 1
 --- !u!4 &2096021400
 Transform:
   m_ObjectHideFlags: 0
