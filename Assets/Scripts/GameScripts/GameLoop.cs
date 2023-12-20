@@ -8,8 +8,8 @@ namespace GameScripts
     public class GameLoop : MonoBehaviour
     {
         public int playerTurn;
-        public int selectedSoldierBlue = 0;
-        public int selectedSoldierRed = 0;
+        public int selectedSoldierBlue = 1;
+        public int selectedSoldierRed = 1;
         public List<Soldier> blueTeamUnits = new List<Soldier>();
         public List<Soldier> redTeamUnits = new List<Soldier>();
     

@@ -7137,8 +7137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurn: 1
-  selectedSoldierBlue: 0
-  selectedSoldierRed: 0
+  selectedSoldierBlue: 1
+  selectedSoldierRed: 1
   blueTeamUnits: []
   redTeamUnits: []
   GameOverScreen: {fileID: 1902548623}
