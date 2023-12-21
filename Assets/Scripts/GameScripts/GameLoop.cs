@@ -212,12 +212,12 @@ namespace GameScripts
             {
                 playerTurn = 2;
                 // set to 1 for build
-                redTeamUnits[0].SetActionUsed(false);
+                redTeamUnits[1].SetActionUsed(false);
             }
             else
             {
                 playerTurn = 1;
-                blueTeamUnits[0].SetActionUsed(false);
+                blueTeamUnits[1].SetActionUsed(false);
             }
             instruments_sounds.GetComponent<InstrumentController>().PlayAll(false);
         }
